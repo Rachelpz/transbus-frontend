@@ -1,5 +1,7 @@
 package pweb.bean;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 //import javax.faces.bean.SessionScoped;
 
 @ManagedBean
@@ -60,6 +62,12 @@ public class BrandBean {
     }
 
 
+    protected HttpServletRequest getRequest() {
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
+    }
 
+    protected FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
+    }
 
 }

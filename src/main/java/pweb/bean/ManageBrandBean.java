@@ -9,12 +9,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Component;
 import pweb.dto.BrandDto;
 import org.primefaces.PrimeFaces;
 import pweb.service.BrandService;
 import pweb.utils.JsfUtils;
 
- //Le indica a spring es un componete registrado
+@Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageBrandBean {
