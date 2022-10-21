@@ -1,4 +1,4 @@
-package pweb.bean;
+package cu.edu.cujae.pweb.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,14 +16,7 @@ public class BrandBean {
     public BrandBean() {
         // TODO Auto-generated constructor stub
     }
-    public BrandBean(String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel) {
-        super();
-        this.brand_name = brand_name;
-        this.seats_numb = seats_numb;
-        this.fuel_type = fuel_type;
-        this.fuel_consumtion = fuel_consumtion;
-        this.fuel = fuel;
-    }
+
 
     public String getBrand_name() {
         return brand_name;

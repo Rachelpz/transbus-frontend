@@ -1,4 +1,4 @@
-package pweb.dto;
+package cu.edu.cujae.pweb.dto;
 
 public class BrandDto {
 
@@ -15,7 +15,7 @@ public class BrandDto {
         super();
     }
 
-    public BrandDto(String brand_id, String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel,boolean newRecord) {
+    public BrandDto(String brand_id, String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel, boolean newRecord) {
         super();
         this.brand_id = brand_id;
         this.brand_name = brand_name;

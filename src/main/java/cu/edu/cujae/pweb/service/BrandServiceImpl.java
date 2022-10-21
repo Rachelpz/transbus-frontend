@@ -1,11 +1,13 @@
-package pweb.service;
+package cu.edu.cujae.pweb.service;
+
+
+import org.springframework.stereotype.Service;
+import cu.edu.cujae.pweb.dto.BrandDto;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import pweb.dto.BrandDto;
 
 @Service
 public class BrandServiceImpl implements BrandService{
