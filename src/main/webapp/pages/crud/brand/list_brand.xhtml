@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Listado de usuarios
+        Listado de Marcas
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
@@ -23,10 +23,10 @@
                         -->
                         <p:commandButton value="Nuevo" icon="pi pi-plus"
                                          actionListener="#{manageBrandBean.openNew}"
-                                         update=":form:manage-user-content"
-                                         oncomplete="PF('manageUserDialog').show()"
+                                         update=":form:manage-brand-content"
+                                         oncomplete="PF('manageBrandDialog').show()"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
-                            <p:resetInput target=":form:manage-user-content" />
+                            <p:resetInput target=":form:manage-brand-content" />
                         </p:commandButton>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
@@ -34,7 +34,7 @@
                              del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-users" fileName="users" />
+                            <p:dataExporter type="pdf" target="dt-brands" fileName="brands" />
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
@@ -49,51 +49,50 @@
                 	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                 	  con mayor detalle ver el showcase.
                  -->
-                <p:dataTable id="dt-users" widgetVar="dtBrands" var="brand"
+                <p:dataTable id="dt-brands" widgetVar="dtBrands" var="brand"
                              value="#{manageBrandBean.brands}" reflow="true" paginator="true"
                              rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
-                            <span style="font-weight: bold">Usuarios</span> <span
+                            <span style="font-weight: bold">Marcas</span> <span
                                 class="filter-container ui-input-icon-left"> <i
                                 class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                       onkeyup="PF('dtUsers').filter()" placeholder="Buscar" />
+                                                                       onkeyup="PF('dtBrands').filter()" placeholder="Buscar" />
 							</span>
 
                         </div>
                     </f:facet>
 
 
-                    <p:column headerText="Usuario" sortBy="#{brand.brand_name}" filterBy="#{brand.brand_name}">
+                    <p:column headerText="Marca" sortBy="#{brand.brand_name}" filterBy="#{brand.brand_name}">
                         <h:outputText value="#{brand.brand_name}" />
                     </p:column>
-                    <p:column headerText="Ci" sortBy="#{brand.brand_name}"
-                              filterBy="#{brand.brand_name}">
-                        <h:outputText value="#{brand.brand_name}" />
+                    <p:column headerText="Cantidad de asientos" sortBy="#{brand.seats_numb}">
+                        <h:outputText value="#{brand.seats_numb}" />
                     </p:column>
-                    <p:column headerText="Nombre" sortBy="#{brand.brand_name}">
-                        <h:outputText value="#{brand.brand_name}" />
+                    <p:column headerText="Consumo de Combustible" sortBy="#{brand.fuel_consumtion}">
+                        <h:outputText value="#{brand.fuel_consumtion}" />
                     </p:column>
-                    <p:column headerText="Correo" sortBy="#{brand.brand_name}"
-                              filterBy="#{brand.brand_name}">
-                        <h:outputText value="#{brand.brand_name}" />
+                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel_type}"
+                              filterBy="#{brand.fuel_type}">
+                        <h:outputText value="#{brand.fuel_type}" />
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" action="#{manageBrandBean.openForEdit}"
-                                         update=":form:manage-user-content"
-                                         oncomplete="PF('manageUserDialog').show()"
+                                         update=":form:manage-brand-content"
+                                         oncomplete="PF('manageBrandDialog').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
                                          process="@this">
                             <f:setPropertyActionListener value="#{brand}"
                                                          target="#{manageBrandBean.selectedBrand}" />
-                            <p:resetInput target=":form:manage-user-content" />
+                            <p:resetInput target=":form:manage-brand-content" />
                         </p:commandButton>
                         <p:commandButton class="ui-button-warning rounded-button"
                                          icon="pi pi-trash" process="@this"
                                          action="#{manageBrandBean.deleteBrand}" >
                             <f:setPropertyActionListener value="#{brand}"
                                                          target="#{manageBrandBean.selectedBrand}" />
-                            <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?" icon="pi pi-exclamation-triangle"/>
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar la marca?" icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
                     </p:column>
 

@@ -5,8 +5,8 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Marca" showEffect="fade" modal="true"
-             responsive="true">
-        <p:outputPanel id="manage-user-content" class="ui-fluid">
+              widgetVar="manageBrandDialog" responsive="true">
+        <p:outputPanel id="manage-brand-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageBrandBean.selectedBrand}">
                 <p:panelGrid layout="grid" columns="2">
                     <h:panelGroup>
@@ -17,7 +17,7 @@
                             <p:message for="@previous" ></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Usuario</p:outputLabel>
+                            <p:outputLabel for="@next">Nombre de Marca</p:outputLabel>
                             <p:inputText id="username" required="true"
                                          value="#{manageBrandBean.selectedBrand.seats_numb}" />
                             <p:message for="@previous"></p:message>
