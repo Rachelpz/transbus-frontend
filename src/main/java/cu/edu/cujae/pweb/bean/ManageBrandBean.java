@@ -61,14 +61,14 @@ public class ManageBrandBean {
 
 
 			this.brands.add(this.selectedBrand);
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
 		}
 		else {
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_edited");
 		}
 
-		PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
-		PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+		PrimeFaces.current().executeScript("PF('manageBrandDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+		PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 	}
 
 	//Permite eliminar una marca
@@ -76,8 +76,8 @@ public class ManageBrandBean {
 		try {
 			this.brands.remove(this.selectedBrand);
 			this.selectedBrand = null;
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_removed");
-			PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_removed");
+			PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
