@@ -17,6 +17,7 @@ public class BrandBean {
         // TODO Auto-generated constructor stub
     }
     public BrandBean(String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel) {
+        super();
         this.brand_name = brand_name;
         this.seats_numb = seats_numb;
         this.fuel_type = fuel_type;

@@ -44,7 +44,6 @@ public class ManageBrandBean {
         brands = brands == null ? brandService.getBrands() : brands;
 
     }
-
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
 
