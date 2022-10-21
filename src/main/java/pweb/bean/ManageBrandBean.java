@@ -1,5 +1,6 @@
 package pweb.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,11 +8,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Component;
-import pweb.dto.BrandDto;
 import org.primefaces.PrimeFaces;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+
+import pweb.dto.BrandDto;
 import pweb.service.BrandService;
 import pweb.utils.JsfUtils;
 
@@ -19,6 +22,7 @@ import pweb.utils.JsfUtils;
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageBrandBean {
+
     private BrandDto brandDto;
     private BrandDto selectedBrand;
     private List<BrandDto> brands;
@@ -27,8 +31,8 @@ public class ManageBrandBean {
       * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
       */
 
-     @Autowired
-     private BrandService brandService;
+    @Autowired
+    private BrandService brandService;
 
     public ManageBrandBean() {
 
@@ -43,6 +47,7 @@ public class ManageBrandBean {
 
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
+
         this.selectedBrand = new BrandDto();
     }
 
@@ -82,7 +87,29 @@ public class ManageBrandBean {
 
     }
 
+    public BrandDto getBrandDto() {
+        return brandDto;
+    }
 
+    public void setBrandDto(BrandDto brandDto) {
+        this.brandDto = brandDto;
+    }
+
+    public BrandDto getSelectedBrand() {
+        return selectedBrand;
+    }
+
+    public void setSelectedBrand(BrandDto selectedBrand) {
+        this.selectedBrand = selectedBrand;
+    }
+
+    public List<BrandDto> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(List<BrandDto> brands) {
+        this.brands = brands;
+    }
 
 
 }
