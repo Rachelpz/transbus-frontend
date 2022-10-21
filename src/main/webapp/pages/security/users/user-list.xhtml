@@ -22,7 +22,7 @@
 					      code en Javascript desde el bean de Jsf
 					    -->
 						<p:commandButton value="Nuevo" icon="pi pi-plus"
-							actionListener="#{manageBrandBean.openNew}"
+							actionListener="#{manageUserBean.openNew}"
 							update=":form:manage-user-content"
 							oncomplete="PF('manageUserDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
@@ -49,8 +49,8 @@
                 	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                 	  con mayor detalle ver el showcase.  
                  -->
-				<p:dataTable id="dt-users" widgetVar="dtBrands" var="brand"
-					value="#{manageBrandBean.brands}" reflow="true" paginator="true"
+				<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
+					value="#{manageUserBean.users}" reflow="true" paginator="true"
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
@@ -64,35 +64,35 @@
 					</f:facet>
 					
 
-					<p:column headerText="Usuario" sortBy="#{brand.brand_name}" filterBy="#{brand.brand_name}">
-						<h:outputText value="#{brand.brand_name}" />
+					<p:column headerText="Usuario" sortBy="#{user.username}" filterBy="#{user.username}">
+						<h:outputText value="#{user.username}" />
 					</p:column>
-					<p:column headerText="Ci" sortBy="#{brand.brand_name}"
-						filterBy="#{brand.brand_name}">
-						<h:outputText value="#{brand.brand_name}" />
+					<p:column headerText="Ci" sortBy="#{user.identification}"
+						filterBy="#{user.identification}">
+						<h:outputText value="#{user.identification}" />
 					</p:column>
-					<p:column headerText="Nombre" sortBy="#{brand.brand_name}">
-						<h:outputText value="#{brand.brand_name}" />
+					<p:column headerText="Nombre" sortBy="#{user.fullName}">
+						<h:outputText value="#{user.fullName}" />
 					</p:column>
-					<p:column headerText="Correo" sortBy="#{brand.brand_name}"
-						filterBy="#{brand.brand_name}">
-						<h:outputText value="#{brand.brand_name}" />
+					<p:column headerText="Correo" sortBy="#{user.email}"
+						filterBy="#{user.email}">
+						<h:outputText value="#{user.email}" />
 					</p:column>
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{manageBrandBean.openForEdit}"
+						<p:commandButton icon="pi pi-pencil" action="#{manageUserBean.openForEdit}"
 							update=":form:manage-user-content"
 							oncomplete="PF('manageUserDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{brand}"
-								target="#{manageBrandBean.selectedBrand}" />
+							<f:setPropertyActionListener value="#{user}"
+								target="#{manageUserBean.selectedUser}" />
 							<p:resetInput target=":form:manage-user-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageBrandBean.deleteBrand}" >
-							<f:setPropertyActionListener value="#{brand}"
-								target="#{manageBrandBean.selectedBrand}" />
+							action="#{manageUserBean.deleteUser}" >
+							<f:setPropertyActionListener value="#{user}"
+								target="#{manageUserBean.selectedUser}" />
 							<p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
