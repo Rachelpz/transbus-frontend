@@ -6,7 +6,7 @@ public class BrandDto {
     private String brand_name;
     private Integer seats_numb;
     private String fuel_type;
-    private Integer fuel_consumtion;
+    private Double fuel_consumtion;
     private String fuel;
     private boolean newRecord;
 
@@ -15,7 +15,7 @@ public class BrandDto {
         super();
     }
 
-    public BrandDto(String brand_id, String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel, boolean newRecord) {
+    public BrandDto(String brand_id, String brand_name, Integer seats_numb, String fuel_type, Double fuel_consumtion, String fuel, boolean newRecord) {
         super();
         this.brand_id = brand_id;
         this.brand_name = brand_name;
@@ -58,11 +58,11 @@ public class BrandDto {
         this.fuel_type = fuel_type;
     }
 
-    public Integer getFuel_consumtion() {
+    public Double getFuel_consumtion() {
         return fuel_consumtion;
     }
 
-    public void setFuel_consumtion(Integer fuel_consumtion) {
+    public void setFuel_consumtion(Double fuel_consumtion) {
         this.fuel_consumtion = fuel_consumtion;
     }
 

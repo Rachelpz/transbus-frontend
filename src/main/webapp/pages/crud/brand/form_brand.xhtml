@@ -11,33 +11,29 @@
                 <p:panelGrid layout="grid" columns="2">
                     <h:panelGroup>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Marca</p:outputLabel>
+                            <p:outputLabel for="@next">Nombre de Marca</p:outputLabel>
                             <p:inputText id="name" required="true"
                                          value="#{manageBrandBean.selectedBrand.brand_name}" />
                             <p:message for="@previous" ></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Nombre de Marca</p:outputLabel>
-                            <p:inputText id="username" required="true"
+                            <p:outputLabel for="@next">Cantidad de Asientos</p:outputLabel>
+                            <p:inputNumber id="seats" required="true" minValue="1" decimalPlaces="0"
                                          value="#{manageBrandBean.selectedBrand.seats_numb}" />
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Identificación</p:outputLabel>
-                            <p:inputText id="ci" required="true"
-                                         value="#{manageBrandBean.selectedBrand.fuel_type}"
-                                         maxlength="11">
+                            <p:outputLabel for="@next">Consumo de Combustible</p:outputLabel>
+                            <p:inputNumber id="consumtion" required="true" minValue="0" decimalPlaces="3"
+                                         value="#{manageBrandBean.selectedBrand.fuel_consumtion}">
                                 <p:keyFilter mask="num" />
-                            </p:inputText>
+                            </p:inputNumber>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Consumo de Combustible</p:outputLabel>
-                            <p:inputText id="email" required="true"
-                                         value="#{manageBrandBean.selectedBrand.fuel_consumtion}"
-                                         validatorMessage="Email mal formado">
-                                <f:validateRegex
-                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            <p:outputLabel for="@next">Tipo de Combustible</p:outputLabel>
+                            <p:inputText id="fuel_type" required="true"
+                                         value="#{manageBrandBean.selectedBrand.fuel_type}">
                             </p:inputText>
                             <p:message for="@previous"></p:message>
                         </div>
@@ -77,12 +73,13 @@
              </p:outputPanel>
          </p:outputPanel>
 
-         <f:facet name="footer">
-             <p:commandButton value="Salvar" icon="pi pi-check"
-                              actionListener="#{manageBrandBean.saveBrand}"
-                              />
-             <p:commandButton value="Cancelar" icon="pi pi-times"
-                               />
-         </f:facet>
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageBrandBean.saveBrand}"
+                             update="manage-brand-content" process="manage-brand-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageBrandDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
      </p:dialog>
  </ui:composition>
