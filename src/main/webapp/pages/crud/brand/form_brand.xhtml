@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Marca" showEffect="fade" modal="true"
-              widgetVar="manageUserDialog" responsive="true">
+             responsive="true">
         <p:outputPanel id="manage-user-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageBrandBean.selectedBrand}">
                 <p:panelGrid layout="grid" columns="2">
@@ -80,9 +80,9 @@
          <f:facet name="footer">
              <p:commandButton value="Salvar" icon="pi pi-check"
                               actionListener="#{manageBrandBean.saveBrand}"
-                              update="manage-user-content" process="manage-user-content @this" />
+                              />
              <p:commandButton value="Cancelar" icon="pi pi-times"
-                              onclick="PF('manageUserDialog').hide()" class="ui-button-secondary" />
+                               />
          </f:facet>
      </p:dialog>
  </ui:composition>

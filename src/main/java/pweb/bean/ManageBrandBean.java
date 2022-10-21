@@ -39,6 +39,7 @@ public class ManageBrandBean {
     }
 
     //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
+
     @PostConstruct
     public void init() {
         brands = brands == null ? brandService.getBrands() : brands;
