@@ -1,20 +1,37 @@
-package bean;
-import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
+package pweb.dto;
 
-@ManagedBean
-//@SessionScoped
-public class BrandBean {
+public class BrandDto {
+
+    private String brand_id;
     private String brand_name;
     private Integer seats_numb;
     private String fuel_type;
+    private Integer fuel_consumtion;
+    private String fuel;
+    private boolean newRecord;
 
-    public BrandBean(String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel) {
+
+    public BrandDto() {
+        super();
+    }
+
+    public BrandDto(String brand_id, String brand_name, Integer seats_numb, String fuel_type, Integer fuel_consumtion, String fuel,boolean newRecord) {
+        super();
+        this.brand_id = brand_id;
         this.brand_name = brand_name;
         this.seats_numb = seats_numb;
         this.fuel_type = fuel_type;
         this.fuel_consumtion = fuel_consumtion;
         this.fuel = fuel;
+        this.newRecord = newRecord;
+    }
+
+    public String getBrand_id() {
+        return brand_id;
+    }
+
+    public void setBrand_id(String brand_id) {
+        this.brand_id = brand_id;
     }
 
     public String getBrand_name() {
@@ -57,8 +74,11 @@ public class BrandBean {
         this.fuel = fuel;
     }
 
-    private Integer fuel_consumtion;
-    private String fuel;
+    public boolean isNewRecord() {
+        return newRecord;
+    }
 
-
+    public void setNewRecord(boolean newRecord) {
+        this.newRecord = newRecord;
+    }
 }

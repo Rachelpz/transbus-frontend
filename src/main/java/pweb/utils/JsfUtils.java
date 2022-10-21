@@ -1,4 +1,4 @@
-package utils;
+package pweb.utils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

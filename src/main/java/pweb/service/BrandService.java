@@ -1,6 +1,6 @@
-package service;
+package pweb.service;
 
-import dto.BrandDto;
+import pweb.dto.BrandDto;
 
 import java.util.List;
 

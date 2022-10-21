@@ -1,6 +1,5 @@
-package bean;
+package pweb.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,12 +8,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import dto.BrandDto;
+import pweb.dto.BrandDto;
 import org.primefaces.PrimeFaces;
-import service.BrandService;
-import utils.JsfUtils;
+import pweb.service.BrandService;
+import pweb.utils.JsfUtils;
 
  //Le indica a spring es un componete registrado
 @ManagedBean
@@ -52,7 +50,7 @@ public class ManageBrandBean {
 
     }
 
-    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
+    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
     public void saveBrand() {
         if (this.selectedBrand.getBrand_id() == null) {
             this.selectedBrand.setBrand_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
@@ -70,8 +68,8 @@ public class ManageBrandBean {
         PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
-    //Permite eliminar un usuario
-    public void deleteUser() {
+    //Permite eliminar una marca
+    public void deleteBrand() {
         try {
             this.brands.remove(this.selectedBrand);
             this.selectedBrand = null;

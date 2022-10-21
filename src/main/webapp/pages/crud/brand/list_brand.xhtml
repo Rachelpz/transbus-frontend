@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Listado de usuarios
+        Listado de Marcas
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
@@ -22,7 +22,7 @@
                           code en Javascript desde el bean de Jsf
                         -->
                         <p:commandButton value="Nuevo" icon="pi pi-plus"
-                                         actionListener="#{manageUserBean.openNew}"
+                                         actionListener="#{manageBrandBean.openNew}"
                                          update=":form:manage-user-content"
                                          oncomplete="PF('manageUserDialog').show()"
                                          styleClass="ui-button-success" style="margin-right: .5rem">
@@ -34,7 +34,7 @@
                              del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
                         <p:commandButton value="Export" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
-                            <p:dataExporter type="pdf" target="dt-users" fileName="users" />
+                            <p:dataExporter type="pdf" target="dt-users" fileName="brands" />
                         </p:commandButton>
                     </p:toolbarGroup>
                 </p:toolbar>
@@ -50,11 +50,11 @@
                 	  con mayor detalle ver el showcase.
                  -->
                 <p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
-                             value="#{manageUserBean.users}" reflow="true" paginator="true"
+                             value="#{manageBrandBean.brands}" reflow="true" paginator="true"
                              rows="10" paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
-                            <span style="font-weight: bold">Usuarios</span> <span
+                            <span style="font-weight: bold">Marcas</span> <span
                                 class="filter-container ui-input-icon-left"> <i
                                 class="pi pi-search"></i> <p:inputText id="globalFilter"
                                                                        onkeyup="PF('dtUsers').filter()" placeholder="Buscar" />
@@ -64,22 +64,22 @@
                     </f:facet>
 
 
-                    <p:column headerText="Usuario" sortBy="#{user.username}" filterBy="#{user.username}">
-                        <h:outputText value="#{user.username}" />
+                    <p:column headerText="Usuario" sortBy="#{brand.brand_name}" filterBy="#{brand.brand_name}">
+                        <h:outputText value="#{brand.brand_name}" />
                     </p:column>
-                    <p:column headerText="Ci" sortBy="#{user.identification}"
-                              filterBy="#{user.identification}">
-                        <h:outputText value="#{user.identification}" />
+                    <p:column headerText="Numero de Asientos" sortBy="#{brand.seats_numb}"
+                              filterBy="#{brand.seats_numb}">
+                        <h:outputText value="#{brand.seats_numb}" />
                     </p:column>
-                    <p:column headerText="Nombre" sortBy="#{user.fullName}">
-                        <h:outputText value="#{user.fullName}" />
+                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel_type}">
+                        <h:outputText value="#{brand.fuel_type}" />
                     </p:column>
-                    <p:column headerText="Correo" sortBy="#{user.email}"
-                              filterBy="#{user.email}">
-                        <h:outputText value="#{user.email}" />
+                    <p:column headerText="Consumo de Combustible" sortBy="#{brand.fuel_consumtion}"
+                              filterBy="#{brand.fuel_consumtion}">
+                        <h:outputText value="#{brand.fuel_consumtion}" />
                     </p:column>
                     <p:column exportable="false">
-                        <p:commandButton icon="pi pi-pencil" action="#{manageUserBean.openForEdit}"
+                        <p:commandButton icon="pi pi-pencil" action="#{manageBrandBean.openForEdit}"
                                          update=":form:manage-user-content"
                                          oncomplete="PF('manageUserDialog').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
