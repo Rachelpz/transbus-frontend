@@ -6,21 +6,19 @@
 
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-		    Inicio
+			Bievenidos a TransBus
 		</ui:define>
     	<ui:define name="layout">
     		<h:form>
 		    	<p:card style="width: 100%; margin-bottom: 2em">
 				    <f:facet name="title">
-				        Bievenidos al demo de pweb
+				        Bievenidos a TransBus
+
 				    </f:facet>
-				
-				    <p>Este demo servirá de guía para el desarrollo de los proyectos de curso de la asignatura. Poco a poco lo iremos actualizando con diversas funcionalidades y casos de estudio. </p>
-				    <ul>
-				    	<li>Plantilla con Facelets </li>
-				    	<li>Login </li>
-				    	<li>Crud de usuario </li>
-				    </ul>
+					<h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+						<p:graphicImage name="bus_PNG101203.png" library="images" width="700" height="350"  style="position:relative;left: 40%;"/>
+					</h:link>
+
 				</p:card>
 			</h:form>
     	</ui:define>
