@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+			Bievenidos a TransBus
+		</ui:define>
+    	<ui:define name="layout">
+    		<h:form>
+		    	<p:card style="width: 100%; margin-bottom: 2em">
+				    <f:facet name="title">
+				        Bievenidos a TransBus
+
+				    </f:facet>
+					<h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+						<p:graphicImage name="bus_PNG101203.png" library="images" width="700" height="350"  style="position:relative;left: 40%;"/>
+					</h:link>
+
+				</p:card>
+			</h:form>
+    	</ui:define>
+    </ui:composition>
+</html>
