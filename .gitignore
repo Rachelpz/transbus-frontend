@@ -1,6 +1,10 @@
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-transbus_webapp.iml
 /.idea/
 /target/
+transbus_webapp.iml
+/.idea
+/target
+.idea
+target
