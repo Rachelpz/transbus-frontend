@@ -73,9 +73,9 @@
                     <p:column headerText="Consumo de Combustible" sortBy="#{brand.fuel_consumtion}">
                         <h:outputText value="#{brand.fuel_consumtion}" />
                     </p:column>
-                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel_type}"
-                              filterBy="#{brand.fuel_type}">
-                        <h:outputText value="#{brand.fuel_type}" />
+                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel}"
+                              filterBy="#{brand.fuel}">
+                        <h:outputText value="#{brand.fuel}" />
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" action="#{manageBrandBean.openForEdit}"

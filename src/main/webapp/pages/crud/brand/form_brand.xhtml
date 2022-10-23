@@ -30,13 +30,20 @@
                             </p:inputNumber>
                             <p:message for="@previous"></p:message>
                         </div>
+
                         <div class="p-field">
                             <p:outputLabel for="@next">Tipo de Combustible</p:outputLabel>
-                            <p:inputText id="fuel_type" required="true"
-                                         value="#{manageBrandBean.selectedBrand.fuel_type}">
-                            </p:inputText>
+                            <p:selectOneMenu id="fuel" required="true" label="Seleccione"
+                                             value="#{manageBrandBean.selectedBrand.fuel}"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageFuel_TypeBean.fuels}" var="fuel"
+                                               itemLabel="#{fuel.fuel_name}" itemValue="#{fuel.fuel_name}" />
+                            </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
+
                     </h:panelGroup>
                     <!-- <h:panelGroup>
                          <div class="p-field">
