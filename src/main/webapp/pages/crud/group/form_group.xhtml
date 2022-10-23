@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Grupo Turístico" showEffect="fade" modal="true"
+              widgetVar="manageGroupDialog" responsive="true">
+        <p:outputPanel id="manage-group-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty manageGroupBean.selectedGroup}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Nombre del grupo turístico</p:outputLabel>
+                            <p:inputText id="name" required="true"
+                                         value="#{manageGroupBean.selectedGroup.group_name}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Cantidad de pasajeros</p:outputLabel>
+                            <p:inputNumber id="paxamount" required="true" minValue="1" decimalPlaces="0"
+                                           value="#{manageGroupBean.selectedGroup.paxamount}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">País</p:outputLabel>
+                            <p:selectOneMenu id="country_name" label="Seleccione un país"
+                                             value="#{manageGroupBean.selectedGroup.country_name}">
+                                <f:selectItem id="country1" itemLabel="Mexico" itemValue="Mexico"/>
+                                <f:selectItem id="country2" itemLabel="Canada" itemValue="Canada"/>
+                                <f:selectItem id="country3" itemLabel="Alemania" itemValue="Alemania"/>
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+                    </h:panelGroup>
+                    <!-- <h:panelGroup>
+                         <div class="p-field">
+                             <p:outputLabel for="@next">Roles</p:outputLabel>
+                             <p:selectCheckboxMenu id="multiple" required="true"
+                                                   value="#{manageUserBean.selectedRoles}" label="Seleccione"
+                                                   style="min-width: 15rem" multiple="true" filter="true"
+                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                   scrollHeight="250">
+                                 <f:selectItems value="#{manageUserBean.roles}" var="role"
+                                                itemLabel="#{role.description}" itemValue="#{role.id}" />
+                             </p:selectCheckboxMenu>
+                         </div>
+                         <div class="p-field">
+                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                             <p:password id="password1" required="true"
+                                         rendered="#{empty manageUserBean.selectedUser.id}"
+                                         value="#{manageUserBean.selectedUser.password}"
+                                         match="password2">
+                             </p:password>
+                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                         </div>
+                         <div class="p-field">
+                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                             <p:password id="password2" required="true"
+                                         value="#{manageUserBean.selectedUser.password}"
+                                         rendered="#{empty manageUserBean.selectedUser.id}">
+                             </p:password>
+                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                         </div>
+
+                     </h:panelGroup> -->
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageGroupBean.saveGroup}"
+                             update="manage-group-content" process="manage-group-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageGroupDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>
