@@ -18,12 +18,12 @@ public class VehicleServiceImpl implements VehicleService{
     public List<VehicleDto> getVehicles() {
 
 
-        List<VehicleDto> brands = new ArrayList<>();
-        brands.add(new VehicleDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "JKU00AS", 5.5F, "Marcelo", "Manolo", "af", false));
-        brands.add(new VehicleDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "LKA88SA", 8.5F, "Pablo", "Gustavo", "ff", false));
+        List<VehicleDto> vehicles = new ArrayList<>();
+        vehicles.add(new VehicleDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "JKU00AS", 5.5F, "Marcelo", "Manolo", "af", false));
+        vehicles.add(new VehicleDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "LKA88SA", 8.5F, "Pablo", "Gustavo", "ff", false));
 
 
-        return brands;
+        return vehicles;
     }
 
     @Override

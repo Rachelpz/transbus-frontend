@@ -24,31 +24,37 @@
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Chofer 1</p:outputLabel>
-                            <p:selectOneMenu id="driver1" label="Seleccione un chofer"
-                                             value="#{manageVehicleBean.selectedVehicle.first_driver}">
-                                <f:selectItem id="driver11" itemLabel="Augusto" itemValue="Augusto"/>
-                                <f:selectItem id="driver12" itemLabel="Camilo" itemValue="Camilo"/>
-                                <f:selectItem id="driver13" itemLabel="Armando" itemValue="Armando"/>
+                            <p:selectOneMenu id="driver1" required="true" label="Seleccione"
+                                             value="#{manageVehicleBean.selectedVehicle.first_driver}"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageDriverBean.drivers}" var="driver1"
+                                               itemLabel="#{driver1.driver_name}" itemValue="#{driver1.driver_name}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Chofer 2</p:outputLabel>
-                            <p:selectOneMenu id="driver2" label="Seleccione un chofer"
-                                             value="#{manageVehicleBean.selectedVehicle.second_driver}">
-                                <f:selectItem id="driver21" itemLabel="Alberto" itemValue="Alberto"/>
-                                <f:selectItem id="driver22" itemLabel="Juan" itemValue="Juan"/>
-                                <f:selectItem id="driver23" itemLabel="Roberto" itemValue="Roberto"/>
+                            <p:selectOneMenu id="driver2" required="true" label="Seleccione"
+                                             value="#{manageVehicleBean.selectedVehicle.second_driver}"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageDriverBean.drivers}" var="driver2"
+                                               itemLabel="#{driver2.driver_name}" itemValue="#{driver2.driver_name}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Marca</p:outputLabel>
-                            <p:selectOneMenu id="brand" label="Seleccione una marca"
-                                             value="#{manageVehicleBean.selectedVehicle.brand}">
-                                <f:selectItem id="brand1" itemLabel="Audi" itemValue="Audi"/>
-                                <f:selectItem id="brand2" itemLabel="Mercedes" itemValue="Mercedes"/>
-                                <f:selectItem id="brand3" itemLabel="Peugeot" itemValue="Peugeot"/>
+                            <p:selectOneMenu id="brand" required="true" label="Seleccione"
+                                             value="#{manageVehicleBean.selectedVehicle.brand}"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageBrandBean.brands}" var="brand"
+                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_name}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
