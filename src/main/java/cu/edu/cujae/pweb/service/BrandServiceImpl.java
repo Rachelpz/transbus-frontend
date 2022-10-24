@@ -19,8 +19,8 @@ public class BrandServiceImpl implements BrandService{
 
 
         List<BrandDto> brands = new ArrayList<>();
-        brands.add(new BrandDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Mercedes", 5, "Gasolina", 45.0, "af", false));
-        brands.add(new BrandDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Audi", 8, "Gasolina", 35.0, "ff", false));
+        brands.add(new BrandDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Mercedes", 5, 45.0, "Gasolina", false));
+        brands.add(new BrandDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Audi", 8, 35.0, "Gasolina", false));
 
 
         return brands;
