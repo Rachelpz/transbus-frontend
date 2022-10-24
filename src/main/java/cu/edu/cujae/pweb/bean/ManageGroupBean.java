@@ -29,7 +29,7 @@ public class ManageGroupBean {
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
      */
     @Autowired
-    private GroupService brandService;
+    private GroupService groupService;
 
     public ManageGroupBean() {
 
@@ -39,7 +39,7 @@ public class ManageGroupBean {
 
     @PostConstruct
     public void init() {
-        groups = groups == null ? brandService.getGroups() : groups;
+        groups = groups == null ? groupService.getGroups() : groups;
 
     }
     //Se ejecuta al dar clic en el button Nuevo
