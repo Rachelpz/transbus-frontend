@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Distrito" showEffect="fade" modal="true"
+              widgetVar="manageDistrictDialog" responsive="true">
+        <p:outputPanel id="manage-district-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty manageDistrictBean.selectedDistrict}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Nombre del distrito</p:outputLabel>
+                            <p:inputText id="name" required="true"
+                                         value="#{manageDistrictBean.selectedDistrict.district_name}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageDistrictBean.saveDistrict}"
+                             update="manage-district-content" process="manage-district-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageDistrictDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>

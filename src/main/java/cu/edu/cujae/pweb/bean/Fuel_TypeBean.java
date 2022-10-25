@@ -1,8 +1,10 @@
 package cu.edu.cujae.pweb.bean;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+@ManagedBean
 public class Fuel_TypeBean {
     private String fuel_name;
 
@@ -16,6 +18,7 @@ public class Fuel_TypeBean {
     public void setFuel_name(String fuel_name) {
         this.fuel_name = fuel_name;
     }
+
     protected HttpServletRequest getRequest() {
         return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }

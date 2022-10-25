@@ -1,8 +1,5 @@
 package cu.edu.cujae.pweb.service;
 
-
-
-
 import cu.edu.cujae.pweb.dto.BrandDto;
 
 import java.util.List;
