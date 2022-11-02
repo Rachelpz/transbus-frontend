@@ -9,3 +9,7 @@ transbus_webapp.iml
 .idea
 target
 lib
+out
+/.out
+/out
+.out
