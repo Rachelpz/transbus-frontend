@@ -56,7 +56,7 @@ public class ManageGroupBean {
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar el grupo
     public void saveGroup() {
         if (this.selectedGroup.getGroup_id() == null) {
-            this.selectedGroup.setGroup_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+            this.selectedGroup.setGroup_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
             this.selectedGroup.setNewRecord(true);
 
 

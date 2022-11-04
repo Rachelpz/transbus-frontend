@@ -2,7 +2,7 @@ package cu.edu.cujae.pweb.dto;
 
 public class VehicleDto {
 
-    private String vehicle_id;
+    private Integer vehicle_id;
     private String plate_numb;
     private Float planned_fuel;
     private String first_driver;
@@ -15,7 +15,7 @@ public class VehicleDto {
         super();
     }
 
-    public VehicleDto(String vehicle_id, String plate_numb, Float planned_fuel, String first_driver, String second_driver, String brand, boolean newRecord) {
+    public VehicleDto(Integer vehicle_id, String plate_numb, Float planned_fuel, String first_driver, String second_driver, String brand, boolean newRecord) {
         super();
         this.vehicle_id = vehicle_id;
         this.plate_numb = plate_numb;
@@ -26,11 +26,11 @@ public class VehicleDto {
         this.newRecord = newRecord;
     }
 
-    public String getVehicle_id() {
+    public Integer getVehicle_id() {
         return vehicle_id;
     }
 
-    public void setVehicle_id(String vehicle_id) {
+    public void setVehicle_id(Integer vehicle_id) {
         this.vehicle_id = vehicle_id;
     }
 

@@ -56,7 +56,7 @@ public class ManageBrandBean {
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
 	public void saveBrand() {
 		if (this.selectedBrand.getBrand_id() == null) {
-			this.selectedBrand.setBrand_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+			this.selectedBrand.setBrand_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
 			this.selectedBrand.setNewRecord(true);
 
 

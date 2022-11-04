@@ -2,7 +2,7 @@ package cu.edu.cujae.pweb.dto;
 
 public class BrandDto {
 
-    private String brand_id;
+    private Integer brand_id;
     private String brand_name;
     private Integer seats_numb;
     private Double fuel_consumtion;
@@ -14,7 +14,7 @@ public class BrandDto {
         super();
     }
 
-    public BrandDto(String brand_id, String brand_name, Integer seats_numb, Double fuel_consumtion, String fuel, boolean newRecord) {
+    public BrandDto(Integer brand_id, String brand_name, Integer seats_numb, Double fuel_consumtion, String fuel, boolean newRecord) {
         super();
         this.brand_id = brand_id;
         this.brand_name = brand_name;
@@ -24,11 +24,11 @@ public class BrandDto {
         this.newRecord = newRecord;
     }
 
-    public String getBrand_id() {
+    public Integer getBrand_id() {
         return brand_id;
     }
 
-    public void setBrand_id(String brand_id) {
+    public void setBrand_id(Integer brand_id) {
         this.brand_id = brand_id;
     }
 

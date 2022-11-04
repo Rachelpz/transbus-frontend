@@ -58,7 +58,7 @@ public class ManageDriverBean {
 
     public void saveDriver() {
         if (this.selectedDriver.getDriver_id() == null) {
-            this.selectedDriver.setDriver_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+            this.selectedDriver.setDriver_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
             this.selectedDriver.setNewRecord(true);
 
 

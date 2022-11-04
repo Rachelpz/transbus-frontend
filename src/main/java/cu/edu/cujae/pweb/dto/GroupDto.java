@@ -2,7 +2,7 @@ package cu.edu.cujae.pweb.dto;
 
 public class GroupDto {
 
-    private String group_id;
+    private Integer group_id;
     private String group_name;
     private Integer paxamount;
     private String country_name;
@@ -13,7 +13,7 @@ public class GroupDto {
         super();
     }
 
-    public GroupDto(String group_id, String group_name, Integer paxamount, String country_name, boolean newRecord) {
+    public GroupDto(Integer group_id, String group_name, Integer paxamount, String country_name, boolean newRecord) {
         super();
         this.group_id = group_id;
         this.group_name = group_name;
@@ -22,11 +22,11 @@ public class GroupDto {
         this.newRecord = newRecord;
     }
 
-    public String getGroup_id() {
+    public Integer getGroup_id() {
         return group_id;
     }
 
-    public void setGroup_id(String group_id) {
+    public void setGroup_id(Integer group_id) {
         this.group_id = group_id;
     }
 

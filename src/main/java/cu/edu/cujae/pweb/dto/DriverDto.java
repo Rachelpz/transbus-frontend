@@ -1,7 +1,7 @@
 package cu.edu.cujae.pweb.dto;
 
 public class DriverDto {
-    private String driver_id;
+    private Integer driver_id;
     private String driver_name;
     private String dni;
     private String address;
@@ -14,7 +14,7 @@ public class DriverDto {
         super();
     }
 
-    public DriverDto(String driver_id, String driver_name, String dni, String address, String phone_number, String district, String brand, boolean newRecord) {
+    public DriverDto(Integer driver_id, String driver_name, String dni, String address, String phone_number, String district, String brand, boolean newRecord) {
         this.driver_id = driver_id;
         this.driver_name = driver_name;
         this.dni = dni;
@@ -25,11 +25,11 @@ public class DriverDto {
         this.newRecord = newRecord;
     }
 
-    public String getDriver_id() {
+    public Integer getDriver_id() {
         return driver_id;
     }
 
-    public void setDriver_id(String driver_id) {
+    public void setDriver_id(Integer driver_id) {
         this.driver_id = driver_id;
     }
 

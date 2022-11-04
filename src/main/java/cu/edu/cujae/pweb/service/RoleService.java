@@ -1,9 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
-
-
 import cu.edu.cujae.pweb.dto.RoleDto;
-
 import java.util.List;
 
 public interface RoleService {

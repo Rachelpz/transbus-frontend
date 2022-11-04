@@ -56,7 +56,7 @@ public class ManageVehicleBean {
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar el vehiculo
     public void saveVehicle() {
         if (this.selectedVehicle.getVehicle_id() == null) {
-            this.selectedVehicle.setVehicle_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+            this.selectedVehicle.setVehicle_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
             this.selectedVehicle.setNewRecord(true);
 
 

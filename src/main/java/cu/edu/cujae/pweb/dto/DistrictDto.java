@@ -1,7 +1,7 @@
 package cu.edu.cujae.pweb.dto;
 
 public class DistrictDto {
-    private String district_id;
+    private Integer district_id;
     private String district_name;
     private boolean newRecord;
 
@@ -9,17 +9,17 @@ public class DistrictDto {
         super();
     }
 
-    public DistrictDto(String district_id, String district_name, boolean newRecord) {
+    public DistrictDto(Integer district_id, String district_name, boolean newRecord) {
         this.district_id = district_id;
         this.district_name = district_name;
         this.newRecord = newRecord;
     }
 
-    public String getDistrict_id() {
+    public Integer getDistrict_id() {
         return district_id;
     }
 
-    public void setDistrict_id(String district_id) {
+    public void setDistrict_id(Integer district_id) {
         this.district_id = district_id;
     }
 

@@ -46,7 +46,7 @@ public class ManageDistrictBean {
 
     public void saveDistrict() {
         if (this.selectedDistrict.getDistrict_id() == null) {
-            this.selectedDistrict.setDistrict_id(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+            this.selectedDistrict.setDistrict_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
             this.selectedDistrict.setNewRecord(true);
 
 
