@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <div class="layout-sidebar">
-    	<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
+        <!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
             <h:form>
                     <p:autoComplete placeholder="Search by name..." minQueryLength="3" effect="fade" 
                                 panelStyleClass="layout-sidebar-filter-panel" scrollHeight="300" emptyMessage="No results found!">
@@ -13,50 +13,55 @@
                 </p:autoComplete>
             </h:form>
         </div> -->
-    
+
         <div class="layout-menu">
-                <div class="menu-category">Administración</div>
+            <div class="menu-category">Administración</div>
+            <div class="menu-items">
+                <h:link outcome="/pages/security/users/user-list.xhtml">
+                    Gestionar usuarios
+                </h:link>
+            </div>
+            <div class="menu-category">Menú</div>
+            <div class="menu-items">
+                <p:outputPanel>
+                    <a tabindex="0" class="submenu-link">
+                        Gestión de Datos(CRUD)
+                    </a>
+                    <div class="submenu">
+                        <ul>
+                            <li><h:link outcome="/pages/crud/brand/list_brand.xhtml">
+                                Gestionar Marcas
+                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/driver/list_driver.xhtml">
+                                Gestionar Choferes
+                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/group/list_group.xhtml">
+                                Gestionar Grupos Turísticos
+                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/vehicle/list_vehicle.xhtml">
+                                Gestionar Vehículos
+                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/fuel_type/list_fuel.xhtml">
+                                Gestionar Tipos de Combustibles
+                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/district/list_district.xhtml">
+                                Gestionar Distritos
+                            </h:link></li>
+                        </ul>
+                    </div>
+                </p:outputPanel>
                 <div class="menu-items">
-                    <h:link outcome="/pages/security/users/user-list.xhtml">
-                        Gestionar usuarios
+                    <h:link outcome="/pages/faq/faq.xhtml">
+                        FAQs
                     </h:link>
                 </div>
-                <div class="menu-category">Menú</div>
-                <div class="menu-items">
-                    <p:outputPanel >
-                        <a tabindex="0" class="submenu-link">
-                            Gestión de Datos(CRUD)
-                        </a>
-                        <div class="submenu">
-                            <ul>
-                                <li><h:link outcome="/pages/crud/brand/list_brand.xhtml">
-                                    Gestionar Marcas
-                                </h:link></li>
-                                <li><h:link outcome="/pages/crud/driver/list_driver.xhtml">
-                                    Gestionar Choferes
-                                </h:link></li>
-                                <li><h:link outcome="/pages/crud/group/list_group.xhtml">
-                                    Gestionar Grupos Turísticos
-                                </h:link></li>
-                                <li><h:link outcome="/pages/crud/vehicle/list_vehicle.xhtml">
-                                    Gestionar Vehículos
-                                </h:link></li>
-                                <li><h:link outcome="/pages/crud/fuel_type/list_fuel.xhtml">
-                                    Gestionar Tipos de Combustibles
-                                </h:link></li>
-                                <li><h:link outcome="/pages/crud/district/list_district.xhtml">
-                                    Gestionar Distritos
-                                </h:link></li>
-                            </ul>
-                        </div>
-                    </p:outputPanel>
-                    <div class="menu-items">
-                        <h:link outcome="/pages/faq/faq.xhtml">
-                            FAQs
-                        </h:link>
-                    </div>
-
-                </div>
+            </div>
+            <div class="menu-category">Configuraciones</div>
+            <div class="menu-items">
+                <h:link outcome="/pages/settings/preferences.xhtml">
+                   Preferencias
+                </h:link>
+            </div>
         </div>
     </div>
 
