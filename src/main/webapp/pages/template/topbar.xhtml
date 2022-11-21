@@ -11,8 +11,37 @@
 
         <h:form styleClass="topbar-form">
             <ul class="topbar-menu">
-                
             </ul>
         </h:form>
+<!--        <p:commandButton value="Usuario" >-->
+<!--&lt;!&ndash;            <p:graphicImage name="favicon-32x32.png" library="images"/>&ndash;&gt;-->
+<!--        </p:commandButton>-->
+
+<!--        action="#{MyClass.myMethod}"-->
+<!--        <p:commandLink styleClass="user_pfp">-->
+<!--            <p:graphicImage name="default_user.png"  library="images"/>-->
+<!--        </p:commandLink>-->
+
+<!--        <p:outputPanel styleClass="dropdown">-->
+<!--            <h:commandButton styleClass="dropdown__hover">User</h:commandButton>-->
+<!--            <p:outputPanel styleClass="dropdown__menu">-->
+<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+<!--            </p:outputPanel>-->
+<!--        </p:outputPanel>-->
+
+        <p:outputPanel class="dropdown">
+            <p:graphicImage styleClass="dropdown__hover user_pfp" name="default_user.png" library="images" alt="User"/>
+            <p:outputPanel class="dropdown__menu">
+                <h:link outcome="/pages/settings/user_profile.xhtml">
+                    Perfil
+                </h:link>
+                <h:link outcome="/pages/security/login.xhtml">
+                    Salir
+                </h:link>
+            </p:outputPanel>
+        </p:outputPanel>
+
     </div>
 </ui:composition>

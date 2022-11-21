@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title">
+        Configuración de Perfil
+    </ui:define>
+
+    <ui:define name="layout">
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="#{msgs.label_username}"/>
+                        </td>
+                        <td>
+                            <p:inputText value="username"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="#{msgs.label_password}"/>
+                        </td>
+                        <td>
+                            <p:inputText value="password"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="#{msgs.label_email}"/>
+                        </td>
+                        <td>
+                            <p:inputText type="email" value="email"/>
+                        </td>
+                    </tr>
+                </table>
+                <p:commandButton value="#{msgs.save_user_button}"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
