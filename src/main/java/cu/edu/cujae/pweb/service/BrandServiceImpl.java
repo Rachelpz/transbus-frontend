@@ -12,7 +12,6 @@ import org.springframework.util.MultiValueMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class BrandServiceImpl implements BrandService{
@@ -26,14 +25,7 @@ public class BrandServiceImpl implements BrandService{
 
         List<BrandDto> brands = new ArrayList<BrandDto>();
 
-        try {
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<BrandDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/brands", params, String.class).getBody();
-            brands = apiRestMapper.mapList(response, BrandDto.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return brands;
 
     }

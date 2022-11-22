@@ -37,7 +37,7 @@ public class ManageFuel_TypeBean {
 
     @PostConstruct
     public void init() {
-        fuels = fuels == null ? fuelService.getFuels() : fuels;
+        fuels = fuelService.getFuels();
 
     }
 
@@ -56,7 +56,7 @@ public class ManageFuel_TypeBean {
     public void saveFuel() {
         if (this.selectedFuel.getFuel_id() == null) {
             this.selectedFuel.setFuel_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedFuel.setNewRecord(true);
+
 
 
             this.fuels.add(this.selectedFuel);

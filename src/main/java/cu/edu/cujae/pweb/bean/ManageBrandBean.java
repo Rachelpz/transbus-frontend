@@ -39,7 +39,7 @@ public class ManageBrandBean {
 
 	@PostConstruct
 	public void init() {
-		brands = brands == null ? brandService.getBrands() : brands;
+		brands = brandService.getBrands();
 
 	}
 	//Se ejecuta al dar clic en el button Nuevo
