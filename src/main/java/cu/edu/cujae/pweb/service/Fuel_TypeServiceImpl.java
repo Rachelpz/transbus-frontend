@@ -1,8 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
-import cu.edu.cujae.pweb.dto.BrandDto;
 import cu.edu.cujae.pweb.dto.FuelDto;
-import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.util.UriTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class Fuel_TypeServiceImpl implements Fuel_TypeService{

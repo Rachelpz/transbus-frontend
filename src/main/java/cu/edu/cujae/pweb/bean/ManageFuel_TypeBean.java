@@ -12,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import java.util.List;
-import java.util.UUID;
 
 @Component //Le indica a spring es un componete registrado
 @ManagedBean

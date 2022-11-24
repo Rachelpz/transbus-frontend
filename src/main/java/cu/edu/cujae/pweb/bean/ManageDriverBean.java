@@ -1,22 +1,18 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
-
-
 import cu.edu.cujae.pweb.dto.DriverDto;
 import cu.edu.cujae.pweb.service.DriverService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import cu.edu.cujae.pweb.dto.BrandDto;
-import cu.edu.cujae.pweb.service.BrandService;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.view.ViewScoped;
+import java.util.List;
+import java.util.UUID;
 
 
 @Component //Le indica a spring es un componete registrado
