@@ -5,23 +5,22 @@ public class BrandDto {
     private Integer brand_id;
     private String brand_name;
     private Integer seats_numb;
-    private Double fuel_consumtion;
-    private String fuel;
-    private boolean newRecord;
+    private Integer fuel_consumption;
+    private FuelDto fuel_type;
 
 
     public BrandDto() {
         super();
     }
 
-    public BrandDto(Integer brand_id, String brand_name, Integer seats_numb, Double fuel_consumtion, String fuel, boolean newRecord) {
-        super();
+    public BrandDto(Integer brand_id, String brand_name, Integer seats_numb, Integer fuel_consumption, FuelDto fuel_type) {
+
         this.brand_id = brand_id;
         this.brand_name = brand_name;
         this.seats_numb = seats_numb;
-        this.fuel_consumtion = fuel_consumtion;
-        this.fuel = fuel;
-        this.newRecord = newRecord;
+        this.fuel_consumption = fuel_consumption;
+        this.fuel_type = fuel_type;
+
     }
 
     public Integer getBrand_id() {
@@ -48,27 +47,20 @@ public class BrandDto {
         this.seats_numb = seats_numb;
     }
 
-    public Double getFuel_consumtion() {
-        return fuel_consumtion;
+    public Integer getFuel_consumption() {
+        return fuel_consumption;
     }
 
-    public void setFuel_consumtion(Double fuel_consumtion) {
-        this.fuel_consumtion = fuel_consumtion;
+    public void setFuel_consumption(Integer fuel_consumption) {
+        this.fuel_consumption = fuel_consumption;
     }
 
-    public String getFuel() {
-        return fuel;
+    public FuelDto getFuel_type() {
+        return fuel_type;
     }
 
-    public void setFuel(String fuel) {
-        this.fuel = fuel;
+    public void setFuel_type(FuelDto fuel_type) {
+        this.fuel_type = fuel_type;
     }
 
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
-    }
 }

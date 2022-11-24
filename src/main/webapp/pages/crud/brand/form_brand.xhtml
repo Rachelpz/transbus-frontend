@@ -24,8 +24,8 @@
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Consumo de Combustible</p:outputLabel>
-                            <p:inputNumber id="consumtion" required="true" minValue="0" decimalPlaces="3"
-                                         value="#{manageBrandBean.selectedBrand.fuel_consumtion}">
+                            <p:inputNumber id="consumtion" required="true" minValue="0" decimalPlaces="0"
+                                         value="#{manageBrandBean.selectedBrand.fuel_consumption}">
                                 <p:keyFilter mask="num" />
                             </p:inputNumber>
                             <p:message for="@previous"></p:message>
@@ -34,7 +34,7 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Tipo de Combustible</p:outputLabel>
                             <p:selectOneMenu id="fuel" required="true" label="Seleccione"
-                                             value="#{manageBrandBean.selectedBrand.fuel}"
+                                             value="#{manageBrandBean.selectedBrand.fuel_type.fuel_name}"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">

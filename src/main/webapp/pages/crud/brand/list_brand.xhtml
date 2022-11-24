@@ -70,12 +70,12 @@
                     <p:column headerText="Cantidad de asientos" sortBy="#{brand.seats_numb}">
                         <h:outputText value="#{brand.seats_numb}" />
                     </p:column>
-                    <p:column headerText="Consumo de Combustible" sortBy="#{brand.fuel_consumtion}">
-                        <h:outputText value="#{brand.fuel_consumtion}" />
+                    <p:column headerText="Consumo de Combustible" sortBy="#{brand.fuel_consumption}">
+                        <h:outputText value="#{brand.fuel_consumption}" />
                     </p:column>
-                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel}"
-                              filterBy="#{brand.fuel}">
-                        <h:outputText value="#{brand.fuel}" />
+                    <p:column headerText="Tipo de Combustible" sortBy="#{brand.fuel_type.fuel_name}"
+                              filterBy="#{brand.fuel_type.fuel_name}">
+                        <h:outputText value="#{brand.fuel_type.fuel_name}" />
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" action="#{manageBrandBean.openForEdit}"

@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.DistrictDto;
+
 import java.util.List;
 
 public interface DistrictService {

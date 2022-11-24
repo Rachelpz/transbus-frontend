@@ -1,13 +1,12 @@
 package cu.edu.cujae.pweb.config;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
+import com.sun.faces.config.FacesInitializer;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
-import com.sun.faces.config.FacesInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 /* Este el code que permite registrar a spring en el contexto de la aplicaci�n */
 public class MainWebAppInitializer extends FacesInitializer implements WebApplicationInitializer {
