@@ -24,6 +24,8 @@ public class ManageBrandBean {
 	private BrandDto selectedBrand;
 	private List<BrandDto> brands;
 
+
+
 	private List<FuelDto> fuels;
 	private FuelDto selectedFuel;
 
@@ -65,7 +67,8 @@ public class ManageBrandBean {
 	public void saveBrand() {
 		if (this.selectedBrand.getBrand_id() == null) {
 
-			this.selectedBrand.setFuel_type(this.selectedFuel);
+			FuelDto fuel=fuelService.getFuelById(selectedFuel.getFuel_id());
+			this.selectedBrand.setFuel_type(fuel);
 			brandService.createBrand(this.selectedBrand);
 
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
@@ -120,5 +123,19 @@ public class ManageBrandBean {
 		this.brands = brands;
 	}
 
+	public List<FuelDto> getFuels() {
+		return fuels;
+	}
 
+	public void setFuels(List<FuelDto> fuels) {
+		this.fuels = fuels;
+	}
+
+	public FuelDto getSelectedFuel() {
+		return selectedFuel;
+	}
+
+	public void setSelectedFuel(FuelDto selectedFuel) {
+		this.selectedFuel = selectedFuel;
+	}
 }

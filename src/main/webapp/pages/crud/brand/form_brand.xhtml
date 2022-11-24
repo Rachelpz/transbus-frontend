@@ -34,11 +34,11 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Tipo de Combustible</p:outputLabel>
                             <p:selectOneMenu id="fuel" required="true" label="Seleccione"
-                                             value="#{manageBrandBean.selectedBrand.fuel_type.fuel_name}"
+                                             value="#{manageBrandBean.selectedFuel}"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageFuel_TypeBean.fuels}" var="fuel"
+                                             scrollHeight="250" rendered="#{empty manageBrandBean.selectedBrand.brand_id}">
+                                <f:selectItems value="#{manageBrandBean.fuels}" var="fuel"
                                                itemLabel="#{fuel.fuel_name}" itemValue="#{fuel.fuel_name}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
