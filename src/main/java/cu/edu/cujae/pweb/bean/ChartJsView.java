@@ -14,6 +14,7 @@ import org.primefaces.model.charts.line.LineChartOptions;
 import org.primefaces.model.charts.optionconfig.title.Title;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
+import org.primefaces.model.charts.pie.PieChartOptions;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -117,6 +118,14 @@ public class ChartJsView implements Serializable {
         bgColors.add("rgb(255, 205, 86)");
         dataSet.setBackgroundColor(bgColors);
 
+        //Options
+        PieChartOptions options = new PieChartOptions();
+        Title title = new Title();
+        title.setDisplay(true);
+        title.setText("Cantidad de pasajeros por grupo");
+        options.setTitle(title);
+
+        pieModel.setOptions(options);
         pieModel.setData(data);
     }
 
@@ -170,7 +179,7 @@ public class ChartJsView implements Serializable {
 
         dataSet.setData(values);
         dataSet.setFill(false);
-        dataSet.setLabel("Cantidad de asientos por marca");
+        dataSet.setLabel("Número de asientos");
         dataSet.setBorderColor("rgb(75, 192, 192)");
 //        dataSet.setTension(0.1);
         data.addChartDataSet(dataSet);
@@ -180,7 +189,7 @@ public class ChartJsView implements Serializable {
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
-        title.setText("Gráfico de línea");
+        title.setText("Cantidad de asientos por marca");
         options.setTitle(title);
 
         lineModel.setOptions(options);
