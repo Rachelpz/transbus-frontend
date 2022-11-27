@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Contrato de Renta" showEffect="fade" modal="true"
+              widgetVar="manageContractDialog" responsive="true">
+        <p:outputPanel id="manage-contract-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty manageContractBean.selectedContract}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Fecha de inicio</p:outputLabel>
+                            <p:datePicker id="start_date" required="true"
+                                          value="#{manageContractBean.selectedContract.start_date}"
+                                          showIcon="true" monthNavigator="true" yearNavigator="true" pattern="yyyy-MM-dd" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Fecha de fin</p:outputLabel>
+                            <p:datePicker id="end_date" required="true"
+                                          value="#{manageContractBean.selectedContract.end_date}"
+                                          showIcon="true" monthNavigator="true" yearNavigator="true" pattern="yyyy-MM-dd" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Kilómetros recorridos</p:outputLabel>
+                            <p:inputNumber id="km_traveled" required="true" minValue="1" decimalPlaces="2"
+                                           value="#{manageContractBean.selectedContract.km_traveled}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Request</p:outputLabel>
+                            <p:selectOneMenu id="request" required="true"
+                                             value="#{manageContractBean.selectedContract.request}" label="Seleccione"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageRequestBean.requests}" var="request_var"
+                                               itemLabel="#{request_var.request_name}" itemValue="#{request_var.request_name}" />
+                            </p:selectOneMenu>
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Importe total</p:outputLabel>
+                            <p:inputNumber id="amount_charged" required="true" minValue="1" decimalPlaces="2"
+                                           value="#{manageContractBean.selectedContract.amount_charged}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+                    </h:panelGroup>
+                    <!-- <h:panelGroup>
+                         <div class="p-field">
+                             <p:outputLabel for="@next">Roles</p:outputLabel>
+                             <p:selectCheckboxMenu id="multiple" required="true"
+                                                   value="#{manageUserBean.selectedRoles}" label="Seleccione"
+                                                   style="min-width: 15rem" multiple="true" filter="true"
+                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                   scrollHeight="250">
+                                 <f:selectItems value="#{manageUserBean.roles}" var="role"
+                                                itemLabel="#{role.description}" itemValue="#{role.id}" />
+                             </p:selectCheckboxMenu>
+                         </div>
+                         <div class="p-field">
+                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                             <p:password id="password1" required="true"
+                                         rendered="#{empty manageUserBean.selectedUser.id}"
+                                         value="#{manageUserBean.selectedUser.password}"
+                                         match="password2">
+                             </p:password>
+                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                         </div>
+                         <div class="p-field">
+                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                             <p:password id="password2" required="true"
+                                         value="#{manageUserBean.selectedUser.password}"
+                                         rendered="#{empty manageUserBean.selectedUser.id}">
+                             </p:password>
+                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                         </div>
+
+                     </h:panelGroup> -->
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{manageContractBean.saveContract}"
+                             update="manage-contract-content" process="manage-contract-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageContractDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>
