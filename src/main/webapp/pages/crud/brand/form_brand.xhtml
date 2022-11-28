@@ -39,7 +39,7 @@
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250" rendered="#{empty manageBrandBean.selectedBrand.brand_id}">
                                 <f:selectItems value="#{manageBrandBean.fuels}" var="fuel"
-                                               itemLabel="#{fuel.fuel_name}" itemValue="#{fuel.fuel_name}" />
+                                               itemLabel="#{fuel.fuel_name}" itemValue="#{fuel.fuel_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
