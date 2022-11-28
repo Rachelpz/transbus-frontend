@@ -13,6 +13,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.ui-panel, div.ui-state-hover {
+  margin: 10px;
+  width: 200px;
+}
+
+.ui-dashboard-column {
+  width: 220px;
+}
+
+.ui-chart {
+  margin-bottom: 50px;
+}
+
+.driver-item .driver-item-content {
+  /*border: 1px solid var(--surface-d);*/
+  border-radius: 3px;
+  margin: .3rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.driver-item .driver-image {
+  width: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
 a {
   text-decoration: none; }
 
