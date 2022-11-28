@@ -9,15 +9,14 @@ public class UserDto {
 	private String password;
 	private String email;
 	private String identification;
-	private boolean newRecord;
 	private List<RoleDto> roles;
-	
+
 	public UserDto() {
 		super();
 	}
 
 	public UserDto(String id, String username, String fullName, String password, String email, String identification,
-			List<RoleDto> roles, boolean newRecord) {
+				   List<RoleDto> roles) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -26,9 +25,8 @@ public class UserDto {
 		this.email = email;
 		this.identification = identification;
 		this.roles = roles;
-		this.newRecord = newRecord;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -71,13 +69,4 @@ public class UserDto {
 	public void setRoles(List<RoleDto> roles) {
 		this.roles = roles;
 	}
-
-	public boolean isNewRecord() {
-		return newRecord;
-	}
-
-	public void setNewRecord(boolean newRecord) {
-		this.newRecord = newRecord;
-	}
-	
 }

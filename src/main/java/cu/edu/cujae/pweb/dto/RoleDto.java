@@ -4,14 +4,19 @@ public class RoleDto {
 	private Long id;
 	private String roleName;
 	private String description;
-	
+
+	public RoleDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public RoleDto(Long id, String roleName, String description) {
 		super();
 		this.id = id;
 		this.roleName = roleName;
 		this.description = description;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
