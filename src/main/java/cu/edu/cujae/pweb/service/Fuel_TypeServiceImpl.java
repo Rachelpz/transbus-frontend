@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class Fuel_TypeServiceImpl implements Fuel_TypeService{
+public class Fuel_TypeServiceImpl implements Fuel_TypeService {
 
     @Autowired
     private RestService restService;
@@ -26,7 +26,7 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService{
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<FuelDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/fuels/", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/fuels/", params, String.class).getBody();
             fuels = apiRestMapper.mapList(response, FuelDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService{
 
             UriTemplate template = new UriTemplate("/api/v1/fuels/{fuelId}");
             String uri = template.expand(fuelId).toString();
-            String response = (String)restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class).getBody();
             fuel = apiRestMapper.mapOne(response, FuelDto.class);
         } catch (Exception e) {
             // TODO: handle exception

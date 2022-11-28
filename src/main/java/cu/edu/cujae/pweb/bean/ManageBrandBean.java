@@ -24,8 +24,8 @@ public class ManageBrandBean {
 	private BrandDto selectedBrand;
 	private List<BrandDto> brands;
 
-	private List<FuelDto> fuels;
-	private FuelDto selectedFuel;
+//	private List<FuelDto> fuels;
+//	private FuelDto selectedFuel;
 
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -45,27 +45,27 @@ public class ManageBrandBean {
 
 	@PostConstruct
 	public void init() {
-		fuels=fuelService.getFuels();
+//		fuels=fuelService.getFuels();
 		brands = brandService.getBrands();
 
 	}
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
-		this.selectedFuel=null;
+//		this.selectedFuel= new FuelDto();
 		this.selectedBrand = new BrandDto();
 	}
 
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-		FuelDto fuel = this.selectedBrand.getFuel_type();
-		this.selectedFuel = fuel;
+//		FuelDto fuel = this.selectedBrand.getFuel_type();
+//		this.selectedFuel = fuel;
 	}
 
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
 	public void saveBrand() {
 		if (this.selectedBrand.getBrand_id() == null) {
 
-			this.selectedBrand.setFuel_type(this.selectedFuel);
+//			this.selectedBrand.setFuel_type(this.selectedFuel);
 			brandService.createBrand(this.selectedBrand);
 
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
@@ -75,6 +75,7 @@ public class ManageBrandBean {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_edited");
 		}
 
+		brands = brandService.getBrands();
 		PrimeFaces.current().executeScript("PF('manageBrandDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 		PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 	}

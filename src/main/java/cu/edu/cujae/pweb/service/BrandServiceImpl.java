@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BrandServiceImpl implements BrandService{
+public class BrandServiceImpl implements BrandService {
 
 
     @Autowired
@@ -27,7 +27,7 @@ public class BrandServiceImpl implements BrandService{
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<BrandDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/brands/", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/brands/", params, String.class).getBody();
             brands = apiRestMapper.mapList(response, BrandDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class BrandServiceImpl implements BrandService{
 
             UriTemplate template = new UriTemplate("/api/v1/brands/{brandId}");
             String uri = template.expand(brandId).toString();
-            String response = (String)restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class).getBody();
             brand = apiRestMapper.mapOne(response, BrandDto.class);
         } catch (Exception e) {
             // TODO: handle exception

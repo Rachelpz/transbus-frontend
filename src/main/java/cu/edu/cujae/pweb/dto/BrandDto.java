@@ -11,6 +11,7 @@ public class BrandDto {
 
     public BrandDto() {
         super();
+        fuel_type = new FuelDto();
     }
 
     public BrandDto(Integer brand_id, String brand_name, Integer seats_numb, Integer fuel_consumption, FuelDto fuel_type) {

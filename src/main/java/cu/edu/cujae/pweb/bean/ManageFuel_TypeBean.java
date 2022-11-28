@@ -54,10 +54,6 @@ public class ManageFuel_TypeBean {
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
     public void saveFuel() {
         if (this.selectedFuel.getFuel_id() == null) {
-
-
-
-
             fuelService.createFuel(this.selectedFuel);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_fuel_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         } else {
