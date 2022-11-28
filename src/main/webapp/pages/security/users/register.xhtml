@@ -5,114 +5,63 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Registration Page</title>
+	<title>Autenticación</title>
 	<h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
+
+
 	<h:form>
 		<p:spacer height="50"></p:spacer>
 		<div class="p-grid p-ai-center vertical-container">
-			<div class="p-col">
+		<div class="p-col">
 
-			</div>
-			<div class="p-col">
-				<p:card style="width: auto">
-					<f:facet name="title">
-						Login
-					</f:facet>
-		<p:outputPanel id="manage-user-content" class="ui-fluid">
-			<p:outputPanel rendered="#{not empty manageUserBean.selectedUser}">
-				<p:panelGrid layout="grid" columns="2">
-					<h:panelGroup>
-						<div class="p-field">
-							<p:outputLabel for="@next">Nombre Completo</p:outputLabel>
-							<p:inputText id="name" required="true"
-										 value="#{manageUserBean.selectedUser.fullName}" />
-							<p:message for="@previous" ></p:message>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next">Usuario</p:outputLabel>
-							<p:inputText id="username" required="true"
-										 value="#{manageUserBean.selectedUser.username}" />
-							<p:message for="@previous"></p:message>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next">Identificación</p:outputLabel>
-							<p:inputText id="ci" required="true"
-										 value="#{manageUserBean.selectedUser.identification}"
-										 maxlength="11">
-								<p:keyFilter mask="num" />
-							</p:inputText>
-							<p:message for="@previous"></p:message>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next">Correo</p:outputLabel>
-							<p:inputText id="email" required="true"
-										 value="#{manageUserBean.selectedUser.email}"
-										 validatorMessage="Email mal formado">
-								<f:validateRegex
-										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-							</p:inputText>
-							<p:message for="@previous"></p:message>
-						</div>
-					</h:panelGroup>
-					<h:panelGroup>
-						<div class="p-field">
-							<p:outputLabel for="@next">Roles</p:outputLabel>
-							<p:selectCheckboxMenu id="multiple" required="true"
-												  value="#{manageUserBean.selectedRoles}" label="Seleccione"
-												  style="min-width: 15rem" multiple="true" filter="true"
-												  filterMatchMode="startsWith" panelStyle="width: 30rem"
-												  scrollHeight="250">
-								<f:selectItems value="#{manageUserBean.roles}" var="role"
-											   itemLabel="#{role.description}" itemValue="#{role.id}" />
-							</p:selectCheckboxMenu>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
-							<p:password id="password1" required="true"
-										rendered="#{empty manageUserBean.selectedUser.id}"
-										value="#{manageUserBean.selectedUser.password}"
-										match="password2">
-							</p:password>
-							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
-							<p:password id="password2" required="true"
-										value="#{manageUserBean.selectedUser.password}"
-										rendered="#{empty manageUserBean.selectedUser.id}">
-							</p:password>
-							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-						</div>
-
-					</h:panelGroup>
-				</p:panelGrid>
-			</p:outputPanel>
-		</p:outputPanel>
-
-					<f:facet name="footer">
-						<p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.message_user_added}" action="#{manageUserBean.saveUser}"/>
-					</f:facet>
-				</p:card>
-			</div>
+		</div>
+		<div class="p-col">
+		<p:card style="width: auto">
+		<f:facet name="title">
+			Login
+		</f:facet>
+		<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+		<div class="card">
+			<table>
+				<tr>
+					<td>
+						<p:outputLabel value="#{msgs.label_username}"/>
+					</td>
+					<td>
+						<p:inputText value="username"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p:outputLabel value="#{msgs.label_password}"/>
+					</td>
+					<td>
+						<p:inputText value="password"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p:outputLabel value="#{msgs.label_email}"/>
+					</td>
+					<td>
+						<p:inputText type="email" value="email"/>
+					</td>
+				</tr>
+			</table>
+			<p:commandButton value="#{msgs.save_user_button}"/>
+		</div>
+			<f:facet name="footer">
+				<p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}" action="#{userBean.login}"/>
+			</f:facet>
+		</p:card>
+		</div>
 			<div class="p-col">
 				<div class="box"></div>
 			</div>
 		</div>
-
-		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
-							 actionListener="#{manageUserBean.saveUser}"
-							 update="manage-user-content" process="manage-user-content @this" />
-			<p:commandButton value="Cancelar" icon="pi pi-times"
-							 onclick="PF('manageUserDialog').hide()" class="ui-button-secondary" />
-		</f:facet>
-
-		<div align="center"><h:link tyle="color: #FF0000"  outcome="/pages/security/login.xhtml">
-			Sign up
-		</h:link></div>
 	</h:form>
 </h:body>
 </html>
