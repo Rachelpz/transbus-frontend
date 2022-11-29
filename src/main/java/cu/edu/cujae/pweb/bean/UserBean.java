@@ -9,16 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Component //Le indica a spring es un componete registrado
 @ManagedBean
+@ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class UserBean {
 
 	private String username;
@@ -46,7 +50,8 @@ public class UserBean {
 	public String login() {
 
 		try {
-			UserAuthenticatedDto userAuthenticated = authService.login(username, password);
+			UserAuthenticatedDto userAuthenticated=null;
+			userAuthenticated = authService.login(this.username, this.password);
 			UserDetails userDetails = UserPrincipal.create(userAuthenticated);
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
