@@ -46,7 +46,7 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
 
             UriTemplate template = new UriTemplate("/api/v1/fuels/{fuelId}");
             String uri = template.expand(fuelId).toString();
-            String response = (String) restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             fuel = apiRestMapper.mapOne(response, FuelDto.class);
         } catch (Exception e) {
             // TODO: handle exception
@@ -56,13 +56,13 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
 
     @Override
     public void createFuel(FuelDto fuel) {
-        restService.POST("/api/v1/fuels/", fuel, String.class).getBody();
+        restService.POST("/api/v1/fuels/", fuel, String.class,CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateFuel(FuelDto fuel) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        restService.PUT("/api/v1/fuels/", params, fuel, String.class).getBody();
+        restService.PUT("/api/v1/fuels/", params, fuel, String.class,CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
@@ -70,6 +70,6 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/fuels/{fuelId}");
         String uri = template.expand(fuelId).toString();
-        restService.DELETE(uri, params, String.class, null).getBody();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 }

@@ -48,7 +48,7 @@ public class BrandServiceImpl implements BrandService {
 
             UriTemplate template = new UriTemplate("/api/v1/brands/{brandId}");
             String uri = template.expand(brandId).toString();
-            String response = (String) restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             brand = apiRestMapper.mapOne(response, BrandDto.class);
         } catch (Exception e) {
             // TODO: handle exception
@@ -58,14 +58,14 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void createBrand(BrandDto brand) {
-        restService.POST("/api/v1/brands/", brand, String.class).getBody();
+        restService.POST("/api/v1/brands/", brand, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 
     }
 
     @Override
     public void updateBrand(BrandDto brand) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        restService.PUT("/api/v1/brands/", params, brand, String.class).getBody();
+        restService.PUT("/api/v1/brands/", params, brand, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 
     }
 
@@ -74,7 +74,7 @@ public class BrandServiceImpl implements BrandService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/brands/{brandId}");
         String uri = template.expand(brandId).toString();
-        restService.DELETE(uri, params, String.class, null).getBody();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
 
