@@ -34,11 +34,6 @@ public class ManageFuel_TypeBean {
 
     //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
 
-    @PostConstruct
-    public void init() {
-        fuels = fuelService.getFuels();
-
-    }
 
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
@@ -99,6 +94,7 @@ public class ManageFuel_TypeBean {
     }
 
     public List<FuelDto> getFuels() {
+        fuels = fuelService.getFuels();
         return fuels;
     }
 

@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.FuelDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<FuelDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/api/v1/fuels/", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/fuels/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             fuels = apiRestMapper.mapList(response, FuelDto.class);
         } catch (IOException e) {
             e.printStackTrace();

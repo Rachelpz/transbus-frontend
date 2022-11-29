@@ -43,12 +43,7 @@ public class ManageBrandBean {
 
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
 
-	@PostConstruct
-	public void init() {
-//		fuels=fuelService.getFuels();
-		brands = brandService.getBrands();
 
-	}
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
 //		this.selectedFuel= new FuelDto();
@@ -114,6 +109,7 @@ public class ManageBrandBean {
 	}
 
 	public List<BrandDto> getBrands() {
+		brands = brandService.getBrands();
 		return brands;
 	}
 
