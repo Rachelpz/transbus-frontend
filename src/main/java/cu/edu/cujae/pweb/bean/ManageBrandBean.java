@@ -20,102 +20,90 @@ import java.util.List;
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageBrandBean {
-	private BrandDto brandDto;
-	private BrandDto selectedBrand;
-	private List<BrandDto> brands;
+    private BrandDto brandDto;
+    private BrandDto selectedBrand;
+    private List<BrandDto> brands;
 
-//	private List<FuelDto> fuels;
-//	private FuelDto selectedFuel;
+    /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
+     * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
+     */
+    @Autowired
+    private BrandService brandService;
 
-	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
-	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
-	 */
-	@Autowired
-	private BrandService brandService;
+    public ManageBrandBean() {
 
-	@Autowired
-	private Fuel_TypeService fuelService;
+    }
 
-
-	public ManageBrandBean() {
-
-	}
-
-	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
+    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
 
 
-	//Se ejecuta al dar clic en el button Nuevo
-	public void openNew() {
-//		this.selectedFuel= new FuelDto();
-		this.selectedBrand = new BrandDto();
-	}
+    //Se ejecuta al dar clic en el button Nuevo
+    public void openNew() {
+        this.selectedBrand = new BrandDto();
+    }
 
-	//Se ejecuta al dar clic en el button con el lapicito
-	public void openForEdit() {
-//		FuelDto fuel = this.selectedBrand.getFuel_type();
-//		this.selectedFuel = fuel;
-	}
+    //Se ejecuta al dar clic en el button con el lapicito
+    public void openForEdit() {
 
-	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
-	public void saveBrand() {
-		if (this.selectedBrand.getBrand_id() == null) {
+    }
 
-//			this.selectedBrand.setFuel_type(this.selectedFuel);
-			brandService.createBrand(this.selectedBrand);
+    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar la marca
+    public void saveBrand() {
+        if (this.selectedBrand.getBrand_id() == null) {
+            this.brandService.createBrand(this.selectedBrand);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+        } else {
+            this.brandService.updateBrand(this.selectedBrand);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_edited");
+        }
 
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-		}
-		else {
-			brandService.updateBrand(this.selectedBrand);
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_edited");
-		}
+        this.brands = brandService.getBrands();
 
-		brands = brandService.getBrands();
-		PrimeFaces.current().executeScript("PF('manageBrandDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
-		PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-	}
+        PrimeFaces.current().executeScript("PF('manageBrandDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+        PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+    }
 
-	//Permite eliminar una marca
-	public void deleteBrand() {
-		try {
-			brandService.deleteBrand(this.selectedBrand.getBrand_id());
-			this.selectedBrand = null;
+    //Permite eliminar una marca
+    public void deleteBrand() {
+        try {
+            this.brandService.deleteBrand(this.selectedBrand.getBrand_id());
+            this.selectedBrand = null;
 
-			//load datatable again with new values
-			brands = brandService.getBrands();
+            //load datatable again with new values
+            this.brands = brandService.getBrands();
 
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_removed");
-			PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-		} catch (Exception e) {
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
-		}
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_removed");
+            PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+        } catch (Exception e) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+        }
 
-	}
+    }
 
-	public BrandDto getBrandDto() {
-		return brandDto;
-	}
+    public BrandDto getBrandDto() {
+        return brandDto;
+    }
 
-	public void setBrandDto(BrandDto brandDto) {
-		this.brandDto = brandDto;
-	}
+    public void setBrandDto(BrandDto brandDto) {
+        this.brandDto = brandDto;
+    }
 
-	public BrandDto getSelectedBrand() {
-		return selectedBrand;
-	}
+    public BrandDto getSelectedBrand() {
+        return selectedBrand;
+    }
 
-	public void setSelectedBrand(BrandDto selectedBrand) {
-		this.selectedBrand = selectedBrand;
-	}
+    public void setSelectedBrand(BrandDto selectedBrand) {
+        this.selectedBrand = selectedBrand;
+    }
 
-	public List<BrandDto> getBrands() {
-		brands = brandService.getBrands();
-		return brands;
-	}
+    public List<BrandDto> getBrands() {
+        this.brands = brandService.getBrands();
+        return this.brands;
+    }
 
-	public void setBrands(List<BrandDto> brands) {
-		this.brands = brands;
-	}
+    public void setBrands(List<BrandDto> brands) {
+        this.brands = brands;
+    }
 
 
 }

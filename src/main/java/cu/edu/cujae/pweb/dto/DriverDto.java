@@ -6,15 +6,16 @@ public class DriverDto {
     private String dni;
     private String address;
     private String phone_number;
-    private String district;
-    private String brand;
-    private boolean newRecord;
+    private DistrictDto district;
+    private BrandDto brand;
 
     public DriverDto() {
         super();
+        district = new DistrictDto();
+        brand = new BrandDto();
     }
 
-    public DriverDto(Integer driver_id, String driver_name, String dni, String address, String phone_number, String district, String brand, boolean newRecord) {
+    public DriverDto(Integer driver_id, String driver_name, String dni, String address, String phone_number, DistrictDto district, BrandDto brand) {
         this.driver_id = driver_id;
         this.driver_name = driver_name;
         this.dni = dni;
@@ -22,7 +23,6 @@ public class DriverDto {
         this.phone_number = phone_number;
         this.district = district;
         this.brand = brand;
-        this.newRecord = newRecord;
     }
 
     public Integer getDriver_id() {
@@ -65,27 +65,19 @@ public class DriverDto {
         this.phone_number = phone_number;
     }
 
-    public String getDistrict() {
+    public DistrictDto getDistrict() {
         return district;
     }
 
-    public void setDistrict(String district) {
+    public void setDistrict(DistrictDto district) {
         this.district = district;
     }
 
-    public String getBrand() {
+    public BrandDto getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(BrandDto brand) {
         this.brand = brand;
-    }
-
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
     }
 }

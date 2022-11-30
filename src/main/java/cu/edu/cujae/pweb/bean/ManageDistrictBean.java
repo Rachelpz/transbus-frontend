@@ -27,16 +27,10 @@ public class ManageDistrictBean {
     private DistrictService districtService;
 
     public ManageDistrictBean() {
-    }
-
-    @PostConstruct
-    public void init() {
-        districts = districts == null ? districtService.getDistricts() : districts;
 
     }
 
     public void openNew() {
-
         this.selectedDistrict = new DistrictDto();
     }
 
@@ -46,16 +40,14 @@ public class ManageDistrictBean {
 
     public void saveDistrict() {
         if (this.selectedDistrict.getDistrict_id() == null) {
-            this.selectedDistrict.setDistrict_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedDistrict.setNewRecord(true);
-
-
-            this.districts.add(this.selectedDistrict);
+            this.districtService.createDistrict(this.selectedDistrict);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_district_added");
-        }
-        else {
+        } else {
+            this.districtService.updateDistrict(this.selectedDistrict);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_district_edited");
         }
+
+        this.districts = districtService.getDistricts();
 
         PrimeFaces.current().executeScript("PF('manageDistrictDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-districts");
@@ -63,16 +55,16 @@ public class ManageDistrictBean {
 
     public void deleteDistrict() {
         try {
-            this.districts.remove(this.selectedDistrict);
+            this.districtService.deleteDistrict(this.selectedDistrict.getDistrict_id());
             this.selectedDistrict = null;
+
+            this.districts = districtService.getDistricts();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_district_removed");
             PrimeFaces.current().ajax().update("form:dt-districts");
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
-
-
-
     }
 
     public DistrictDto getDistrictDto() {
@@ -92,7 +84,8 @@ public class ManageDistrictBean {
     }
 
     public List<DistrictDto> getDistricts() {
-        return districts;
+        this.districts = districtService.getDistricts();
+        return this.districts;
     }
 
     public void setDistricts(List<DistrictDto> districts) {

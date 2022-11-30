@@ -37,23 +37,23 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Marca</p:outputLabel>
                             <p:selectOneMenu id="brand" required="true"
-                                                  value="#{manageDriverBean.selectedDriver.brand}" label="Seleccione"
+                                                  value="#{manageDriverBean.selectedDriver.brand.brand_id}" label="Seleccione"
                                                   style="min-width: 15rem" multiple="true" filter="true"
                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
                                                   scrollHeight="250">
                                 <f:selectItems value="#{manageBrandBean.brands}" var="brand"
-                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_name}" />
+                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_id}" />
                             </p:selectOneMenu>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Distrito</p:outputLabel>
                             <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDriverBean.selectedDriver.district}" label="Seleccione"
+                                             value="#{manageDriverBean.selectedDriver.district.district_id}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageDistrictBean.districts}" var="district"
-                                               itemLabel="#{district.district_name}" itemValue="#{district.district_name}" />
+                                               itemLabel="#{district.district_name}" itemValue="#{district.district_id}" />
 <!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
 <!--                                <f:selectItem id="distrito_2" itemLabel="Distrito 2" itemValue="Distrito 2"/>-->
 <!--                                <f:selectItem id="distrito_3" itemLabel="Distrito 3" itemValue="Distrito 3"/>-->

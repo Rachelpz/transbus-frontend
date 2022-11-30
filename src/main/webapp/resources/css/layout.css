@@ -13,10 +13,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.ui-panel, div.ui-state-hover {
-  margin: 10px;
-  width: 200px;
-}
+/*.ui-panel, div.ui-state-hover {*/
+/*  margin: 10px;*/
+/*  width: 200px;*/
+/*}*/
 
 .ui-dashboard-column {
   width: 220px;
@@ -925,8 +925,8 @@ pre[class*="language-"].line-numbers > code {
       color: var(--primary-color-text);
       line-height: inherit;
       font-size: 14px; }
-    .layout-config .layout-config-close:hover {
-      transform: scale(1.1); }
+    /*.layout-config .layout-config-close:hover {*/
+    /*  transform: scale(1.1); }*/
     .layout-config .layout-config-close:focus {
       outline: 0 none;
       box-shadow: 0 0 0 0.2rem #BBDEFB; }
@@ -943,16 +943,16 @@ pre[class*="language-"].line-numbers > code {
     width: 50px;
     border-radius: 4px;
     transition: transform .2s; }
-    .layout-config .free-themes img:hover {
-      transform: scale(1.1); }
+    /*.layout-config .free-themes img:hover {*/
+    /*  transform: scale(1.1); }*/
   .layout-config .free-themes span {
     font-size: .875rem;
     margin-top: .25rem; }
   .layout-config .premium-themes img {
     width: 100%;
     transition: transform .2s; }
-    .layout-config .premium-themes img:hover {
-      transform: scale(1.1); }
+    /*.layout-config .premium-themes img:hover {*/
+    /*  transform: scale(1.1); }*/
 
 @keyframes rubberBand {
   from {

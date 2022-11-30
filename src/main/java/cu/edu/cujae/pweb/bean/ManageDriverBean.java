@@ -33,17 +33,8 @@ public class ManageDriverBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        drivers = drivers == null ? driverService.getDrivers() : drivers;
-
-    }
-
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedDriver = new DriverDto();
     }
 
@@ -54,27 +45,29 @@ public class ManageDriverBean {
 
     public void saveDriver() {
         if (this.selectedDriver.getDriver_id() == null) {
-            this.selectedDriver.setDriver_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedDriver.setNewRecord(true);
-
-
-            this.drivers.add(this.selectedDriver);
+            this.driverService.createDriver(this.selectedDriver);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_driver_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.driverService.updateDriver(this.selectedDriver);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_driver_edited");
         }
 
+        drivers = driverService.getDrivers();
         PrimeFaces.current().executeScript("PF('manageDriverDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-drivers");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
     public void deleteDriver() {
         try {
-            this.drivers.remove(this.selectedDriver);
+            this.driverService.deleteDriver(this.selectedDriver.getDriver_id());
             this.selectedDriver = null;
+
+            this.drivers = driverService.getDrivers();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_driver_removed");
             PrimeFaces.current().ajax().update("form:dt-drivers"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -98,7 +91,8 @@ public class ManageDriverBean {
     }
 
     public List<DriverDto> getDrivers() {
-        return drivers;
+        this.drivers = driverService.getDrivers();
+        return this.drivers;
     }
 
     public void setDrivers(List<DriverDto> drivers) {

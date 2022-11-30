@@ -2,53 +2,77 @@ package cu.edu.cujae.pweb.service;
 
 
 import cu.edu.cujae.pweb.dto.DriverDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.RestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class DriverServiceImpl implements DriverService{
+public class DriverServiceImpl implements DriverService {
+
+    @Autowired
+    private RestService restService;
 
     @Override
     public List<DriverDto> getDrivers() {
 
-        List<DriverDto> drivers = new ArrayList<>();
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 1", "00021060502", "KSA", "55654413", "Distrito 1", "Marca 1", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 2", "98021235102", "KSA", "55673513", "Distrito 2", "Marca 2", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 3", "00012487635", "KSA", "55673513", "Distrito 2", "Marca 3", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 4", "03051145698", "KSA", "55673513", "Distrito 2", "Marca 4", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 5", "00071966627", "KSA", "55673513", "Distrito 2", "Marca 5", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 6", "95072021365", "KSA", "55673513", "Distrito 2", "Marca 6", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 7", "96021835103", "KSA", "55673513", "Distrito 2", "Marca 7", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 8", "91021935102", "KSA", "55673513", "Distrito 2", "Marca 8", false ));
-        drivers.add(new DriverDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "Driver 9", "90022735129", "KSA", "55673513", "Distrito 2", "Marca 9", false ));
+        List<DriverDto> brands = new ArrayList<DriverDto>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/drivers/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            brands = apiRestMapper.mapList(response, DriverDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return drivers;
+        return brands;
     }
 
     @Override
     public DriverDto getDriverById(Integer driverId) {
-        return getDrivers().stream().filter(r -> r.getDriver_id().equals(driverId)).findFirst().get();
+        DriverDto district = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/drivers/{driverId}");
+            String uri = template.expand(driverId).toString();
+            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            district = apiRestMapper.mapOne(response, DriverDto.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return district;
     }
 
     @Override
     public void createDriver(DriverDto driver) {
-        // TODO Auto-generated method stub
-
+        restService.POST("/api/v1/drivers/", driver, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateDriver(DriverDto driver) {
-        // TODO Auto-generated method stub
-
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/drivers/", params, driver, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
-    public void deleteDriver(Integer id) {
-        // TODO Auto-generated method stub
-
+    public void deleteDriver(Integer driverId) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/drivers/{driverId}");
+        String uri = template.expand(driverId).toString();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
-
 }
