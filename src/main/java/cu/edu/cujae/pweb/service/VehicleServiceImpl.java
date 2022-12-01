@@ -2,8 +2,16 @@ package cu.edu.cujae.pweb.service;
 
 
 import cu.edu.cujae.pweb.dto.VehicleDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.RestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,39 +19,60 @@ import java.util.UUID;
 @Service
 public class VehicleServiceImpl implements VehicleService{
 
+    @Autowired
+    private RestService restService;
+
     @Override
     public List<VehicleDto> getVehicles() {
 
-        List<VehicleDto> vehicles = new ArrayList<>();
-        vehicles.add(new VehicleDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "JKU00AS", 5.5F, "Marcelo", "Manolo", "af", false));
-        vehicles.add(new VehicleDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), "LKA88SA", 8.5F, "Pablo", "Gustavo", "ff", false));
-
+        List<VehicleDto> vehicles = new ArrayList<VehicleDto>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<VehicleDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/vehicles/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            vehicles = apiRestMapper.mapList(response, VehicleDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return vehicles;
     }
 
     @Override
     public VehicleDto getVehicleById(Integer vehicleId) {
-        return getVehicles().stream().filter(r -> r.getVehicle_id().equals(vehicleId)).findFirst().get();
+        VehicleDto vehicle = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<VehicleDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/vehicles/{vehicleId}");
+            String uri = template.expand(vehicleId).toString();
+            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            vehicle = apiRestMapper.mapOne(response, VehicleDto.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return vehicle;
     }
 
     @Override
     public void createVehicle(VehicleDto vehicle) {
-        // TODO Auto-generated method stub
-
+        restService.POST("/api/v1/vehicles/", vehicle, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateVehicle(VehicleDto vehicle) {
-        // TODO Auto-generated method stub
-
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/vehicles/", params, vehicle, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
-    public void deleteVehicle(Integer id) {
-        // TODO Auto-generated method stub
-
+    public void deleteVehicle(Integer vehicleId) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/vehicles/{vehicleId}");
+        String uri = template.expand(vehicleId).toString();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
-
-
 }

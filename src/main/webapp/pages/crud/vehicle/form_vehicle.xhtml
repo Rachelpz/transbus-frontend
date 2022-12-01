@@ -25,36 +25,36 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Chofer 1</p:outputLabel>
                             <p:selectOneMenu id="driver1" required="true" label="Seleccione"
-                                             value="#{manageVehicleBean.selectedVehicle.first_driver}"
+                                             value="#{manageVehicleBean.selectedVehicle.first_driver.driver_id}"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageDriverBean.drivers}" var="driver1"
-                                               itemLabel="#{driver1.driver_name}" itemValue="#{driver1.driver_name}" />
+                                               itemLabel="#{driver1.driver_name}" itemValue="#{driver1.driver_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Chofer 2</p:outputLabel>
                             <p:selectOneMenu id="driver2" required="true" label="Seleccione"
-                                             value="#{manageVehicleBean.selectedVehicle.second_driver}"
+                                             value="#{manageVehicleBean.selectedVehicle.second_driver.driver_id}"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageDriverBean.drivers}" var="driver2"
-                                               itemLabel="#{driver2.driver_name}" itemValue="#{driver2.driver_name}" />
+                                               itemLabel="#{driver2.driver_name}" itemValue="#{driver2.driver_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Marca</p:outputLabel>
                             <p:selectOneMenu id="brand" required="true" label="Seleccione"
-                                             value="#{manageVehicleBean.selectedVehicle.brand}"
+                                             value="#{manageVehicleBean.selectedVehicle.brand.brand_id}"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageBrandBean.brands}" var="brand"
-                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_name}" />
+                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>

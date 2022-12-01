@@ -1,29 +1,27 @@
 package cu.edu.cujae.pweb.dto;
 
 public class VehicleDto {
-
     private Integer vehicle_id;
     private String plate_numb;
     private Float planned_fuel;
-    private String first_driver;
-    private String second_driver;
-    private String brand;
-    private boolean newRecord;
-
+    private DriverDto first_driver;
+    private DriverDto second_driver;
+    private BrandDto brand;
 
     public VehicleDto() {
         super();
+        first_driver = new DriverDto();
+        second_driver = new DriverDto();
+        brand = new BrandDto();
     }
 
-    public VehicleDto(Integer vehicle_id, String plate_numb, Float planned_fuel, String first_driver, String second_driver, String brand, boolean newRecord) {
-        super();
+    public VehicleDto(Integer vehicle_id, String plate_numb, Float planned_fuel, DriverDto first_driver, DriverDto second_driver, BrandDto brand) {
         this.vehicle_id = vehicle_id;
         this.plate_numb = plate_numb;
         this.planned_fuel = planned_fuel;
         this.first_driver = first_driver;
         this.second_driver = second_driver;
         this.brand = brand;
-        this.newRecord = newRecord;
     }
 
     public Integer getVehicle_id() {
@@ -50,35 +48,27 @@ public class VehicleDto {
         this.planned_fuel = planned_fuel;
     }
 
-    public String getFirst_driver() {
+    public DriverDto getFirst_driver() {
         return first_driver;
     }
 
-    public void setFirst_driver(String first_driver) {
+    public void setFirst_driver(DriverDto first_driver) {
         this.first_driver = first_driver;
     }
 
-    public String getSecond_driver() {
+    public DriverDto getSecond_driver() {
         return second_driver;
     }
 
-    public void setSecond_driver(String second_driver) {
+    public void setSecond_driver(DriverDto second_driver) {
         this.second_driver = second_driver;
     }
 
-    public String getBrand() {
+    public BrandDto getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(BrandDto brand) {
         this.brand = brand;
-    }
-
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
     }
 }
