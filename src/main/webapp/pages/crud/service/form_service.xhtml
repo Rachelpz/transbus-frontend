@@ -26,7 +26,7 @@
                             <p:outputLabel for="@next">Hora de recogida</p:outputLabel>
                             <p:datePicker id="pickup_time" required="true"
                                           value="#{manageServiceBean.selectedService.pickup_time}"
-                                          timeOnly="true" pattern="HH:mm:ss" showSeconds="true" />
+                                          timeOnly="true" pattern="HH:mm:ss.SSS" showSeconds="true" />
                             <p:message for="@previous" ></p:message>
                         </div>
                         <div class="p-field">
