@@ -71,7 +71,7 @@
                         <h:outputText value="#{service.pickup_place}" />
                     </p:column>
                     <p:column headerText="Hora de recogida" sortBy="#{service.pickup_time}" filterBy="#{service.pickup_time}">
-                        <h:outputText value="#{service.pickup_time}" />
+                        <h:outputText value="#{service.pickup_time.toString().substring(11,19)}" />
                     </p:column>
                     <p:column headerText="Kilómetros recorridos" sortBy="#{service.km_traveled}" filterBy="#{service.km_traveled}">
                         <h:outputText value="#{service.km_traveled}" />
