@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Vehículo" showEffect="fade" modal="true"
-              widgetVar="manageVehicleDialog" responsive="true">
+              widgetVar="manageVehicleDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-vehicle-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageVehicleBean.selectedVehicle}">
                 <p:panelGrid layout="grid" columns="2">

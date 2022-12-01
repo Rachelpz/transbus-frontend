@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Servicio" showEffect="fade" modal="true"
-              widgetVar="manageServiceDialog" responsive="true">
+              widgetVar="manageServiceDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-service-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageServiceBean.selectedService}">
                 <p:panelGrid layout="grid" columns="2">

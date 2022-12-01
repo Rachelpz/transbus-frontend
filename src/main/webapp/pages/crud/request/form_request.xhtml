@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Solicitud" showEffect="fade" modal="true"
-              widgetVar="manageRequestDialog" responsive="true">
+              widgetVar="manageRequestDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-request-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageRequestBean.selectedRequest}">
                 <p:panelGrid layout="grid" columns="2">

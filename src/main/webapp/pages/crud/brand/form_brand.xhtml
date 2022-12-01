@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Marca" showEffect="fade" modal="true"
-              widgetVar="manageBrandDialog" responsive="true">
+              widgetVar="manageBrandDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-brand-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageBrandBean.selectedBrand}">
                 <p:panelGrid layout="grid" columns="2">
