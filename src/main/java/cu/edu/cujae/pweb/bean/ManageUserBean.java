@@ -7,15 +7,14 @@ import cu.edu.cujae.pweb.service.UserService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @Component //Le indica a spring es un componete registrado
@@ -23,123 +22,141 @@ import java.util.UUID;
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageUserBean {
 
-	private UserDto userDto;
-	private UserDto selectedUser;
-	private List<UserDto> users;
-	private Long[] selectedRoles;
+    private UserDto userDto;
+    private UserDto selectedUser;
+    private List<UserDto> users;
+    private Long[] selectedRoles;
 
-	private List<RoleDto> roles;
+    private List<RoleDto> roles;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
-	public ManageUserBean() {
+    public ManageUserBean() {
 
+    }
 
-	}
+    //Se ejecuta al dar clic en el button Nuevo
+    public void openNew() {
+        this.selectedUser = new UserDto();
+        this.selectedRoles = null;
+    }
 
-	//Se ejecuta al dar clic en el button Nuevo
-	public void openNew() {
-		this.selectedUser = new UserDto();
-		this.selectedRoles = null;
-	}
+    //Se ejecuta al dar clic en el button con el lapicito
+    public void openForEdit() {
+        System.out.println("\nUser ID: " + selectedUser.getId());
+        System.out.println("Username: " + selectedUser.getUsername());
+        System.out.println("Roles: " + selectedUser.getRoles().size());
 
-	//Se ejecuta al dar clic en el button con el lapicito
-	public void openForEdit() {
-		List<RoleDto> roles = this.selectedUser.getRoles();
-		this.selectedRoles = roles.stream().map(r -> r.getId()).toArray(Long[]::new);
-	}
+        for (RoleDto role : selectedUser.getRoles()) {
+            System.out.println(role.getId() + " - " + role.getDescription());
+        }
 
-	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
-	public void saveUser() {
-		if (this.selectedUser.getId() == null) {
-			this.selectedUser.setId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-			List<RoleDto> rolesToAdd = new ArrayList<RoleDto>();
-			for(int i = 0; i < this.selectedRoles.length; i++) {
-				rolesToAdd.add(roleService.getRolesById(selectedRoles[i]));
-			}
-			this.selectedUser.setRoles(rolesToAdd);
+        this.selectedRoles = this.selectedUser.getRoles().stream().map(r -> r.getId()).toArray(Long[]::new);
 
-			//register user
-			userService.createUser(this.selectedUser);
+//        System.out.println("\nSelected roles IDs:");
+//        for (Long role_id : selectedRoles) System.out.println(role_id);
+//		this.roles = this.selectedUser.getRoles();
+//		this.selectedRoles = this.roles.stream().map(r -> r.getId()).toArray(Long[]::new);
+//		for (Long role : this.selectedRoles) System.out.println("\n\nRole: " + role);
+    }
 
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-		}
-		else {
-			//register user
-			userService.updateUser(this.selectedUser);
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
-		}
+    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
+    public void saveUser() {
+        List<RoleDto> rolesToAdd = new ArrayList<RoleDto>();
 
-		//load datatable again with new values
-		users = userService.getUsers();
+        for (int i = 0; i < this.selectedRoles.length; i++) {
+            rolesToAdd.add(roleService.getRoleById(selectedRoles[i]));
+        }
 
-		PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
-		PrimeFaces.current().ajax().update("form:dt-users");
-	}
+        this.selectedUser.setRoles(rolesToAdd);
 
-	//Permite eliminar un usuario
-	public void deleteUser() {
-		try {
-			//delete user
-			userService.deleteUser(this.selectedUser.getId());
-			this.selectedUser = null;
+        if (this.selectedUser.getId() == null) {
+            //register user
+            this.userService.createUser(this.selectedUser);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+        } else {
+            //update user
+            this.userService.updateUser(this.selectedUser);
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
+        }
 
-			//load datatable again with new values
-			users = userService.getUsers();
+        //load datatable again with new values
+        this.users = userService.getUsers();
+//
+//        for (UserDto user : users)
+//            System.out.println("\nUser ID: " + user.getId() + " Username: " + user.getUsername() + " Roles: " + user.getRoles().size());
 
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_deleted");
-			PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-		} catch (Exception e) {
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
-		}
+        PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+        PrimeFaces.current().ajax().update("form:dt-users");
+        System.out.println("\n\nUpdated form:dt-users\n\n");
+    }
 
-	}
+    //Permite eliminar un usuario
+    public void deleteUser() {
+        try {
+            //delete user
+            this.userService.deleteUser(this.selectedUser.getId());
+            this.selectedUser = null;
 
-	public UserDto getUserDto() {
-		return userDto;
-	}
+            //load datatable again with new values
+            this.users = userService.getUsers();
 
-	public void setUserDto(UserDto userDto) {
-		this.userDto = userDto;
-	}
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_deleted");
+            PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+        } catch (Exception e) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+        }
+    }
 
-	public UserDto getSelectedUser() {
-		return selectedUser;
-	}
+    public UserDto getUserDto() {
+        return userDto;
+    }
 
-	public void setSelectedUser(UserDto selectedUser) {
-		this.selectedUser = selectedUser;
-	}
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
+    }
 
-	public List<UserDto> getUsers() {
-		users = userService.getUsers();
-		return users;
-	}
+    public UserDto getSelectedUser() {
+        return selectedUser;
+    }
 
-	public void setUsers(List<UserDto> users) {
+    public void setSelectedUser(UserDto selectedUser) {
+        this.selectedUser = selectedUser;
+    }
 
-		this.users = users;
-	}
+    public List<UserDto> getUsers() {
+        users = userService.getUsers();
+        System.out.println("\nGet Users");
+        for (UserDto user : users) {
+            System.out.println("username: " + user.getUsername() + " roles: " + user.getRoles().size());
+        }
+        return users;
+    }
 
-	public Long[] getSelectedRoles() {
-		return selectedRoles;
-	}
+    public void setUsers(List<UserDto> users) {
 
-	public void setSelectedRoles(Long[] selectedRoles) {
-		this.selectedRoles = selectedRoles;
-	}
+        this.users = users;
+    }
 
-	public List<RoleDto> getRoles() {
-		roles = roleService.getRoles();
-		return roles;
-	}
+    public Long[] getSelectedRoles() {
+        return selectedRoles;
+    }
 
-	public void setRoles(List<RoleDto> roles) {
-		this.roles = roles;
-	}
+    public void setSelectedRoles(Long[] selectedRoles) {
+        this.selectedRoles = selectedRoles;
+    }
+
+    public List<RoleDto> getRoles() {
+        roles = roleService.getRoles();
+        return roles;
+    }
+
+    public void setRoles(List<RoleDto> roles) {
+        this.roles = roles;
+    }
 
 }

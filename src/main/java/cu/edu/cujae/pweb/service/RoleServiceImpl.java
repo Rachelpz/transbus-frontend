@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public RoleDto getRolesById(Long roleId) {
+	public RoleDto getRoleById(Long roleId) {
 		RoleDto role = null;
 
 		try {

@@ -76,11 +76,11 @@
                     <p:column headerText="Número de teléfono" sortBy="#{driver.phone_number}" filterBy="#{driver.phone_number}">
                         <h:outputText value="#{driver.phone_number}" />
                     </p:column>
-                    <p:column headerText="Distrito" sortBy="#{driver.district}" filterBy="#{driver.district}">
-                        <h:outputText value="#{driver.district}" />
+                    <p:column headerText="Distrito" sortBy="#{driver.district.district_name}" filterBy="#{driver.district.district_name}">
+                        <h:outputText value="#{driver.district.district_name}" />
                     </p:column>
-                    <p:column headerText="Marca" sortBy="#{driver.brand}" filterBy="#{driver.brand}">
-                        <h:outputText value="#{driver.brand}" />
+                    <p:column headerText="Marca" sortBy="#{driver.brand.brand_name}" filterBy="#{driver.brand.brand_name}">
+                        <h:outputText value="#{driver.brand.brand_name}" />
                     </p:column>
 
                     <p:column exportable="false">
