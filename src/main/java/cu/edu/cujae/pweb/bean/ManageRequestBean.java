@@ -33,17 +33,8 @@ public class ManageRequestBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        requests = requests == null ? requestService.getRequests() : requests;
-
-    }
-
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedRequest = new RequestDto();
     }
 
@@ -54,27 +45,29 @@ public class ManageRequestBean {
 
     public void saveRequest() {
         if (this.selectedRequest.getRequest_id() == null) {
-            this.selectedRequest.setRequest_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedRequest.setNewRecord(true);
-
-
-            this.requests.add(this.selectedRequest);
+            this.requestService.createRequest(this.selectedRequest);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_request_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.requestService.updateRequest(this.selectedRequest);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_request_edited");
         }
 
+        requests = requestService.getRequests();
         PrimeFaces.current().executeScript("PF('manageRequestDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-requests");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
     public void deleteRequest() {
         try {
-            this.requests.remove(this.selectedRequest);
+            this.requestService.deleteRequest(this.selectedRequest.getRequest_id());
             this.selectedRequest = null;
+
+            this.requests = requestService.getRequests();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_request_removed");
             PrimeFaces.current().ajax().update("form:dt-requests"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -98,7 +91,8 @@ public class ManageRequestBean {
     }
 
     public List<RequestDto> getRequests() {
-        return requests;
+        this.requests = requestService.getRequests();
+        return this.requests;
     }
 
     public void setRequests(List<RequestDto> requests) {

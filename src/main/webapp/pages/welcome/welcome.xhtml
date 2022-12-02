@@ -6,18 +6,57 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Bievenidos a TransBus
+        <p:outputLabel style="padding-left:5px;size: A5;">#{msgs.message_welcome}  #{userBean.userLogued}</p:outputLabel>
+
     </ui:define>
     <ui:define name="layout">
 
-        <!--            Imagen para el Welcome-->
-        <p:card style="width: 100%; height: 200px; margin-bottom: 1.5em; overflow: hidden">
-            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
-                <p:graphicImage name="Bus Transtur.jpg" library="images" width="700" height="400"
-                                style="width: 100%; position: relative;  bottom: 100px"/>
-            </h:link>
+        <!--            cards-->
+        <div class="chart-cont">
+            <h:form style="display: flex;">
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
-        </p:card>
+                <!--                    Brand-->
+                <p:card style="width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
+                    <f:facet name="title">
+                        Marca
+                    </f:facet>
+
+                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                </p:card>
+                <!--                    -->
+                <p:card style="width: 25%; margin-bottom: 2em; margin: 0 10px 0 10px">
+                    <f:facet name="title">
+                        Marca
+                    </f:facet>
+
+                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                </p:card>
+                <!--                    -->
+                <p:card style="width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px">
+                    <f:facet name="title">
+                        Marca
+                    </f:facet>
+
+                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                </p:card>
+                <!--                   -->
+                <p:card style="width: 25%; margin-bottom: 2em; margin: 0 0 0 10px">
+                    <f:facet name="title">
+                        Marca
+                    </f:facet>
+
+                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                </p:card>
+
+                <div style="clear:both"/>
+            </h:form>
+        </div>
+
 
         <!--			Chart Dashboard-->
         <div class="chart-cont">
@@ -38,12 +77,22 @@
             </h:form>
         </div>
 
+
+        <!--            Imagen para el Welcome-->
+        <p:card style="width: 100%; height: 200px; margin-bottom: 1.5em; overflow: hidden">
+            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+                <p:graphicImage name="Bus Transtur.jpg" library="images" width="700" height="400"
+                                style="width: 100%; position: relative;  bottom: 100px"/>
+            </h:link>
+
+        </p:card>
+
         <!--        Carousel with info-->
         <h:form id="form">
 
             <div class="card">
                 <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"
-                             numVisible="3" numScroll="1">
+                            numVisible="3" numScroll="1">
                     <f:facet name="header">
                         <h5>Choferes</h5>
                     </f:facet>
@@ -60,11 +109,14 @@
                                         <f:convertNumber type="currency"/>
                                     </h:outputText>
                                 </h6>
-<!--                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>-->
+                                <!--                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>-->
                                 <div class="mt-5">
-                                    <p:commandButton type="button" icon="pi pi-search" styleClass="rounded-button mr-2" />
-                                    <p:commandButton type="button" icon="pi pi-star" styleClass="ui-button-success rounded-button mr-2" />
-                                    <p:commandButton type="button" icon="pi pi-cog" styleClass="ui-button-help rounded-button" />
+                                    <p:commandButton type="button" icon="pi pi-search"
+                                                     styleClass="rounded-button mr-2"/>
+                                    <p:commandButton type="button" icon="pi pi-star"
+                                                     styleClass="ui-button-success rounded-button mr-2"/>
+                                    <p:commandButton type="button" icon="pi pi-cog"
+                                                     styleClass="ui-button-help rounded-button"/>
                                 </div>
                             </div>
                         </div>

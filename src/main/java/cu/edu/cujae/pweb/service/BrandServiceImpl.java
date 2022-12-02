@@ -37,6 +37,23 @@ public class BrandServiceImpl implements BrandService {
         return brands;
 
     }
+    @Override
+    public Integer getBrandsSize() {
+
+        List<BrandDto> brands = new ArrayList<BrandDto>();
+        Integer size=0;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<BrandDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/brands/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            brands = apiRestMapper.mapList(response, BrandDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return size=brands.size();
+
+    }
 
     @Override
     public BrandDto getBrandById(Integer brandId) {

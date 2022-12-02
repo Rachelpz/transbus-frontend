@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Grupo Turístico" showEffect="fade" modal="true"
-              widgetVar="manageGroupDialog" responsive="true">
+              widgetVar="manageGroupDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-group-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageGroupBean.selectedGroup}">
                 <p:panelGrid layout="grid" columns="2">
@@ -26,10 +26,9 @@
                             <p:outputLabel for="@next">País</p:outputLabel>
                             <p:selectOneMenu id="country_name" required="true" filter="true"
                                              label="Seleccione un país"
-                                             value="#{manageGroupBean.selectedGroup.country_name}">
-                                <f:selectItem id="country1" itemLabel="Mexico" itemValue="Mexico"/>
-                                <f:selectItem id="country2" itemLabel="Canada" itemValue="Canada"/>
-                                <f:selectItem id="country3" itemLabel="Alemania" itemValue="Alemania"/>
+                                             value="#{manageGroupBean.selectedGroup.country.country_id}">
+                                <f:selectItems value="#{manageCountryBean.countries}" var="country"
+                                               itemLabel="#{country.country_name}" itemValue="#{country.country_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>

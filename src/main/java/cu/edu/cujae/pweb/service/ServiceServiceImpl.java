@@ -1,7 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
 
-import cu.edu.cujae.pweb.dto.FuelDto;
 import cu.edu.cujae.pweb.dto.ServiceDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -13,8 +12,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +26,6 @@ public class ServiceServiceImpl implements ServiceService{
     public List<ServiceDto> getServices() {
 
         List<ServiceDto> services = new ArrayList<>();
-
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ServiceDto> apiRestMapper = new ApiRestMapper<>();
@@ -39,47 +35,44 @@ public class ServiceServiceImpl implements ServiceService{
             e.printStackTrace();
         }
 
-
         return services;
     }
+
     @Override
     public ServiceDto getServiceById(Integer serviceId) {
         ServiceDto service = null;
+
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ServiceDto> apiRestMapper = new ApiRestMapper<>();
 
             UriTemplate template = new UriTemplate("/api/v1/services/{serviceId}");
             String uri = template.expand(serviceId).toString();
-            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
+            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             service = apiRestMapper.mapOne(response, ServiceDto.class);
         } catch (Exception e) {
             // TODO: handle exception
         }
+
         return service;
     }
 
     @Override
     public void createService(ServiceDto service) {
-        restService.POST("/api/v1/services/", service, String.class,CurrentUserUtils.getTokenBearer()).getBody();
-
-
+        restService.POST("/api/v1/services/", service, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateService(ServiceDto service) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        restService.PUT("/api/v1/services/", params, service, String.class,CurrentUserUtils.getTokenBearer()).getBody();
-
-
+        restService.PUT("/api/v1/services/", params, service, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
-    public void deleteService(Integer id) {
+    public void deleteService(Integer serviceId) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/api/v1/services/{id}");
-        String uri = template.expand(id).toString();
+        UriTemplate template = new UriTemplate("/api/v1/services/{serviceId}");
+        String uri = template.expand(serviceId).toString();
         restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
-
 }
