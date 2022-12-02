@@ -6,50 +6,130 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        <p:outputLabel style="padding-left:5px;size: A5;">#{msgs.message_welcome}  #{userBean.userLogued}</p:outputLabel>
+        <p:outputLabel
+                style="padding-left:5px;size: A5;">#{msgs.message_welcome}  #{userBean.userLogued}</p:outputLabel>
 
     </ui:define>
     <ui:define name="layout">
 
+        <style>
+            .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+                text-align: center;
+            }
+
+            .customPanelGrid .ui-panelgrid-content {
+                align-items: center;
+            }
+
+        </style>
         <!--            cards-->
         <div class="chart-cont">
             <h:form style="display: flex;">
                 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
                 <!--                    Brand-->
-                <p:card style="width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
-                    <f:facet name="title">
-                        Marca
-                    </f:facet>
+                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
+                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                        <p:row style=" padding:0px;">
+                            <p:column rowspan="2" style=" padding:0px;">
+                                <p:outputPanel
+                                        style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                    <i class="pi pi-briefcase"
+                                       style="font-size:2rem ;color: navy;"></i>
 
-                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                                </p:outputPanel>
+                            </p:column>
+
+                            <p:column style=" padding:0px;">
+                                <h:outputLabel style="text-align: right  ">
+                                    <strong>#{manageBrandBean.sizeBrands}</strong>
+                                    <br></br>
+                                    <a>Contratos</a></h:outputLabel>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
 
                 </p:card>
-                <!--                    -->
-                <p:card style="width: 25%; margin-bottom: 2em; margin: 0 10px 0 10px">
-                    <f:facet name="title">
-                        Marca
-                    </f:facet>
+                <!--                    Brand-->
+                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
+                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                        <p:row style=" padding:0px;">
+                            <p:column rowspan="2" style=" padding:0px;">
+                                <p:outputPanel
+                                        style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                    <i class="pi pi-briefcase"
+                                       style="font-size:2rem ;color: navy;"></i>
 
-                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                                </p:outputPanel>
+                            </p:column>
+
+                            <p:column style=" padding:0px;">
+                                <h:outputLabel style="text-align: right  ">
+                                    <strong>#{manageBrandBean.sizeBrands}</strong>
+                                    <br></br>
+                                    <a>Contratos</a></h:outputLabel>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
 
                 </p:card>
-                <!--                    -->
-                <p:card style="width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px">
-                    <f:facet name="title">
-                        Marca
-                    </f:facet>
+                <!--                    Brand-->
+                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
+                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                        <p:row style=" padding:0px;">
+                            <p:column rowspan="2" style=" padding:0px;">
+                                <p:outputPanel
+                                        style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                    <i class="pi pi-briefcase"
+                                       style="font-size:2rem ;color: navy;"></i>
 
-                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+
+                                </p:outputPanel>
+                            </p:column>
+
+                            <p:column style=" padding:0px;">
+                                <h:outputLabel style="text-align: right  ">
+                                    <strong>#{manageBrandBean.sizeBrands}</strong>
+                                    <br></br>
+                                    <a>Contratos</a></h:outputLabel>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
 
                 </p:card>
-                <!--                   -->
-                <p:card style="width: 25%; margin-bottom: 2em; margin: 0 0 0 10px">
-                    <f:facet name="title">
-                        Marca
-                    </f:facet>
 
-                    <h:outputText value="#{manageBrandBean.sizeBrands}"/>
+                <!--                    Brand-->
+                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 0 0 10px ">
+                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                        <p:row style=" padding:0px;">
+                            <p:column rowspan="2" style=" padding:0px;">
+                                <p:outputPanel
+                                        style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                    <i class="pi pi-briefcase"
+                                       style="font-size:2rem ;color: navy;"></i>
+
+
+                                </p:outputPanel>
+                            </p:column>
+
+                            <p:column style=" padding:0px;">
+                                <h:outputLabel style="text-align: right  ">
+                                    <strong>#{manageBrandBean.sizeBrands}</strong>
+                                    <br></br>
+                                    <a>Contratos</a></h:outputLabel>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
 
                 </p:card>
 
