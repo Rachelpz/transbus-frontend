@@ -10,4 +10,5 @@ public interface BrandService {
     void createBrand(BrandDto brand);
     void updateBrand(BrandDto brand);
     void deleteBrand(Integer id);
+    Integer getBrandsSize();
 }

@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<p:dialog header="Usuario" showEffect="fade" modal="true"
-		widgetVar="manageUserDialog" responsive="true">
+		widgetVar="manageUserDialog" responsive="true" fitViewport="true" resizeObserver="true">
 		<p:outputPanel id="manage-user-content" class="ui-fluid">
 			<p:outputPanel rendered="#{not empty manageUserBean.selectedUser}">
 				<p:panelGrid layout="grid" columns="2">

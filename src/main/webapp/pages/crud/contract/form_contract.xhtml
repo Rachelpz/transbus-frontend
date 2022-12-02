@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Contrato de Renta" showEffect="fade" modal="true"
-              widgetVar="manageContractDialog" responsive="true">
+              widgetVar="manageContractDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-contract-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageContractBean.selectedContract}">
                 <p:panelGrid layout="grid" columns="2">

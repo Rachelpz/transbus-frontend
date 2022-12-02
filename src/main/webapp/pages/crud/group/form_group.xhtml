@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Grupo Turístico" showEffect="fade" modal="true"
-              widgetVar="manageGroupDialog" responsive="true">
+              widgetVar="manageGroupDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-group-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageGroupBean.selectedGroup}">
                 <p:panelGrid layout="grid" columns="2">
