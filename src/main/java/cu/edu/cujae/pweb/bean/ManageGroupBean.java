@@ -33,16 +33,8 @@ public class ManageGroupBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        groups = groups == null ? groupService.getGroups() : groups;
-
-    }
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedGroup = new GroupDto();
     }
 
@@ -51,31 +43,31 @@ public class ManageGroupBean {
 
     }
 
-    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar el grupo
     public void saveGroup() {
         if (this.selectedGroup.getGroup_id() == null) {
-            this.selectedGroup.setGroup_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedGroup.setNewRecord(true);
-
-
-            this.groups.add(this.selectedGroup);
+            this.groupService.createGroup(this.selectedGroup);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.groupService.updateGroup(this.selectedGroup);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_edited");
         }
 
+        groups = groupService.getGroups();
         PrimeFaces.current().executeScript("PF('manageGroupDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-groups");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
-    //Permite eliminar un grupo
     public void deleteGroup() {
         try {
-            this.groups.remove(this.selectedGroup);
+            this.groupService.deleteGroup(this.selectedGroup.getGroup_id());
             this.selectedGroup = null;
+
+            this.groups = groupService.getGroups();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_removed");
             PrimeFaces.current().ajax().update("form:dt-groups");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -99,12 +91,19 @@ public class ManageGroupBean {
     }
 
     public List<GroupDto> getGroups() {
-        return groups;
+        this.groups = groupService.getGroups();
+        return this.groups;
     }
 
     public void setGroups(List<GroupDto> groups) {
         this.groups = groups;
     }
 
+    public GroupService getGroupService() {
+        return groupService;
+    }
 
+    public void setGroupService(GroupService groupService) {
+        this.groupService = groupService;
+    }
 }

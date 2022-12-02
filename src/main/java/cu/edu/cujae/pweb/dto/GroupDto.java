@@ -1,25 +1,21 @@
 package cu.edu.cujae.pweb.dto;
 
 public class GroupDto {
-
     private Integer group_id;
     private String group_name;
     private Integer paxamount;
-    private String country_name;
-    private boolean newRecord;
-
+    private CountryDto country;
 
     public GroupDto() {
         super();
+        country = new CountryDto();
     }
 
-    public GroupDto(Integer group_id, String group_name, Integer paxamount, String country_name, boolean newRecord) {
-        super();
+    public GroupDto(Integer group_id, String group_name, Integer paxamount, CountryDto country) {
         this.group_id = group_id;
         this.group_name = group_name;
         this.paxamount = paxamount;
-        this.country_name = country_name;
-        this.newRecord = newRecord;
+        this.country = country;
     }
 
     public Integer getGroup_id() {
@@ -46,19 +42,11 @@ public class GroupDto {
         this.paxamount = paxamount;
     }
 
-    public String getCountry_name() {
-        return country_name;
+    public CountryDto getCountry() {
+        return country;
     }
 
-    public void setCountry_name(String country_name) {
-        this.country_name = country_name;
-    }
-
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
+    public void setCountry(CountryDto country) {
+        this.country = country;
     }
 }
