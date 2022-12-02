@@ -24,6 +24,10 @@ public class ManageBrandBean {
     private BrandDto selectedBrand;
     private List<BrandDto> brands;
 
+
+
+    private Integer sizeBrands=0;
+
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
      */
@@ -58,7 +62,7 @@ public class ManageBrandBean {
         }
 
         this.brands = brandService.getBrands();
-
+        this.sizeBrands=brands.size();
         PrimeFaces.current().executeScript("PF('manageBrandDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
@@ -104,6 +108,16 @@ public class ManageBrandBean {
     public void setBrands(List<BrandDto> brands) {
         this.brands = brands;
     }
+
+    public Integer getSizeBrands() {
+        this.sizeBrands = brandService.getBrandsSize();
+        return this.sizeBrands;
+    }
+
+    public void setSizeBrands(Integer sizeBrands) {
+        this.sizeBrands = sizeBrands;
+    }
+
 
 
 }

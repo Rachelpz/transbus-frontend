@@ -33,16 +33,8 @@ public class ManageVehicleBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        vehicles = vehicles == null ? vehicleService.getVehicles() : vehicles;
-
-    }
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedVehicle = new VehicleDto();
     }
 
@@ -51,31 +43,31 @@ public class ManageVehicleBean {
 
     }
 
-    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar el vehiculo
     public void saveVehicle() {
         if (this.selectedVehicle.getVehicle_id() == null) {
-            this.selectedVehicle.setVehicle_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedVehicle.setNewRecord(true);
-
-
-            this.vehicles.add(this.selectedVehicle);
+            this.vehicleService.createVehicle(this.selectedVehicle);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_vehicle_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.vehicleService.updateVehicle(this.selectedVehicle);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_vehicle_edited");
         }
 
+        vehicles = vehicleService.getVehicles();
         PrimeFaces.current().executeScript("PF('manageVehicleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-vehicles");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
-    //Permite eliminar un vehiculo
     public void deleteVehicle() {
         try {
-            this.vehicles.remove(this.selectedVehicle);
+            this.vehicleService.deleteVehicle(this.selectedVehicle.getVehicle_id());
             this.selectedVehicle = null;
+
+            this.vehicles = vehicleService.getVehicles();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_vehicle_removed");
             PrimeFaces.current().ajax().update("form:dt-vehicles");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -99,12 +91,19 @@ public class ManageVehicleBean {
     }
 
     public List<VehicleDto> getVehicles() {
-        return vehicles;
+        this.vehicles = vehicleService.getVehicles();
+        return this.vehicles;
     }
 
     public void setVehicles(List<VehicleDto> vehicles) {
         this.vehicles = vehicles;
     }
 
+    public VehicleService getVehicleService() {
+        return vehicleService;
+    }
 
+    public void setVehicleService(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 }

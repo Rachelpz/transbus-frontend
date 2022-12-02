@@ -6,17 +6,19 @@ public class RequestDto {
     private Integer request_id;
     private Date date;
     private String petitioner_name;
-    private String group;
-    private String service;
-    private String vehicle;
+    private GroupDto group;
+    private ServiceDto service;
+    private VehicleDto vehicle;
     private String request_name;
-    private boolean newRecord;
 
     public RequestDto() {
         super();
+        group = new GroupDto();
+        service = new ServiceDto();
+        vehicle = new VehicleDto();
     }
 
-    public RequestDto(Integer request_id, Date date, String petitioner_name, String group, String service, String vehicle, String request_name, boolean newRecord) {
+    public RequestDto(Integer request_id, Date date, String petitioner_name, GroupDto group, ServiceDto service, VehicleDto vehicle, String request_name) {
         this.request_id = request_id;
         this.date = date;
         this.petitioner_name = petitioner_name;
@@ -24,7 +26,6 @@ public class RequestDto {
         this.service = service;
         this.vehicle = vehicle;
         this.request_name = request_name;
-        this.newRecord = newRecord;
     }
 
     public Integer getRequest_id() {
@@ -51,27 +52,27 @@ public class RequestDto {
         this.petitioner_name = petitioner_name;
     }
 
-    public String getGroup() {
+    public GroupDto getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(GroupDto group) {
         this.group = group;
     }
 
-    public String getService() {
+    public ServiceDto getService() {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(ServiceDto service) {
         this.service = service;
     }
 
-    public String getVehicle() {
+    public VehicleDto getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(String vehicle) {
+    public void setVehicle(VehicleDto vehicle) {
         this.vehicle = vehicle;
     }
 
@@ -81,13 +82,5 @@ public class RequestDto {
 
     public void setRequest_name(String request_name) {
         this.request_name = request_name;
-    }
-
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
     }
 }

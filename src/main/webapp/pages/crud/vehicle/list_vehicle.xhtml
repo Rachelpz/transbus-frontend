@@ -70,18 +70,16 @@
                     <p:column headerText="Consumo de Combustible Planeado" sortBy="#{vehicle.planned_fuel}">
                         <h:outputText value="#{vehicle.planned_fuel}" />
                     </p:column>
-                    <p:column headerText="Chofer 1" sortBy="#{vehicle.first_driver}"
-                              filterBy="#{vehicle.first_driver}">
-                        <h:outputText value="#{vehicle.first_driver}" />
+                    <p:column headerText="Chofer 1" sortBy="#{vehicle.first_driver.driver_name}" filterBy="#{vehicle.first_driver.driver_name}">
+                        <h:outputText value="#{vehicle.first_driver.driver_name}" />
                     </p:column>
-                    <p:column headerText="Chofer 2" sortBy="#{vehicle.second_driver}"
-                              filterBy="#{vehicle.second_driver}">
-                        <h:outputText value="#{vehicle.second_driver}" />
+                    <p:column headerText="Chofer 2" sortBy="#{vehicle.second_driver.driver_name}" filterBy="#{vehicle.second_driver.driver_name}">
+                        <h:outputText value="#{vehicle.second_driver.driver_name}" />
                     </p:column>
-                    <p:column headerText="Marca" sortBy="#{vehicle.brand}"
-                              filterBy="#{vehicle.brand}">
-                        <h:outputText value="#{vehicle.brand}" />
+                    <p:column headerText="Marca" sortBy="#{vehicle.brand.brand_name}" filterBy="#{vehicle.brand.brand_name}">
+                        <h:outputText value="#{vehicle.brand.brand_name}" />
                     </p:column>
+
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" action="#{manageVehicleBean.openForEdit}"
                                          update=":form:manage-vehicle-content"

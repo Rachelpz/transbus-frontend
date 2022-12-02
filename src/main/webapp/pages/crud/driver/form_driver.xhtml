@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:dialog header="Driver" showEffect="fade" modal="true"
-              widgetVar="manageDriverDialog" responsive="true">
+              widgetVar="manageDriverDialog" responsive="true" fitViewport="true" resizeObserver="true">
         <p:outputPanel id="manage-driver-content" class="ui-fluid">
             <p:outputPanel rendered="#{not empty manageDriverBean.selectedDriver}">
                 <p:panelGrid layout="grid" columns="2">

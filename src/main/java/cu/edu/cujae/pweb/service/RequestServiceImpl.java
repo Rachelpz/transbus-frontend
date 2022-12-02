@@ -2,10 +2,16 @@ package cu.edu.cujae.pweb.service;
 
 
 import cu.edu.cujae.pweb.dto.RequestDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.RestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,37 +19,60 @@ import java.util.UUID;
 @Service
 public class RequestServiceImpl implements RequestService{
 
+    @Autowired
+    private RestService restService;
+
     @Override
     public List<RequestDto> getRequests() {
 
-        List<RequestDto> requests = new ArrayList<>();
-        requests.add(new RequestDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), Date.valueOf(LocalDate.now()), "Petitioner 1", "Group 1", "Service 1", "Vehicle 1", "sdsa", false ));
-        requests.add(new RequestDto(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)), Date.valueOf(LocalDate.now()), "Petitioner 2", "Group 2", "Service 2", "Vehicle 2", "sdsa", false ));
+        List<RequestDto> requests = new ArrayList<RequestDto>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<RequestDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/requests/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            requests = apiRestMapper.mapList(response, RequestDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return requests;
     }
 
     @Override
     public RequestDto getRequestById(Integer requestId) {
-        return getRequests().stream().filter(r -> r.getRequest_id().equals(requestId)).findFirst().get();
+        RequestDto request = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<RequestDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/requests/{requestId}");
+            String uri = template.expand(requestId).toString();
+            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            request = apiRestMapper.mapOne(response, RequestDto.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        return request;
     }
 
     @Override
     public void createRequest(RequestDto request) {
-        // TODO Auto-generated method stub
-
+        restService.POST("/api/v1/requests/", request, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
     public void updateRequest(RequestDto request) {
-        // TODO Auto-generated method stub
-
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/requests/", params, request, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
 
     @Override
-    public void deleteRequest(Integer id) {
-        // TODO Auto-generated method stub
-
+    public void deleteRequest(Integer requestId) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/requests/{requestId}");
+        String uri = template.expand(requestId).toString();
+        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
     }
-
 }

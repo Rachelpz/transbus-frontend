@@ -8,21 +8,20 @@ public class ContractDto {
     private Date end_date;
     private Float km_traveled;
     private Float amount_charged;
-    private String request;
-    private boolean newRecord;
+    private RequestDto request;
 
     public ContractDto() {
         super();
+        request = new RequestDto();
     }
 
-    public ContractDto(Integer contract_id, Date start_date, Date end_date, Float km_traveled, Float amount_charged, String request, boolean newRecord) {
+    public ContractDto(Integer contract_id, Date start_date, Date end_date, Float km_traveled, Float amount_charged, RequestDto request) {
         this.contract_id = contract_id;
         this.start_date = start_date;
         this.end_date = end_date;
         this.km_traveled = km_traveled;
         this.amount_charged = amount_charged;
         this.request = request;
-        this.newRecord = newRecord;
     }
 
     public Integer getContract_id() {
@@ -65,19 +64,11 @@ public class ContractDto {
         this.amount_charged = amount_charged;
     }
 
-    public String getRequest() {
+    public RequestDto getRequest() {
         return request;
     }
 
-    public void setRequest(String request) {
+    public void setRequest(RequestDto request) {
         this.request = request;
-    }
-
-    public boolean isNewRecord() {
-        return newRecord;
-    }
-
-    public void setNewRecord(boolean newRecord) {
-        this.newRecord = newRecord;
     }
 }

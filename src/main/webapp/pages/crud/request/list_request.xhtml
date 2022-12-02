@@ -67,17 +67,17 @@
                     <p:column headerText="Solicitante" sortBy="#{request_var.petitioner_name}" filterBy="#{request_var.petitioner_name}">
                         <h:outputText value="#{request_var.petitioner_name}" />
                     </p:column>
-                    <p:column headerText="Fecha" sortBy="#{request_var.date}" filterBy="#{request_var.date}">
-                        <h:outputText value="#{request_var.date}" />
+                    <p:column headerText="Fecha" sortBy="#{request_var.date.toInstant().toString().substring(0,10)}" filterBy="#{request_var.date.toInstant().toString().substring(0,10)}">
+                        <h:outputText value="#{request_var.date.toInstant().toString().substring(0,10)}" />
                     </p:column>
-                    <p:column headerText="Grupo Turístico" sortBy="#{request_var.group}" filterBy="#{request_var.group}">
-                        <h:outputText value="#{request_var.group}" />
+                    <p:column headerText="Grupo Turístico" sortBy="#{request_var.group.group_name}" filterBy="#{request_var.group.group_name}">
+                        <h:outputText value="#{request_var.group.group_name}" />
                     </p:column>
-                    <p:column headerText="Vehículo" sortBy="#{request_var.vehicle}" filterBy="#{request_var.vehicle}">
-                        <h:outputText value="#{request_var.vehicle}" />
+                    <p:column headerText="Vehículo" sortBy="#{request_var.vehicle.plate_numb}" filterBy="#{request_var.vehicle.plate_numb}">
+                        <h:outputText value="#{request_var.vehicle.plate_numb}" />
                     </p:column>
-                    <p:column headerText="Servicio" sortBy="#{request_var.service}" filterBy="#{request_var.service}">
-                        <h:outputText value="#{request_var.service}" />
+                    <p:column headerText="Servicio" sortBy="#{request_var.service.service_name}" filterBy="#{request_var.service}">
+                        <h:outputText value="#{request_var.service.service_name}" />
                     </p:column>
                     <p:column headerText="Solicitud" sortBy="#{request_var.request_name}" filterBy="#{request_var.request_name}">
                         <h:outputText value="#{request_var.request_name}" />

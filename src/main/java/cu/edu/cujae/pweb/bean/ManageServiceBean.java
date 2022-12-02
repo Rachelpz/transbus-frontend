@@ -33,17 +33,8 @@ public class ManageServiceBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        services = services == null ? serviceService.getServices() : services;
-
-    }
-
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedService = new ServiceDto();
     }
 
@@ -54,27 +45,29 @@ public class ManageServiceBean {
 
     public void saveService() {
         if (this.selectedService.getService_id() == null) {
-            this.selectedService.setService_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedService.setNewRecord(true);
-
-
-            this.services.add(this.selectedService);
+            this.serviceService.createService(this.selectedService);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_service_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.serviceService.updateService(this.selectedService);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_service_edited");
         }
 
+        services = serviceService.getServices();
         PrimeFaces.current().executeScript("PF('manageServiceDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-services");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
     public void deleteService() {
         try {
-            this.services.remove(this.selectedService);
+            this.serviceService.deleteService(this.selectedService.getService_id());
             this.selectedService = null;
+
+            this.services = serviceService.getServices();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_service_removed");
             PrimeFaces.current().ajax().update("form:dt-services"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -98,7 +91,8 @@ public class ManageServiceBean {
     }
 
     public List<ServiceDto> getServices() {
-        return services;
+        this.services = serviceService.getServices();
+        return this.services;
     }
 
     public void setServices(List<ServiceDto> services) {

@@ -70,9 +70,9 @@
                     <p:column headerText="Cantidad de pasajeros" sortBy="#{group.paxamount}">
                         <h:outputText value="#{group.paxamount}" />
                     </p:column>
-                    <p:column headerText="País" sortBy="#{group.country_name}"
-                              filterBy="#{group.country_name}">
-                        <h:outputText value="#{group.country_name}" />
+                    <p:column headerText="País" sortBy="#{group.country}"
+                              filterBy="#{group.country}">
+                        <h:outputText value="#{group.country.country_name}" />
                     </p:column>
                     <p:column exportable="false">
                         <p:commandButton icon="pi pi-pencil" action="#{manageGroupBean.openForEdit}"
