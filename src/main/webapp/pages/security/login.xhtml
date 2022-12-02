@@ -30,7 +30,7 @@
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:outputLabel for="@next" value="#{msgs.label_password}"/>
+							<p:outputLabel for="@next" value="#{msgs.label_password}" escape="false"/>
 							<p:password style="width:100%" value="#{userBean.password}" required="true" requiredMessage="Valor requerido" id="password"/>
 							<p:message for="@previous"  />
 						</h:panelGroup>
