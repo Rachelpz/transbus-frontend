@@ -64,17 +64,17 @@
                     </f:facet>
 
 
-                    <p:column headerText="Fecha de inicio" sortBy="#{contract.start_date}" filterBy="#{contract.start_date}">
-                        <h:outputText value="#{contract.start_date}" />
+                    <p:column headerText="Fecha de inicio" sortBy="#{contract.start_date.toInstant().toString().substring(0,10)}" filterBy="#{contract.start_date.toInstant().toString().substring(0,10)}">
+                        <h:outputText value="#{contract.start_date.toInstant().toString().substring(0,10)}" />
                     </p:column>
-                    <p:column headerText="Fecha de fin" sortBy="#{contract.end_date}" filterBy="#{contract.end_date}">
-                        <h:outputText value="#{contract.end_date}" />
+                    <p:column headerText="Fecha de fin" sortBy="#{contract.end_date.toInstant().toString().substring(0,10)}" filterBy="#{contract.end_date.toInstant().toString().substring(0,10)}">
+                        <h:outputText value="#{contract.end_date.toInstant().toString().substring(0,10)}" />
                     </p:column>
                     <p:column headerText="Kilómetros recorridos" sortBy="#{contract.km_traveled}" filterBy="#{contract.km_traveled}">
                         <h:outputText value="#{contract.km_traveled}" />
                     </p:column>
-                    <p:column headerText="Solicitud" sortBy="#{contract.request}" filterBy="#{contract.request}">
-                        <h:outputText value="#{contract.request}" />
+                    <p:column headerText="Solicitud" sortBy="#{contract.request.request_name}" filterBy="#{contract.request.request_name}">
+                        <h:outputText value="#{contract.request.request_name}" />
                     </p:column>
                     <p:column headerText="Importe total" sortBy="#{contract.amount_charged}" filterBy="#{contract.amount_charged}">
                         <h:outputText value="#{contract.amount_charged}" />

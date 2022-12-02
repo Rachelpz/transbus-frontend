@@ -33,17 +33,8 @@ public class ManageContractBean {
 
     }
 
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-
-    @PostConstruct
-    public void init() {
-        contracts = contracts == null ? contractService.getContracts() : contracts;
-
-    }
-
     //Se ejecuta al dar clic en el button Nuevo
     public void openNew() {
-
         this.selectedContract = new ContractDto();
     }
 
@@ -54,27 +45,29 @@ public class ManageContractBean {
 
     public void saveContract() {
         if (this.selectedContract.getContract_id() == null) {
-            this.selectedContract.setContract_id(Integer.valueOf(UUID.randomUUID().toString().replaceAll("-|[a-zA-Z]", "").substring(0, 6)));
-            this.selectedContract.setNewRecord(true);
-
-
-            this.contracts.add(this.selectedContract);
+            this.contractService.createContract(this.selectedContract);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_contract_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+            this.contractService.updateContract(this.selectedContract);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_contract_edited");
         }
 
+        contracts = contractService.getContracts();
         PrimeFaces.current().executeScript("PF('manageContractDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-contracts");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }
 
     public void deleteContract() {
         try {
-            this.contracts.remove(this.selectedContract);
+            this.contractService.deleteContract(this.selectedContract.getContract_id());
             this.selectedContract = null;
+
+            this.contracts = contractService.getContracts();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_contract_removed");
             PrimeFaces.current().ajax().update("form:dt-contracts"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
@@ -98,7 +91,8 @@ public class ManageContractBean {
     }
 
     public List<ContractDto> getContracts() {
-        return contracts;
+        this.contracts = contractService.getContracts();
+        return this.contracts;
     }
 
     public void setContracts(List<ContractDto> contracts) {

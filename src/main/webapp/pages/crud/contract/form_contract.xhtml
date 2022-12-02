@@ -33,12 +33,12 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Request</p:outputLabel>
                             <p:selectOneMenu id="request" required="true"
-                                             value="#{manageContractBean.selectedContract.request}" label="Seleccione"
+                                             value="#{manageContractBean.selectedContract.request.request_id}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageRequestBean.requests}" var="request_var"
-                                               itemLabel="#{request_var.request_name}" itemValue="#{request_var.request_name}" />
+                                               itemLabel="#{request_var.request_name}" itemValue="#{request_var.request_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous" ></p:message>
                         </div>
