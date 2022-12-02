@@ -26,36 +26,36 @@
                         <div class="p-field">
                             <p:outputLabel for="@next">Grupo Turístico</p:outputLabel>
                             <p:selectOneMenu id="group" required="true"
-                                             value="#{manageRequestBean.selectedRequest.group}" label="Seleccione"
+                                             value="#{manageRequestBean.selectedRequest.group.group_id}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageGroupBean.groups}" var="group"
-                                               itemLabel="#{group.group_name}" itemValue="#{group.group_name}" />
+                                               itemLabel="#{group.group_name}" itemValue="#{group.group_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous" ></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Vehicle</p:outputLabel>
                             <p:selectOneMenu id="vehicle" required="true"
-                                             value="#{manageRequestBean.selectedRequest.vehicle}" label="Seleccione"
+                                             value="#{manageRequestBean.selectedRequest.vehicle.vehicle_id}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageVehicleBean.vehicles}" var="vehicle"
-                                               itemLabel="#{vehicle.plate_numb}" itemValue="#{vehicle.plate_numb}" />
+                                               itemLabel="#{vehicle.plate_numb}" itemValue="#{vehicle.vehicle_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous" ></p:message>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="@next">Service</p:outputLabel>
                             <p:selectOneMenu id="service" required="true"
-                                             value="#{manageRequestBean.selectedRequest.service}" label="Seleccione"
+                                             value="#{manageRequestBean.selectedRequest.service.service_id}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageServiceBean.services}" var="service"
-                                               itemLabel="#{service.service_name}" itemValue="#{service.service_name}" />
+                                               itemLabel="#{service.service_name}" itemValue="#{service.service_id}" />
                             </p:selectOneMenu>
                             <p:message for="@previous" ></p:message>
                         </div>
