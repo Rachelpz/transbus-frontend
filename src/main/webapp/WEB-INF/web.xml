@@ -8,6 +8,10 @@
 	    <param-name>primefaces.THEME</param-name>
 	    <param-value>#{changeTheme.theme}</param-value>
 	</context-param>
+    <context-param>
+        <param-name>primefaces</param-name>
+        <param-value>#{languageBean.localeCode}</param-value>
+    </context-param>
 	<listener>
 	    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
 	 </listener>

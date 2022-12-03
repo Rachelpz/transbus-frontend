@@ -1,9 +1,10 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+        xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
+<f:view locale="#{languageBean.locale}">
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
         <p:outputLabel
@@ -22,6 +23,9 @@
             }
 
         </style>
+
+
+
         <!--            cards-->
         <div class="chart-cont">
             <h:form style="display: flex;">
@@ -208,4 +212,5 @@
 
     </ui:define>
 </ui:composition>
+</f:view>
 </html>
