@@ -1,13 +1,17 @@
 package cu.edu.cujae.pweb.bean;
 
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
+import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.security.UserPrincipal;
 import cu.edu.cujae.pweb.service.AuthService;
+import cu.edu.cujae.pweb.service.UserService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -19,17 +23,24 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class UserBean {
 
+	private UserDto logged_user;
+	private UserDto logged_user_values;
+
 	private String username;
 	private String password;
 
 	@Autowired
 	private AuthService authService;
+
+	@Autowired
+	private UserService userService;
 
 	public UserBean() {
 		// TODO Auto-generated constructor stub
@@ -47,8 +58,28 @@ public class UserBean {
 		this.password = password;
 	}
 
-	public String login() {
+	public void editLoggedUser() {
+		logged_user_values = userService.getUserById(logged_user.getId());
+		logged_user_values.setPassword("");
+//		logged_user_values = new UserDto();
+//		logged_user_values.setId(logged_user.getId());
+//		logged_user_values.setUsername(logged_user.getUsername());
+//		logged_user_values.setFullName(logged_user.getFullName());
+//		logged_user_values.setIdentification(logged_user.getIdentification());
+//		logged_user_values.setEmail(logged_user.getEmail());
+		PrimeFaces.current().ajax().update(":user_profile_form:user_profile_form_edit");
+	}
 
+	public void saveUserProfile() {
+		this.userService.updateUser(logged_user_values);
+		logged_user = userService.getUserById(logged_user_values.getId());
+		PrimeFaces.current().executeScript("PF('manageUserProfileDialog').hide()");
+		PrimeFaces.current().ajax().update(":user_profile_form");
+		PrimeFaces.current().ajax().update(":form_user_topbar:user_name_label");
+		System.out.println("\n\nName: " + logged_user.getFullName());
+	}
+
+	public String login() {
 		try {
 			UserAuthenticatedDto userAuthenticated=null;
 			userAuthenticated = authService.login(this.username, this.password);
@@ -56,15 +87,28 @@ public class UserBean {
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
+			// set logged user
+			List<UserDto> users =  userService.getUsers();
+			for (UserDto user : users) {
+				if (user.getUsername().equals( this.username)) {
+					logged_user = user;
+					break;
+				}
+			}
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle("securityMessages", FacesMessage.SEVERITY_INFO, "message_invalid_credentials");
 			return null;
 		}
+
 		return "login";
 	}
 
 	public String logout() {
 		return dispatchToUrl("/logout");
+	}
+
+	public String profile() {
+		return dispatchToUrl("/user_profile");
 	}
 
 	public String getUserLogued() {
@@ -85,4 +129,19 @@ public class UserBean {
 		return null;
 	}
 
+	public UserDto getLogged_user() {
+		return logged_user;
+	}
+
+	public void setLogged_user(UserDto logged_user) {
+		this.logged_user = logged_user;
+	}
+
+	public UserDto getLogged_user_values() {
+		return logged_user_values;
+	}
+
+	public void setLogged_user_values(UserDto logged_user_values) {
+		this.logged_user_values = logged_user_values;
+	}
 }

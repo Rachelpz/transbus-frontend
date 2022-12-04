@@ -17,7 +17,9 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider {
         return ConfigurationBuilder.begin()
 
                 .addRule(Join.path("/security-users").to("/pages/security/users/user-list.jsf"))
-                .addRule(Join.path("/welcome").to("/pages/welcome/welcome.jsf"));
+                .addRule(Join.path("/welcome").to("/pages/welcome/welcome.jsf"))
+                .addRule(Join.path("/user_profile").to("/pages/settings/user_profile.jsf"))
+                ;
 
 
         //ej using params

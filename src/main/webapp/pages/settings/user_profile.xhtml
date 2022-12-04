@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/pages/template/layout.xhtml">
@@ -9,24 +10,32 @@
     </ui:define>
 
     <ui:define name="layout">
-        <h:form id="form">
+        <h:form id="user_profile_form">
             <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
             <div class="card">
-                <table>
+                <table class="user_profile_table">
                     <tr>
                         <td>
                             <p:outputLabel value="#{msgs.label_username}"/>
                         </td>
                         <td>
-                            <p:inputText value="username"/>
+                            <p:outputLabel value="#{userBean.logged_user.username}"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p:outputLabel value="#{msgs.label_password}"/>
+                            <p:outputLabel value="#{msgs.label_fullname}"/>
                         </td>
                         <td>
-                            <p:inputText value="password"/>
+                            <p:outputLabel value="#{userBean.logged_user.fullName}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:outputLabel value="#{msgs.label_identification}"/>
+                        </td>
+                        <td>
+                            <p:outputLabel value="#{userBean.logged_user.identification}"/>
                         </td>
                     </tr>
                     <tr>
@@ -34,11 +43,25 @@
                             <p:outputLabel value="#{msgs.label_email}"/>
                         </td>
                         <td>
-                            <p:inputText type="email" value="email"/>
+                            <p:outputLabel type="email" value="#{userBean.logged_user.email}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p:commandButton icon="pi pi-pencil"
+                                             styleClass="edit-button ui-button-success"
+                                             process="@this"
+                                             value="#{msgs.btn_edit}"
+                                             action="#{userBean.editLoggedUser}"
+                                             oncomplete="PF('manageUserProfileDialog').show()">
+                            <p:resetInput target="user_profile_form"/>
+                            </p:commandButton>
                         </td>
                     </tr>
                 </table>
-                <p:commandButton value="#{msgs.save_user_button}"/>
+<!--                <p:commandButton value="#{msgs.save_user_button}"/>-->
+
+                <ui:include src="form_user_profile.xhtml"/>
             </div>
         </h:form>
     </ui:define>

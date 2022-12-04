@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="#{msgs.message_user_profile_header}" showEffect="fade" modal="true"
+              widgetVar="manageUserProfileDialog" responsive="true" fitViewport="true" resizeObserver="true"
+              id="user_profile_form_edit">
+        <p:outputPanel id="manage-user_profile-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty userBean.logged_user}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">#{msgs.label_username}</p:outputLabel>
+                            <p:inputText id="username" required="true"
+                                         value="#{userBean.logged_user_values.username}" />
+                            <p:message for="@previous" />
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">#{msgs.label_fullname}</p:outputLabel>
+                            <p:inputText id="fullname" required="true"
+                                         value="#{userBean.logged_user_values.fullName}" />
+                            <p:message for="@previous" />
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">#{msgs.label_identification}</p:outputLabel>
+                            <p:inputText id="identification" required="true"
+                                         value="#{userBean.logged_user_values.identification}"
+                                         maxlength="11">
+                                <p:keyFilter mask="num" />
+                            </p:inputText>
+                            <p:message for="@previous"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">#{msgs.label_email}</p:outputLabel>
+                            <p:inputText id="email" required="true"
+                                         value="#{userBean.logged_user_values.email}"
+                                         validatorMessage="Email mal formado">
+                                <f:validateRegex
+                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+                            <p:message for="@previous"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Contraseña</p:outputLabel>
+                            <p:password id="password1"
+                                        value="#{userBean.logged_user_values.password}"
+                                        match="password2">
+                            </p:password>
+                            <p:message for="@previous" />
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Repetir contraseña</p:outputLabel>
+                            <p:password id="password2"
+                                        value="#{userBean.logged_user_values.password}">
+                            </p:password>
+                            <p:message for="@previous"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{userBean.saveUserProfile}"
+                             update="manage-user_profile-content" process="manage-user_profile-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('manageUserProfileDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+</ui:composition>

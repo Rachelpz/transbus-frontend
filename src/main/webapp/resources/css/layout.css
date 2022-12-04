@@ -1521,3 +1521,25 @@ pre[class*="language-"].line-numbers > code {
   background: #f0f0f0;
   color: #323b40;
 }
+
+.layout-topbar .topbar-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  align-self: center;
+  margin: 0;
+}
+
+.layout-topbar {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user_profile_table{
+  font-size: 1.6rem;
+}
+
+.user_profile_table tr{
+  margin: 4px;
+}

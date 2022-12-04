@@ -47,13 +47,17 @@ public class ManageUserBean {
 
     //Se ejecuta al dar clic en el button con el lapicito
     public void openForEdit() {
-        System.out.println("\nUser ID: " + selectedUser.getId());
-        System.out.println("Username: " + selectedUser.getUsername());
-        System.out.println("Roles: " + selectedUser.getRoles().size());
+        for (UserDto user : users)
+            System.out.println("\nUser ID: " + user.getId() + " Username: " + user.getUsername() + " Roles: " + user.getRoles().size());
 
-        for (RoleDto role : selectedUser.getRoles()) {
-            System.out.println(role.getId() + " - " + role.getDescription());
-        }
+
+//        System.out.println("\nUser ID: " + selectedUser.getId());
+//        System.out.println("Username: " + selectedUser.getUsername());
+//        System.out.println("Roles: " + selectedUser.getRoles().size());
+
+//        for (RoleDto role : selectedUser.getRoles()) {
+//            System.out.println(role.getId() + " - " + role.getDescription());
+//        }
 
         this.selectedRoles = this.selectedUser.getRoles().stream().map(r -> r.getId()).toArray(Long[]::new);
 
@@ -79,6 +83,7 @@ public class ManageUserBean {
             this.userService.createUser(this.selectedUser);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         } else {
+            this.selectedUser.setPassword("");
             //update user
             this.userService.updateUser(this.selectedUser);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
