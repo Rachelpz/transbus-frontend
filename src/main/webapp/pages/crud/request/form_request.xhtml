@@ -1,107 +1,110 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition lang="#{languageBean.localeCode}"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog header="Solicitud" showEffect="fade" modal="true"
-              widgetVar="manageRequestDialog" responsive="true" fitViewport="true" resizeObserver="true">
-        <p:outputPanel id="manage-request-content" class="ui-fluid">
-            <p:outputPanel rendered="#{not empty manageRequestBean.selectedRequest}">
-                <p:panelGrid layout="grid" columns="2">
-                    <h:panelGroup>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Nombre del solicitante</p:outputLabel>
-                            <p:inputText id="petitioner_name" required="true"
-                                         value="#{manageRequestBean.selectedRequest.petitioner_name}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Fecha</p:outputLabel>
-                            <p:datePicker id="date" required="true"
-                                         value="#{manageRequestBean.selectedRequest.date}"
-                                         showIcon="true" monthNavigator="true" yearNavigator="true" pattern="yyyy-MM-dd" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Grupo Turístico</p:outputLabel>
-                            <p:selectOneMenu id="group" required="true"
-                                             value="#{manageRequestBean.selectedRequest.group.group_id}" label="Seleccione"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageGroupBean.groups}" var="group"
-                                               itemLabel="#{group.group_name}" itemValue="#{group.group_id}" />
-                            </p:selectOneMenu>
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Vehicle</p:outputLabel>
-                            <p:selectOneMenu id="vehicle" required="true"
-                                             value="#{manageRequestBean.selectedRequest.vehicle.vehicle_id}" label="Seleccione"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageVehicleBean.vehicles}" var="vehicle"
-                                               itemLabel="#{vehicle.plate_numb}" itemValue="#{vehicle.vehicle_id}" />
-                            </p:selectOneMenu>
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Service</p:outputLabel>
-                            <p:selectOneMenu id="service" required="true"
-                                             value="#{manageRequestBean.selectedRequest.service.service_id}" label="Seleccione"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageServiceBean.services}" var="service"
-                                               itemLabel="#{service.service_name}" itemValue="#{service.service_id}" />
-                            </p:selectOneMenu>
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                    </h:panelGroup>
-                    <!-- <h:panelGroup>
-                         <div class="p-field">
-                             <p:outputLabel for="@next">Roles</p:outputLabel>
-                             <p:selectCheckboxMenu id="multiple" required="true"
-                                                   value="#{manageUserBean.selectedRoles}" label="Seleccione"
-                                                   style="min-width: 15rem" multiple="true" filter="true"
-                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                                   scrollHeight="250">
-                                 <f:selectItems value="#{manageUserBean.roles}" var="role"
-                                                itemLabel="#{role.description}" itemValue="#{role.id}" />
-                             </p:selectCheckboxMenu>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
-                             <p:password id="password1" required="true"
-                                         rendered="#{empty manageUserBean.selectedUser.id}"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         match="password2">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
-                             <p:password id="password2" required="true"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         rendered="#{empty manageUserBean.selectedUser.id}">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
+    <f:view locale="#{languageBean.locale}">
+        <p:dialog header="#{msgs.label_request}" showEffect="fade" modal="true"
+                  widgetVar="manageRequestDialog" responsive="true" fitViewport="true" resizeObserver="true">
+            <p:outputPanel id="manage-request-content" class="ui-fluid">
+                <p:outputPanel rendered="#{not empty manageRequestBean.selectedRequest}">
+                    <p:panelGrid layout="grid" columns="2">
+                        <h:panelGroup>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_petitioner}"/>
+                                <p:inputText id="petitioner_name" required="true"
+                                             value="#{manageRequestBean.selectedRequest.petitioner_name}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_date}"/>
+                                <p:datePicker id="date" required="true"
+                                              value="#{manageRequestBean.selectedRequest.date}"
+                                              showIcon="true" monthNavigator="true" yearNavigator="true" pattern="yyyy-MM-dd" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_group}"/>
+                                <p:selectOneMenu id="group" required="true"
+                                                 value="#{manageRequestBean.selectedRequest.group.group_id}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageGroupBean.groups}" var="group"
+                                                   itemLabel="#{group.group_name}" itemValue="#{group.group_id}" />
+                                </p:selectOneMenu>
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.label_vehicle}"/>
+                                <p:selectOneMenu id="vehicle" required="true"
+                                                 value="#{manageRequestBean.selectedRequest.vehicle.vehicle_id}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageVehicleBean.vehicles}" var="vehicle"
+                                                   itemLabel="#{vehicle.plate_numb}" itemValue="#{vehicle.vehicle_id}" />
+                                </p:selectOneMenu>
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_service}"/>
+                                <p:selectOneMenu id="service" required="true"
+                                                 value="#{manageRequestBean.selectedRequest.service.service_id}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageServiceBean.services}" var="service"
+                                                   itemLabel="#{service.service_name}" itemValue="#{service.service_id}" />
+                                </p:selectOneMenu>
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                        </h:panelGroup>
+                        <!-- <h:panelGroup>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next">Roles</p:outputLabel>
+                                 <p:selectCheckboxMenu id="multiple" required="true"
+                                                       value="#{manageUserBean.selectedRoles}" label="Seleccione"
+                                                       style="min-width: 15rem" multiple="true" filter="true"
+                                                       filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                       scrollHeight="250">
+                                     <f:selectItems value="#{manageUserBean.roles}" var="role"
+                                                    itemLabel="#{role.description}" itemValue="#{role.id}" />
+                                 </p:selectCheckboxMenu>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                                 <p:password id="password1" required="true"
+                                             rendered="#{empty manageUserBean.selectedUser.id}"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             match="password2">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                                 <p:password id="password2" required="true"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             rendered="#{empty manageUserBean.selectedUser.id}">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
 
-                     </h:panelGroup> -->
-                </p:panelGrid>
+                         </h:panelGroup> -->
+                    </p:panelGrid>
+                </p:outputPanel>
             </p:outputPanel>
-        </p:outputPanel>
 
 
-        <f:facet name="footer">
-            <p:commandButton value="Salvar" icon="pi pi-check"
-                             actionListener="#{manageRequestBean.saveRequest}"
-                             update="manage-request-content" process="manage-request-content @this" />
-            <p:commandButton value="Cancelar" icon="pi pi-times"
-                             onclick="PF('manageRequestDialog').hide()" class="ui-button-secondary" />
-        </f:facet>
-    </p:dialog>
+            <f:facet name="footer">
+                <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
+                                 actionListener="#{manageRequestBean.saveRequest}"
+                                 update="manage-request-content" process="manage-request-content @this" />
+                <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
+                                 onclick="PF('manageRequestDialog').hide()" class="ui-button-secondary" />
+            </f:facet>
+        </p:dialog>
+    </f:view>
 </ui:composition>

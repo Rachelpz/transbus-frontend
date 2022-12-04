@@ -1,107 +1,110 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition lang="#{languageBean.localeCode}"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog header="Driver" showEffect="fade" modal="true"
-              widgetVar="manageDriverDialog" responsive="true" fitViewport="true" resizeObserver="true">
-        <p:outputPanel id="manage-driver-content" class="ui-fluid">
-            <p:outputPanel rendered="#{not empty manageDriverBean.selectedDriver}">
-                <p:panelGrid layout="grid" columns="2">
-                    <h:panelGroup>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Nombre del chofer</p:outputLabel>
-                            <p:inputText id="driver_name" required="true"
-                                         value="#{manageDriverBean.selectedDriver.driver_name}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Carnet de identidad</p:outputLabel>
-                            <p:inputText id="dni" required="true"
-                                         value="#{manageDriverBean.selectedDriver.dni}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Dirección</p:outputLabel>
-                            <p:inputText id="address" required="true"
-                                         value="#{manageDriverBean.selectedDriver.address}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Número de teléfono</p:outputLabel>
-                            <p:inputText id="phone_number" required="true"
-                                         value="#{manageDriverBean.selectedDriver.phone_number}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Marca</p:outputLabel>
-                            <p:selectOneMenu id="brand" required="true"
-                                                  value="#{manageDriverBean.selectedDriver.brand.brand_id}" label="Seleccione"
-                                                  style="min-width: 15rem" multiple="true" filter="true"
-                                                  filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                                  scrollHeight="250">
-                                <f:selectItems value="#{manageBrandBean.brands}" var="brand"
-                                               itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_id}" />
-                            </p:selectOneMenu>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Distrito</p:outputLabel>
-                            <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDriverBean.selectedDriver.district.district_id}" label="Seleccione"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageDistrictBean.districts}" var="district"
-                                               itemLabel="#{district.district_name}" itemValue="#{district.district_id}" />
-<!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
-<!--                                <f:selectItem id="distrito_2" itemLabel="Distrito 2" itemValue="Distrito 2"/>-->
-<!--                                <f:selectItem id="distrito_3" itemLabel="Distrito 3" itemValue="Distrito 3"/>-->
-                            </p:selectOneMenu>
-                        </div>
-                    </h:panelGroup>
-                    <!-- <h:panelGroup>
-                         <div class="p-field">
-                             <p:outputLabel for="@next">Roles</p:outputLabel>
-                             <p:selectCheckboxMenu id="multiple" required="true"
-                                                   value="#{manageUserBean.selectedRoles}" label="Seleccione"
-                                                   style="min-width: 15rem" multiple="true" filter="true"
-                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                                   scrollHeight="250">
-                                 <f:selectItems value="#{manageUserBean.roles}" var="role"
-                                                itemLabel="#{role.description}" itemValue="#{role.id}" />
-                             </p:selectCheckboxMenu>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
-                             <p:password id="password1" required="true"
-                                         rendered="#{empty manageUserBean.selectedUser.id}"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         match="password2">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
-                             <p:password id="password2" required="true"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         rendered="#{empty manageUserBean.selectedUser.id}">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
+    <f:view locale="#{languageBean.locale}">
+        <p:dialog header="#{msgs.label_driver}" showEffect="fade" modal="true"
+                  widgetVar="manageDriverDialog" responsive="true" fitViewport="true" resizeObserver="true">
+            <p:outputPanel id="manage-driver-content" class="ui-fluid">
+                <p:outputPanel rendered="#{not empty manageDriverBean.selectedDriver}">
+                    <p:panelGrid layout="grid" columns="2">
+                        <h:panelGroup>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_driver}"/>
+                                <p:inputText id="driver_name" required="true"
+                                             value="#{manageDriverBean.selectedDriver.driver_name}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_ci}"/>
+                                <p:inputText id="dni" required="true"
+                                             value="#{manageDriverBean.selectedDriver.dni}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_address}"/>
+                                <p:inputText id="address" required="true"
+                                             value="#{manageDriverBean.selectedDriver.address}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_phone}"/>
+                                <p:inputText id="phone_number" required="true"
+                                             value="#{manageDriverBean.selectedDriver.phone_number}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_brand}"/>
+                                <p:selectOneMenu id="brand" required="true"
+                                                 value="#{manageDriverBean.selectedDriver.brand.brand_id}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageBrandBean.brands}" var="brand"
+                                                   itemLabel="#{brand.brand_name}" itemValue="#{brand.brand_id}" />
+                                </p:selectOneMenu>
+                            </div>
 
-                     </h:panelGroup> -->
-                </p:panelGrid>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_district}"/>
+                                <p:selectOneMenu id="district_select" required="true"
+                                                 value="#{manageDriverBean.selectedDriver.district.district_id}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageDistrictBean.districts}" var="district"
+                                                   itemLabel="#{district.district_name}" itemValue="#{district.district_id}" />
+                                    <!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
+                                    <!--                                <f:selectItem id="distrito_2" itemLabel="Distrito 2" itemValue="Distrito 2"/>-->
+                                    <!--                                <f:selectItem id="distrito_3" itemLabel="Distrito 3" itemValue="Distrito 3"/>-->
+                                </p:selectOneMenu>
+                            </div>
+                        </h:panelGroup>
+                        <!-- <h:panelGroup>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next">Roles</p:outputLabel>
+                                 <p:selectCheckboxMenu id="multiple" required="true"
+                                                       value="#{manageUserBean.selectedRoles}" label="Seleccione"
+                                                       style="min-width: 15rem" multiple="true" filter="true"
+                                                       filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                       scrollHeight="250">
+                                     <f:selectItems value="#{manageUserBean.roles}" var="role"
+                                                    itemLabel="#{role.description}" itemValue="#{role.id}" />
+                                 </p:selectCheckboxMenu>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                                 <p:password id="password1" required="true"
+                                             rendered="#{empty manageUserBean.selectedUser.id}"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             match="password2">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                                 <p:password id="password2" required="true"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             rendered="#{empty manageUserBean.selectedUser.id}">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
+
+                         </h:panelGroup> -->
+                    </p:panelGrid>
+                </p:outputPanel>
             </p:outputPanel>
-        </p:outputPanel>
 
-
-        <f:facet name="footer">
-            <p:commandButton value="Salvar" icon="pi pi-check"
-                             actionListener="#{manageDriverBean.saveDriver}"
-                             update="manage-driver-content" process="manage-driver-content @this" />
-            <p:commandButton value="Cancelar" icon="pi pi-times"
-                             onclick="PF('manageDriverDialog').hide()" class="ui-button-secondary" />
-        </f:facet>
-    </p:dialog>
+            <f:facet name="footer">
+                <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
+                                 actionListener="#{manageDriverBean.saveDriver}"
+                                 update="manage-driver-content" process="manage-driver-content @this" />
+                <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
+                                 onclick="PF('manageDriverDialog').hide()" class="ui-button-secondary" />
+            </f:facet>
+        </p:dialog>
+    </f:view>
 </ui:composition>

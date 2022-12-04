@@ -47,25 +47,7 @@ public class ManageUserBean {
 
     //Se ejecuta al dar clic en el button con el lapicito
     public void openForEdit() {
-        for (UserDto user : users)
-            System.out.println("\nUser ID: " + user.getId() + " Username: " + user.getUsername() + " Roles: " + user.getRoles().size());
-
-
-//        System.out.println("\nUser ID: " + selectedUser.getId());
-//        System.out.println("Username: " + selectedUser.getUsername());
-//        System.out.println("Roles: " + selectedUser.getRoles().size());
-
-//        for (RoleDto role : selectedUser.getRoles()) {
-//            System.out.println(role.getId() + " - " + role.getDescription());
-//        }
-
         this.selectedRoles = this.selectedUser.getRoles().stream().map(r -> r.getId()).toArray(Long[]::new);
-
-//        System.out.println("\nSelected roles IDs:");
-//        for (Long role_id : selectedRoles) System.out.println(role_id);
-//		this.roles = this.selectedUser.getRoles();
-//		this.selectedRoles = this.roles.stream().map(r -> r.getId()).toArray(Long[]::new);
-//		for (Long role : this.selectedRoles) System.out.println("\n\nRole: " + role);
     }
 
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
@@ -97,7 +79,6 @@ public class ManageUserBean {
 
         PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-users");
-        System.out.println("\n\nUpdated form:dt-users\n\n");
     }
 
     //Permite eliminar un usuario

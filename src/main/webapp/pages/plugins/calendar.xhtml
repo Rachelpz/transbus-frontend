@@ -1,23 +1,25 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/pages/template/layout.xhtml">
-    <ui:define name="title">
-        Calendario
-    </ui:define>
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.title_calendar}
+        </ui:define>
 
-    <ui:define name="layout">
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        <ui:define name="layout">
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
                 <div class="card">
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FHavana&amp;showTabs=1&amp;showPrint=0&amp;showCalendars=0&amp;src=NzI5MmM4ODJkNjJkNzUyZDIyMTU5MGU3ZTkzMjI1MTM5ZWVlMjBlZjU5NDU3OWQzM2I2ZTJhYjU5NmUyNTJjNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23F4511E" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                 </div>
-
-
-        </h:form>
-    </ui:define>
-</ui:composition>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
 </html>

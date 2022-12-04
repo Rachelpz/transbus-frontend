@@ -1,69 +1,69 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/pages/template/layout.xhtml">
-    <ui:define name="title">
-        Configuración de Perfil
-    </ui:define>
-
-    <ui:define name="layout">
-        <h:form id="user_profile_form">
-            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-            <div class="card">
-                <table class="user_profile_table">
-                    <tr>
-                        <td>
-                            <p:outputLabel value="#{msgs.label_username}"/>
-                        </td>
-                        <td>
-                            <p:outputLabel value="#{userBean.logged_user.username}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:outputLabel value="#{msgs.label_fullname}"/>
-                        </td>
-                        <td>
-                            <p:outputLabel value="#{userBean.logged_user.fullName}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:outputLabel value="#{msgs.label_identification}"/>
-                        </td>
-                        <td>
-                            <p:outputLabel value="#{userBean.logged_user.identification}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:outputLabel value="#{msgs.label_email}"/>
-                        </td>
-                        <td>
-                            <p:outputLabel type="email" value="#{userBean.logged_user.email}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p:commandButton icon="pi pi-pencil"
-                                             styleClass="edit-button ui-button-success"
-                                             process="@this"
-                                             value="#{msgs.btn_edit}"
-                                             action="#{userBean.editLoggedUser}"
-                                             oncomplete="PF('manageUserProfileDialog').show()">
-                            <p:resetInput target="user_profile_form"/>
-                            </p:commandButton>
-                        </td>
-                    </tr>
-                </table>
-<!--                <p:commandButton value="#{msgs.save_user_button}"/>-->
-
-                <ui:include src="form_user_profile.xhtml"/>
-            </div>
-        </h:form>
-    </ui:define>
-</ui:composition>
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.label_configProfile}
+        </ui:define>
+        <ui:define name="layout">
+            <h:form id="user_profile_form">
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <div class="card">
+                    <table class="user_profile_table">
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_username}"/>
+                            </td>
+                            <td>
+                                <p:outputLabel value="#{userBean.logged_user.username}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_fullname}"/>
+                            </td>
+                            <td>
+                                <p:outputLabel value="#{userBean.logged_user.fullName}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_identification}"/>
+                            </td>
+                            <td>
+                                <p:outputLabel value="#{userBean.logged_user.identification}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_email}"/>
+                            </td>
+                            <td>
+                                <p:outputLabel type="email" value="#{userBean.logged_user.email}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:commandButton icon="pi pi-pencil"
+                                                 styleClass="edit-button ui-button-success"
+                                                 process="@this"
+                                                 value="#{msgs.btn_edit}"
+                                                 action="#{userBean.editLoggedUser}"
+                                                 oncomplete="PF('manageUserProfileDialog').show()">
+                                    <p:resetInput target="user_profile_form"/>
+                                </p:commandButton>
+                            </td>
+                        </tr>
+                    </table>
+                    <ui:include src="form_user_profile.xhtml"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
 </html>

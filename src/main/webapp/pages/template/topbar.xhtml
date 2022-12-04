@@ -1,41 +1,51 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition lang="#{languageBean.localeCode}"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-    <div class="layout-topbar">
-        <a class="menu-button" tabindex="0">
-            <i class="pi pi-bars"></i>
-        </a>
-        <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
-            <p:graphicImage name="Recurso 1.svg" library="images" />
-        </h:link>
+    <f:view locale="#{languageBean.locale}">
+        <div class="layout-topbar">
+            <a class="menu-button" tabindex="0">
+                <i class="pi pi-bars"></i>
+            </a>
+            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+                <p:graphicImage name="Recurso 1.svg" library="images"/>
+            </h:link>
+            <h:form styleClass="topbar-form" style="display: none;" id="form_user_topbar">
+                <ul class="topbar-menu">
 
-        <h:form styleClass="topbar-form" style="display: none;" id="form_user_topbar">
-            <ul class="topbar-menu" >
+                    <li>
+                        <p:outputLabel style="padding-left:5px;"
+                                       id="user_name_label">#{userBean.logged_user.fullName}</p:outputLabel>
+                    </li>
+                    <li>
+                        <p:commandLink action="#{userBean.logout}" ajax="false"><i
+                                class="pi pi-sign-out"></i> {msgs.label_exit}</p:commandLink>
+                    </li>
+                </ul>
+            </h:form>
 
-                <li>
-                    <p:outputLabel style="padding-left:5px;" id="user_name_label">#{userBean.logged_user.fullName}</p:outputLabel>
-                </li>
-                <li>
-                    <p:commandLink action="#{userBean.logout}" ajax="false" ><i class="pi pi-sign-out" ></i> Salir</p:commandLink>
-                </li>
-            </ul>
-        </h:form>
+            <h:form styleClass="topbar-form">
+                <p:outputLabel style="padding-left:5px;"> #{userBean.userLogued}</p:outputLabel>
 
-        <h:form styleClass="topbar-form">
-            <p:outputLabel style="padding-left:5px;"> #{userBean.userLogued}</p:outputLabel>
-            <p:outputPanel class="dropdown">
-                <p:graphicImage styleClass="dropdown__hover user_pfp" name="default_user.png" library="images" alt="User"/>
-                <p:outputPanel class="dropdown__menu">
-                    <h:link outcome="/pages/settings/user_profile.xhtml">
-                        <i class="pi pi-user-edit" />
-                        Perfil
-                    </h:link>
-                    <h:link outcome="/pages/security/login.xhtml">
-                        <i class="pi pi-sign-out" />
-                        Salir
-                    </h:link>
+                <p:outputPanel class="dropdown">
+                    <p:graphicImage styleClass="dropdown__hover user_pfp" name="default_user.png" library="images"
+                                    alt="User"/>
+                    <p:outputPanel class="dropdown__menu">
+                        <h:link outcome="/pages/settings/user_profile.xhtml">
+                            <i class="pi pi-user-edit"/>
+                            #{msgs.label_profile}
+                        </h:link>
+                        <h:link outcome="/pages/security/login.xhtml">
+                            <i class="pi pi-sign-out"/>
+                            #{msgs.label_exit}
+                        </h:link>
+                    </p:outputPanel>
                 </p:outputPanel>
-            </p:outputPanel>
-        </h:form>
-    </div>
+            </h:form>
+        </div>
+
+    </f:view>
 </ui:composition>
