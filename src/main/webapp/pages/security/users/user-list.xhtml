@@ -96,7 +96,7 @@
                                              action="#{manageUserBean.deleteUser}">
                                 <f:setPropertyActionListener value="#{user}"
                                                              target="#{manageUserBean.selectedUser}"/>
-                                <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?"
+                                <p:confirm header="#{msgs.header_confirm}" message="#{msgs.message_user}"
                                            icon="pi pi-exclamation-triangle"/>
                             </p:commandButton>
                         </p:column>
@@ -108,9 +108,9 @@
                     <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
                     su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
                     <p:confirmDialog global="true" showEffect="fade" width="300">
-                        <p:commandButton value="Si" type="button"
+                        <p:commandButton value="#{msgs.btn_yes}" type="button"
                                          styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                        <p:commandButton value="No" type="button"
+                        <p:commandButton value="#{msgs.btn_no}" type="button"
                                          styleClass="ui-confirmdialog-no ui-button-secondary"
                                          icon="pi pi-times"/>
                     </p:confirmDialog>

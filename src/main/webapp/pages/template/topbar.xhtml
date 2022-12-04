@@ -1,54 +1,59 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition lang="#{languageBean.localeCode}"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-    <div class="layout-topbar">
-        <a class="menu-button" tabindex="0">
-            <i class="pi pi-bars"></i>
-        </a>
-        <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
-            <p:graphicImage name="Recurso 1.svg" library="images" />
-        </h:link>
+    <f:view locale="#{languageBean.locale}">
+        <div class="layout-topbar">
+            <a class="menu-button" tabindex="0">
+                <i class="pi pi-bars"></i>
+            </a>
+            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+                <p:graphicImage name="Recurso 1.svg" library="images" />
+            </h:link>
 
-        <h:form styleClass="topbar-form">
-            <ul class="topbar-menu" >
+            <h:form styleClass="topbar-form">
+                <ul class="topbar-menu" >
 
-                <li>
-                    <p:outputLabel style="padding-left:5px;"> #{userBean.userLogued}</p:outputLabel>
-                </li>
-                <li>
-                    <p:commandLink action="#{userBean.logout}" ajax="false" ><i class="pi pi-sign-out" ></i> Salir</p:commandLink>
-                </li>
-            </ul>
-        </h:form>
-<!--        <p:commandButton value="Usuario" >-->
-<!--&lt;!&ndash;            <p:graphicImage name="favicon-32x32.png" library="images"/>&ndash;&gt;-->
-<!--        </p:commandButton>-->
+                    <li>
+                        <p:outputLabel style="padding-left:5px;"> #{userBean.userLogued}</p:outputLabel>
+                    </li>
+                    <li>
+                        <p:commandLink action="#{userBean.logout}" ajax="false" ><i class="pi pi-sign-out" ></i> #{msgs.label_exit}</p:commandLink>
+                    </li>
+                </ul>
+            </h:form>
+            <!--        <p:commandButton value="Usuario" >-->
+            <!--&lt;!&ndash;            <p:graphicImage name="favicon-32x32.png" library="images"/>&ndash;&gt;-->
+            <!--        </p:commandButton>-->
 
-<!--        action="#{MyClass.myMethod}"-->
-<!--        <p:commandLink styleClass="user_pfp">-->
-<!--            <p:graphicImage name="default_user.png"  library="images"/>-->
-<!--        </p:commandLink>-->
+            <!--        action="#{MyClass.myMethod}"-->
+            <!--        <p:commandLink styleClass="user_pfp">-->
+            <!--            <p:graphicImage name="default_user.png"  library="images"/>-->
+            <!--        </p:commandLink>-->
 
-<!--        <p:outputPanel styleClass="dropdown">-->
-<!--            <h:commandButton styleClass="dropdown__hover">User</h:commandButton>-->
-<!--            <p:outputPanel styleClass="dropdown__menu">-->
-<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
-<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
-<!--                <p:commandLink>Dropdown 1</p:commandLink>-->
-<!--            </p:outputPanel>-->
-<!--        </p:outputPanel>-->
+            <!--        <p:outputPanel styleClass="dropdown">-->
+            <!--            <h:commandButton styleClass="dropdown__hover">User</h:commandButton>-->
+            <!--            <p:outputPanel styleClass="dropdown__menu">-->
+            <!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+            <!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+            <!--                <p:commandLink>Dropdown 1</p:commandLink>-->
+            <!--            </p:outputPanel>-->
+            <!--        </p:outputPanel>-->
 
-        <p:outputPanel class="dropdown">
-            <p:graphicImage styleClass="dropdown__hover user_pfp" name="default_user.png" library="images" alt="User"/>
-            <p:outputPanel class="dropdown__menu">
-                <h:link outcome="/pages/settings/user_profile.xhtml">
-                    Perfil
-                </h:link>
-                <h:link outcome="/pages/security/login.xhtml">
-                    Salir
-                </h:link>
+            <p:outputPanel class="dropdown">
+                <p:graphicImage styleClass="dropdown__hover user_pfp" name="default_user.png" library="images" alt="User"/>
+                <p:outputPanel class="dropdown__menu">
+                    <h:link outcome="/pages/settings/user_profile.xhtml">
+                        #{msgs.label_profile}
+                    </h:link>
+                    <h:link outcome="/pages/security/login.xhtml">
+                        #{msgs.label_exit}
+                    </h:link>
+                </p:outputPanel>
             </p:outputPanel>
-        </p:outputPanel>
-
-    </div>
+        </div>
+    </f:view>
 </ui:composition>
