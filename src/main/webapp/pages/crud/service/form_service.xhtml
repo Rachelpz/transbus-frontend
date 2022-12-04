@@ -1,101 +1,103 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition lang="#{languageBean.localeCode}"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog header="Servicio" showEffect="fade" modal="true"
-              widgetVar="manageServiceDialog" responsive="true" fitViewport="true" resizeObserver="true">
-        <p:outputPanel id="manage-service-content" class="ui-fluid">
-            <p:outputPanel rendered="#{not empty manageServiceBean.selectedService}">
-                <p:panelGrid layout="grid" columns="2">
-                    <h:panelGroup>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Nombre del servicio</p:outputLabel>
-                            <p:inputText id="service_name" required="true"
-                                         value="#{manageServiceBean.selectedService.service_name}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Lugar de recogida</p:outputLabel>
-                            <p:inputText id="pickup_place" required="true"
-                                         value="#{manageServiceBean.selectedService.pickup_place}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Hora de recogida</p:outputLabel>
-                            <p:datePicker id="pickup_time" required="true"
-                                          value="#{manageServiceBean.selectedService.pickup_time}"
-                                          timeOnly="true" pattern="HH:mm:ss.SSS" showSeconds="true" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Kilómetros recorridos</p:outputLabel>
-                            <p:inputNumber id="km_traveled" required="true" minValue="1" decimalPlaces="2"
-                                           value="#{manageServiceBean.selectedService.km_traveled}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Combustible gastado</p:outputLabel>
-                            <p:inputNumber id="spent_fuel" required="true" minValue="1" decimalPlaces="2"
-                                           value="#{manageServiceBean.selectedService.spent_fuel}" />
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="@next">Tipo de servicio</p:outputLabel>
-                            <p:selectOneMenu id="service_type" required="true"
-                                             value="#{manageServiceBean.selectedService.service_type}" label="Seleccione"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItem id="planned" itemLabel="Planificado" itemValue="Planificado"/>
-                                <f:selectItem id="extra" itemLabel="Extra" itemValue="Extra"/>
-                            </p:selectOneMenu>
-                            <p:message for="@previous" ></p:message>
-                        </div>
-                    </h:panelGroup>
-                    <!-- <h:panelGroup>
-                         <div class="p-field">
-                             <p:outputLabel for="@next">Roles</p:outputLabel>
-                             <p:selectCheckboxMenu id="multiple" required="true"
-                                                   value="#{manageUserBean.selectedRoles}" label="Seleccione"
-                                                   style="min-width: 15rem" multiple="true" filter="true"
-                                                   filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                                   scrollHeight="250">
-                                 <f:selectItems value="#{manageUserBean.roles}" var="role"
-                                                itemLabel="#{role.description}" itemValue="#{role.id}" />
-                             </p:selectCheckboxMenu>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
-                             <p:password id="password1" required="true"
-                                         rendered="#{empty manageUserBean.selectedUser.id}"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         match="password2">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
-                         <div class="p-field">
-                             <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
-                             <p:password id="password2" required="true"
-                                         value="#{manageUserBean.selectedUser.password}"
-                                         rendered="#{empty manageUserBean.selectedUser.id}">
-                             </p:password>
-                             <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
-                         </div>
+    <f:view locale="#{languageBean.locale}">
+        <p:dialog header="#{msgs.label_services}" showEffect="fade" modal="true"
+                  widgetVar="manageServiceDialog" responsive="true" fitViewport="true" resizeObserver="true">
+            <p:outputPanel id="manage-service-content" class="ui-fluid">
+                <p:outputPanel rendered="#{not empty manageServiceBean.selectedService}">
+                    <p:panelGrid layout="grid" columns="2">
+                        <h:panelGroup>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_service}"/>
+                                <p:inputText id="service_name" required="true"
+                                             value="#{manageServiceBean.selectedService.service_name}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_pickupPlace}"/>
+                                <p:inputText id="pickup_place" required="true"
+                                             value="#{manageServiceBean.selectedService.pickup_place}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_pickupTime}"/>
+                                <p:datePicker id="pickup_time" required="true"
+                                              value="#{manageServiceBean.selectedService.pickup_time}"
+                                              timeOnly="true" pattern="HH:mm:ss.SSS" showSeconds="true" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_traveled}"/>
+                                <p:inputNumber id="km_traveled" required="true" minValue="1" decimalPlaces="2"
+                                               value="#{manageServiceBean.selectedService.km_traveled}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_spentFuel}"/>
+                                <p:inputNumber id="spent_fuel" required="true" minValue="1" decimalPlaces="2"
+                                               value="#{manageServiceBean.selectedService.spent_fuel}" />
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                            <div class="p-field">
+                                <p:outputLabel for="@next" value="#{msgs.header_typeService}"/>
+                                <p:selectOneMenu id="service_type" required="true"
+                                                 value="#{manageServiceBean.selectedService.service_type}" label="Seleccione"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItem id="planned" itemLabel="Planificado" itemValue="Planificado"/>
+                                    <f:selectItem id="extra" itemLabel="Extra" itemValue="Extra"/>
+                                </p:selectOneMenu>
+                                <p:message for="@previous" ></p:message>
+                            </div>
+                        </h:panelGroup>
+                        <!-- <h:panelGroup>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next">Roles</p:outputLabel>
+                                 <p:selectCheckboxMenu id="multiple" required="true"
+                                                       value="#{manageUserBean.selectedRoles}" label="Seleccione"
+                                                       style="min-width: 15rem" multiple="true" filter="true"
+                                                       filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                       scrollHeight="250">
+                                     <f:selectItems value="#{manageUserBean.roles}" var="role"
+                                                    itemLabel="#{role.description}" itemValue="#{role.id}" />
+                                 </p:selectCheckboxMenu>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+                                 <p:password id="password1" required="true"
+                                             rendered="#{empty manageUserBean.selectedUser.id}"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             match="password2">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
+                             <div class="p-field">
+                                 <p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+                                 <p:password id="password2" required="true"
+                                             value="#{manageUserBean.selectedUser.password}"
+                                             rendered="#{empty manageUserBean.selectedUser.id}">
+                                 </p:password>
+                                 <p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+                             </div>
 
-                     </h:panelGroup> -->
-                </p:panelGrid>
+                         </h:panelGroup> -->
+                    </p:panelGrid>
+                </p:outputPanel>
             </p:outputPanel>
-        </p:outputPanel>
 
-
-        <f:facet name="footer">
-            <p:commandButton value="Salvar" icon="pi pi-check"
-                             actionListener="#{manageServiceBean.saveService}"
-                             update="manage-service-content" process="manage-service-content @this" />
-            <p:commandButton value="Cancelar" icon="pi pi-times"
-                             onclick="PF('manageServiceDialog').hide()" class="ui-button-secondary" />
-        </f:facet>
-    </p:dialog>
+            <f:facet name="footer">
+                <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
+                                 actionListener="#{manageServiceBean.saveService}"
+                                 update="manage-service-content" process="manage-service-content @this" />
+                <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
+                                 onclick="PF('manageServiceDialog').hide()" class="ui-button-secondary" />
+            </f:facet>
+        </p:dialog>
+    </f:view>
 </ui:composition>

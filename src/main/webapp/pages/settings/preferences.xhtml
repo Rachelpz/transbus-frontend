@@ -1,38 +1,47 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/pages/template/layout.xhtml">
-    <ui:define name="title">
-        Preferencias
-    </ui:define>
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.title_preferences}
+        </ui:define>
 
-    <ui:define name="layout">
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-            <div class="card">
-                <p:outputLabel>Tema</p:outputLabel>
-                <p:selectOneMenu  value="#{changeTheme.theme}" onchange="submit()" immediate = "true" editable="true" style="position:relative;left: 10%;">
-                    <f:selectItems value="#{changeTheme.themes}" />
-                </p:selectOneMenu>
-           </div>
-        </h:form>
-        <h:form >
-            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-            <div class="card">
-                <p:outputLabel>Idioma</p:outputLabel>
-                <p:selectOneMenu value="#{languageBean.localeCode}" onchange="submit()" immediate = "true" editable="true"
-                                 valueChangeListener="#{languageBean.countryLocaleCodeChanged}" effect="fade"
-                                style="position:relative;left: 10%;">
-                    <f:selectItems value="#{languageBean.countriesInMap}" var="locale" itemValue="#{locale}" />
-
-
-                </p:selectOneMenu>
-            </div>
-
-        </h:form>
-    </ui:define>
-</ui:composition>
+        <ui:define name="layout">
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <div class="card">
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_theme}"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu  value="#{changeTheme.theme}" onchange="submit()" immediate = "true" editable="true" style="position:relative;left: 10%;">
+                                    <f:selectItems value="#{changeTheme.themes}" />
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="#{msgs.label_language}"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu value="#{languageBean.localeCode}" onchange="submit()" immediate = "true" editable="true"
+                                                 valueChangeListener="#{languageBean.countryLocaleCodeChanged}" effect="fade"
+                                                 style="position:relative;left: 10%;">
+                                    <f:selectItems value="#{languageBean.countriesInMap}" var="locale" itemValue="#{locale}" />
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
 </html>

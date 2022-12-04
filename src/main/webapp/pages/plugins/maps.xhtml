@@ -1,20 +1,24 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/pages/template/layout.xhtml">
-    <ui:define name="title">
-      Mapa de Cuba
-    </ui:define>
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.title_map}
+        </ui:define>
 
-    <ui:define name="layout">
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-            <div class="card">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3196205.5022954647!2d-79.92736202956034!3d21.5129705892955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scu!4v1668979121468!5m2!1ses-419!2scu" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                 </div>
-        </h:form>
-    </ui:define>
-</ui:composition>
+        <ui:define name="layout">
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <div class="card">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3196205.5022954647!2d-79.92736202956034!3d21.5129705892955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scu!4v1668979121468!5m2!1ses-419!2scu" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
 </html>

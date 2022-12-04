@@ -1,216 +1,191 @@
 <html lang="#{languageBean.localeCode}"
-        xmlns="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+
 <f:view locale="#{languageBean.locale}">
-<ui:composition template="/pages/template/layout.xhtml">
-    <ui:define name="title">
-        <p:outputLabel
-                style="padding-left:5px;size: A5;">#{msgs.message_welcome}  #{userBean.userLogued}</p:outputLabel>
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            <p:outputLabel
+                    style="padding-left:5px;size: A5;">#{msgs.message_welcome}  #{userBean.userLogued}</p:outputLabel>
+        </ui:define>
+        <ui:define name="layout">
+            <style>
+                .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+                    text-align: center;
+                }
 
-    </ui:define>
-    <ui:define name="layout">
+                .customPanelGrid .ui-panelgrid-content {
+                    align-items: center;
+                }
+            </style>
 
-        <style>
-            .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
-                text-align: center;
-            }
+            <!--            cards-->
+            <div class="chart-cont">
+                <h:form style="display: flex;">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
-            .customPanelGrid .ui-panelgrid-content {
-                align-items: center;
-            }
+                    <!--                    Contract-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-briefcase"
+                                           style="font-size:2rem ;color: navy;"></i>
+                                    </p:outputPanel>
+                                </p:column>
 
-        </style>
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageBrandBean.sizeBrands}</strong>
+                                        <br></br>
+                                        <a>#{msgs.label_contracts}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
 
+                    <!--                    Users-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: #ECCFFF;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-users"
+                                           style="font-size:2rem ;color: #c92c2c;"></i>
+                                    </p:outputPanel>
+                                </p:column>
 
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageBrandBean.sizeBrands}</strong>
+                                        <br></br>
+                                        <a>#{msgs.label_users}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
 
-        <!--            cards-->
-        <div class="chart-cont">
-            <h:form style="display: flex;">
-                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                    <!--                    Driver-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: lightgreen;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-id-card"
+                                           style="font-size:2rem ;color: #256029;"></i>
+                                    </p:outputPanel>
+                                </p:column>
 
-                <!--                    Contract-->
-                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
-                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
-                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
-                        <p:row style=" padding:0px;">
-                            <p:column rowspan="2" style=" padding:0px;">
-                                <p:outputPanel
-                                        style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
-                                    <i class="pi pi-briefcase"
-                                       style="font-size:2rem ;color: navy;"></i>
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageBrandBean.sizeBrands}</strong>
+                                        <br></br>
+                                        <a>#{msgs.label_drivers}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
 
+                    <!--                    Brand-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 0 0 10px ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: #FFD8B2;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-star"
+                                           style="font-size:2rem ;color: #ee9900"></i>
+                                    </p:outputPanel>
+                                </p:column>
 
-                                </p:outputPanel>
-                            </p:column>
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageBrandBean.sizeBrands}</strong>
+                                        <br></br>
+                                        <a>#{msgs.label_brands}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
+                    <div style="clear:both"/>
+                </h:form>
+            </div>
 
-                            <p:column style=" padding:0px;">
-                                <h:outputLabel style="text-align: right  ">
-                                    <strong>#{manageBrandBean.sizeBrands}</strong>
-                                    <br></br>
-                                    <a>Contratos</a></h:outputLabel>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
+            <!--			Chart Dashboard-->
+            <div class="chart-cont">
+                <h:form style="display: flex;">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
+                    <!--                    LineChart-->
+                    <div class="card" style="width: 60%; margin: 0 10px 0 0">
+                        <p:lineChart model="#{chartJsView.lineModel}"/>
+                    </div>
 
-                </p:card>
-                <!--                    Users-->
-                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
-                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
-                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
-                        <p:row style=" padding:0px;">
-                            <p:column rowspan="2" style=" padding:0px;">
-                                <p:outputPanel
-                                        style="display:flex;background: #ECCFFF;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
-                                    <i class="pi pi-users"
-                                       style="font-size:2rem ;color: #c92c2c;"></i>
+                    <!--                Pie Chart-->
+                    <div class="card" style="width: 40%; margin: 0 0 0 10px">
+                        <p:pieChart model="#{chartJsView.pieModel}"/>
+                    </div>
 
+                    <div style="clear:both"/>
+                </h:form>
+            </div>
 
-                                </p:outputPanel>
-                            </p:column>
+            <!--            Imagen para el Welcome-->
+            <p:card style="width: 100%; height: 200px; margin-bottom: 1.5em; overflow: hidden">
+                <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+                    <p:graphicImage name="Bus Transtur.jpg" library="images" width="700" height="400"
+                                    style="width: 100%; position: relative;  bottom: 100px"/>
+                </h:link>
+            </p:card>
 
-                            <p:column style=" padding:0px;">
-                                <h:outputLabel style="text-align: right  ">
-                                    <strong>#{manageBrandBean.sizeBrands}</strong>
-                                    <br></br>
-                                    <a>Usuarios</a></h:outputLabel>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
+            <!--        Carousel with info-->
+            <h:form id="form">
+                <div class="card">
+                    <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"
+                                numVisible="3" numScroll="1">
+                        <f:facet name="header">
+                            <h5>#{msgs.label_drivers}</h5>
+                        </f:facet>
 
-
-                </p:card>
-                <!--                    Driver-->
-                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
-                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
-                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
-                        <p:row style=" padding:0px;">
-                            <p:column rowspan="2" style=" padding:0px;">
-                                <p:outputPanel
-                                        style="display:flex;background: lightgreen;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
-                                    <i class="pi pi-id-card"
-                                       style="font-size:2rem ;color: #256029;"></i>
-
-
-                                </p:outputPanel>
-                            </p:column>
-
-                            <p:column style=" padding:0px;">
-                                <h:outputLabel style="text-align: right  ">
-                                    <strong>#{manageBrandBean.sizeBrands}</strong>
-                                    <br></br>
-                                    <a>Choferes</a></h:outputLabel>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-
-
-                </p:card>
-
-                <!--                    Brand-->
-                <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 0 0 10px ">
-                    <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
-                                 style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
-                        <p:row style=" padding:0px;">
-                            <p:column rowspan="2" style=" padding:0px;">
-                                <p:outputPanel
-                                        style="display:flex;background: #FFD8B2;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
-                                    <i class="pi pi-star"
-                                       style="font-size:2rem ;color: #ee9900"></i>
-
-
-                                </p:outputPanel>
-                            </p:column>
-
-                            <p:column style=" padding:0px;">
-                                <h:outputLabel style="text-align: right  ">
-                                    <strong>#{manageBrandBean.sizeBrands}</strong>
-                                    <br></br>
-                                    <a>Marcas</a></h:outputLabel>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-
-
-                </p:card>
-
-                <div style="clear:both"/>
-            </h:form>
-        </div>
-
-
-        <!--			Chart Dashboard-->
-        <div class="chart-cont">
-            <h:form style="display: flex;">
-                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-
-                <!--                    LineChart-->
-                <div class="card" style="width: 60%; margin: 0 10px 0 0">
-                    <p:lineChart model="#{chartJsView.lineModel}"/>
-                </div>
-
-                <!--                Pie Chart-->
-                <div class="card" style="width: 40%; margin: 0 0 0 10px">
-                    <p:pieChart model="#{chartJsView.pieModel}"/>
-                </div>
-
-                <div style="clear:both"/>
-            </h:form>
-        </div>
-
-
-        <!--            Imagen para el Welcome-->
-        <p:card style="width: 100%; height: 200px; margin-bottom: 1.5em; overflow: hidden">
-            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
-                <p:graphicImage name="Bus Transtur.jpg" library="images" width="700" height="400"
-                                style="width: 100%; position: relative;  bottom: 100px"/>
-            </h:link>
-
-        </p:card>
-
-        <!--        Carousel with info-->
-        <h:form id="form">
-
-            <div class="card">
-                <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"
-                            numVisible="3" numScroll="1">
-                    <f:facet name="header">
-                        <h5>Choferes</h5>
-                    </f:facet>
-
-                    <div class="driver-item">
-                        <div class="driver-item-content">
-                            <div class="mb-3">
-                                <p:graphicImage name="driver.jpg" library="images" styleClass="driver-image"/>
-                            </div>
-                            <div>
-                                <h4 class="mb-1">#{driver.driver_name}</h4>
-                                <h6 class="mt-0 mb-3">
-                                    <h:outputText value="#{driver.brand}">
-                                        <f:convertNumber type="currency"/>
-                                    </h:outputText>
-                                </h6>
-                                <!--                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>-->
-                                <div class="mt-5">
-                                    <p:commandButton type="button" icon="pi pi-search"
-                                                     styleClass="rounded-button mr-2"/>
-                                    <p:commandButton type="button" icon="pi pi-star"
-                                                     styleClass="ui-button-success rounded-button mr-2"/>
-                                    <p:commandButton type="button" icon="pi pi-cog"
-                                                     styleClass="ui-button-help rounded-button"/>
+                        <div class="driver-item">
+                            <div class="driver-item-content">
+                                <div class="mb-3">
+                                    <p:graphicImage name="driver.jpg" library="images" styleClass="driver-image"/>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1">#{driver.driver_name}</h4>
+                                    <h6 class="mt-0 mb-3">
+                                        <h:outputText value="#{driver.brand}">
+                                            <f:convertNumber type="currency"/>
+                                        </h:outputText>
+                                    </h6>
+                                    <!--                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>-->
+                                    <div class="mt-5">
+                                        <p:commandButton type="button" icon="pi pi-search"
+                                                         styleClass="rounded-button mr-2"/>
+                                        <p:commandButton type="button" icon="pi pi-star"
+                                                         styleClass="ui-button-success rounded-button mr-2"/>
+                                        <p:commandButton type="button" icon="pi pi-cog"
+                                                         styleClass="ui-button-help rounded-button"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </p:carousel>
-            </div>
-
-        </h:form>
-
-    </ui:define>
-</ui:composition>
+                    </p:carousel>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </f:view>
 </html>

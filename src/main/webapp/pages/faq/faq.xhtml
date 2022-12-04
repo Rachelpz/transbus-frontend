@@ -3,68 +3,69 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <f:view locale="#{languageBean.locale}">
-<ui:composition template="/pages/template/layout.xhtml">
-	<ui:define name="title">
-		FAQs
-	</ui:define>
-	<ui:define name="layout">
+	<ui:composition template="/pages/template/layout.xhtml">
+		<ui:define name="title">
+			FAQs
+		</ui:define>
+		<ui:define name="layout">
 
 
-		<h:form id="form">
-			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
 
 
-			<div class="card">
-				<p:accordionPanel multiple="true" widgetVar="multiple">
+				<div class="card">
+					<p:accordionPanel multiple="true" widgetVar="multiple">
 
-					<p:tab title="#{msgs.preg1}">
+						<p:tab title="#{msgs.preg1}">
+							<p class="m-0">
+								#{msgs.faq1}
+							</p>
+						</p:tab>
+
+						<p:tab title="#{msgs.preg2}">
+							<p class="m-0">
+								#{msgs.faq2}
+							</p>
+						</p:tab>
+
+						<p:tab title="#{msgs.preg3}">
+							<p class="m-0">
+								#{msgs.faq3}
+							</p>
+						</p:tab>
+
+						<p:tab title="#{msgs.preg4}">
+							<p class="m-0">
+								#{msgs.faq4}
+							</p>
+						</p:tab>
+
+						<p:tab title="#{msgs.preg5}">
+							<p class="m-0">
+								#{msgs.faq5}
+							</p>
+						</p:tab>
+
+						<p:tab title="#{msgs.preg6}">
+							<p class="m-0">#{msgs.faq6}
+							</p>
+						</p:tab>
+
+						` <p:tab title="#{msgs.preg7}">
 						<p class="m-0">
-							#{msgs.faq1}
-						</p>
+							#{msgs.faq7}</p>
 					</p:tab>
 
-					<p:tab title="#{msgs.preg2}">
-						<p class="m-0">
-							#{msgs.faq2}
-						</p>
-					</p:tab>
-
-					<p:tab title="#{msgs.preg3}">
-						<p class="m-0">
-							#{msgs.faq3}
-						</p>
-					</p:tab>
-
-					<p:tab title="#{msgs.preg4}">
-						<p class="m-0">
-							#{msgs.faq4}
-						</p>
-					</p:tab>
-
-					<p:tab title="#{msgs.preg5}">
-						<p class="m-0">
-							#{msgs.faq5}
-						</p>
-					</p:tab>
-
-					<p:tab title="#{msgs.preg6}">
-						<p class="m-0">#{msgs.faq6}
-						</p>
-					</p:tab>
-
-					` <p:tab title="#{msgs.preg7}">
-					<p class="m-0">
-						#{msgs.faq7}</p>
-				</p:tab>
-
-				</p:accordionPanel>
-			</div>
+					</p:accordionPanel>
+				</div>
 
 
-		</h:form>
+			</h:form>
 
-	</ui:define>
-</ui:composition>
+		</ui:define>
+	</ui:composition>
 </f:view>
 </html>

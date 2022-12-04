@@ -17,55 +17,37 @@
 
         <div class="layout-menu">
 
-            <div class="menu-category">Principal</div>
+            <div class="menu-category">#{msgs.menuCategory_main}</div>
             <div class="menu-items">
                 <h:link outcome="/pages/welcome/welcome.xhtml">
                     Dashboard
                 </h:link>
             </div>
 
-            <div class="menu-category">Menú</div>
+            <div class="menu-category">#{msgs.menuCategory_menu}</div>
 
             <div class="menu-items">
                 <p:outputPanel>
                     <a tabindex="0" class="submenu-link" >
-                        Gestionar Datos
+                        #{msgs.menuItem_data}
                     </a>
                     <div class="submenu">
                         <ul>
-                            <li><h:link outcome="/pages/crud/brand/list_brand.xhtml">
-                                Gestionar Marcas
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/driver/list_driver.xhtml">
-                                Gestionar Choferes
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/group/list_group.xhtml">
-                                Gestionar Grupos Turísticos
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/vehicle/list_vehicle.xhtml">
-                                Gestionar Vehículos
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/fuel_type/list_fuel.xhtml">
-                                Gestionar Tipos de Combustibles
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/district/list_district.xhtml">
-                                Gestionar Distritos
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/request/list_request.xhtml">
-                                Gestionar Solicitudes
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/service/list_service.xhtml">
-                                Gestionar Servicios
-                            </h:link></li>
-                            <li><h:link outcome="/pages/crud/contract/list_contract.xhtml">
-                                Gestionar Contratos de Renta
-                            </h:link></li>
+                            <li><h:link outcome="/pages/crud/brand/list_brand.xhtml" value="#{msgs.submenu_brands}"/></li>
+                            <li><h:link outcome="/pages/crud/driver/list_driver.xhtml" value="#{msgs.submenu_drivers}"/></li>
+                            <li><h:link outcome="/pages/crud/group/list_group.xhtml" value="#{msgs.submenu_groups}"/></li>
+                            <li><h:link outcome="/pages/crud/vehicle/list_vehicle.xhtml" value="#{msgs.submenu_vehicles}"/></li>
+                            <li><h:link outcome="/pages/crud/fuel_type/list_fuel.xhtml" value="#{msgs.submenu_fuelTypes}"/></li>
+                            <li><h:link outcome="/pages/crud/district/list_district.xhtml" value="#{msgs.submenu_districts}"/></li>
+                            <li><h:link outcome="/pages/crud/request/list_request.xhtml" value="#{msgs.submenu_requests}"/></li>
+                            <li><h:link outcome="/pages/crud/service/list_service.xhtml" value="#{msgs.submenu_services}"/></li>
+                            <li><h:link outcome="/pages/crud/contract/list_contract.xhtml" value="#{msgs.submenu_contracts}"/></li>
                         </ul>
                     </div>
                 </p:outputPanel>
                 <p:outputPanel>
                     <a tabindex="0" class="submenu-link">
-                        Reportes Y Gráficas
+                        #{msgs.menuItem_reports}
                     </a>
                     <div class="submenu">
                         <ul>
@@ -79,30 +61,24 @@
                     </div>
                 </p:outputPanel>
                 <div class="menu-items">
-                    <h:link outcome="/pages/security/users/user-list.xhtml">
-                        Gestionar Usuarios
-                    </h:link>
+                    <h:link outcome="/pages/security/users/user-list.xhtml" value="#{msgs.menuItem_users}"/>
                 </div>
 
             </div>
-            <div class="menu-category">Ayuda y Plugins</div>
+            <div class="menu-category">#{msgs.menuCategory_helpEtPlugins}</div>
             <div class="menu-items">
                 <h:link outcome="/pages/plugins/maps.xhtml">
                     Google Maps
                 </h:link>
-                <h:link outcome="/pages/plugins/calendar.xhtml">
-                    Calendario
-                </h:link>
+                <h:link outcome="/pages/plugins/calendar.xhtml" value="#{msgs.menuItem_calendar}"/>
                 <h:link outcome="/pages/faq/faq.xhtml">
                 FAQs
                 </h:link>
 
             </div>
-            <div class="menu-category">Configuraciones</div>
+            <div class="menu-category">#{msgs.menuCategory_settings}</div>
             <div class="menu-items">
-                <h:link outcome="/pages/settings/preferences.xhtml">
-                   Preferencias
-                </h:link>
+                <h:link outcome="/pages/settings/preferences.xhtml" value="#{msgs.menuItem_preferences}"/>
             </div>
 
         </div>
