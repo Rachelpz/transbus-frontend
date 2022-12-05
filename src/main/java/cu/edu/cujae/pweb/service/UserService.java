@@ -11,4 +11,5 @@ public interface UserService {
 	void createUser(UserDto user);
 	void updateUser(UserDto user);
 	void deleteUser(String id);
+	Integer getUsersSize();
 }

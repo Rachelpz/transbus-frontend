@@ -10,4 +10,5 @@ public interface DriverService {
     void createDriver(DriverDto dirver);
     void updateDriver(DriverDto driver);
     void deleteDriver(Integer id);
+    Integer getDriversSize();
 }
