@@ -20,7 +20,8 @@
                                 <p:outputLabel value="#{msgs.label_username}"/>
                             </td>
                             <td>
-                                <p:outputLabel value="#{userBean.logged_user.username}"/>
+                                <p:outputLabel value="#{userBean.logged_user.username}"
+                                               style="position:relative;left: 10%;"/>
                             </td>
                         </tr>
                         <tr>
@@ -28,23 +29,26 @@
                                 <p:outputLabel value="#{msgs.label_fullname}"/>
                             </td>
                             <td>
-                                <p:outputLabel value="#{userBean.logged_user.fullName}"/>
+                                <p:outputLabel value="#{userBean.logged_user.fullName}"
+                                               style="position:relative;left: 10%;"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:outputLabel value="#{msgs.label_identification}"/>
+                                <p:outputLabel value="#{msgs.header_ci}"/>
                             </td>
                             <td>
-                                <p:outputLabel value="#{userBean.logged_user.identification}"/>
+                                <p:outputLabel value="#{userBean.logged_user.identification}"
+                                               style="position:relative;left: 10%;"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:outputLabel value="#{msgs.label_email}"/>
+                                <p:outputLabel value="#{msgs.header_email}"/>
                             </td>
                             <td>
-                                <p:outputLabel type="email" value="#{userBean.logged_user.email}"/>
+                                <p:outputLabel type="email" value="#{userBean.logged_user.email}"
+                                               style="position:relative;left: 10%;"/>
                             </td>
                         </tr>
                         <tr>

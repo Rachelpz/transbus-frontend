@@ -12,19 +12,19 @@
                 <p:panelGrid layout="grid" columns="2">
                     <h:panelGroup>
                         <div class="p-field">
-                            <p:outputLabel for="@next">#{msgs.label_username}</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.label_username}"/>
                             <p:inputText id="username" required="true"
                                          value="#{userBean.logged_user_values.username}" />
                             <p:message for="@previous" />
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">#{msgs.label_fullname}</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.label_fullname}"/>
                             <p:inputText id="fullname" required="true"
                                          value="#{userBean.logged_user_values.fullName}" />
                             <p:message for="@previous" />
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">#{msgs.label_identification}</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.header_ci}"/>
                             <p:inputText id="identification" required="true"
                                          value="#{userBean.logged_user_values.identification}"
                                          maxlength="11">
@@ -33,7 +33,7 @@
                             <p:message for="@previous"/>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">#{msgs.label_email}</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.header_email}"/>
                             <p:inputText id="email" required="true"
                                          value="#{userBean.logged_user_values.email}"
                                          validatorMessage="Email mal formado">
@@ -43,7 +43,7 @@
                             <p:message for="@previous"/>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Contraseña</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.label_password}"/>
                             <p:password id="password1"
                                         value="#{userBean.logged_user_values.password}"
                                         match="password2">
@@ -51,7 +51,7 @@
                             <p:message for="@previous" />
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Repetir contraseña</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.label_repeat}"/>
                             <p:password id="password2"
                                         value="#{userBean.logged_user_values.password}">
                             </p:password>
@@ -64,10 +64,10 @@
 
 
         <f:facet name="footer">
-            <p:commandButton value="Salvar" icon="pi pi-check"
+            <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
                              actionListener="#{userBean.saveUserProfile}"
                              update="manage-user_profile-content" process="manage-user_profile-content @this" />
-            <p:commandButton value="Cancelar" icon="pi pi-times"
+            <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
                              onclick="PF('manageUserProfileDialog').hide()" class="ui-button-secondary" />
         </f:facet>
     </p:dialog>
