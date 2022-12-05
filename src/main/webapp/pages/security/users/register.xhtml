@@ -1,69 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>Autenticación</title>
-    <h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
-</h:head>
 
-<h:body>
+<f:view locale="#{languageBean.locale}">
+    <h:head>
+        <title>#{msgs.title_authentication}</title>
+        <h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
+    </h:head>
 
+    <h:body>
+        <h:form>
+            <p:spacer height="50"></p:spacer>
+            <div class="p-grid p-ai-center vertical-container">
+                <div class="p-col">
 
-    <h:form>
-        <p:spacer height="50"></p:spacer>
-        <div class="p-grid p-ai-center vertical-container">
-            <div class="p-col">
-
+                </div>
+                <div class="p-col">
+                    <p:card style="width: auto">
+                        <f:facet name="title">
+                            #{msgs.title_login}
+                        </f:facet>
+                        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                        <div class="card">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="#{msgs.label_username}"/>
+                                    </td>
+                                    <td>
+                                        <p:inputText value="#{msgs.label_username}"
+                                                     style="position:relative;left: 10%;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="#{msgs.label_password}"/>
+                                    </td>
+                                    <td>
+                                        <p:inputText value="#{msgs.label_password}"
+                                                     style="position:relative;left: 10%;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="#{msgs.header_email}"/>
+                                    </td>
+                                    <td>
+                                        <p:inputText type="email" value="#{msgs.header_email}"
+                                                     style="position:relative;left: 10%;"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p:commandButton value="#{msgs.btn_save}"/>
+                        </div>
+                        <f:facet name="footer">
+                            <p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}"
+                                             action="#{userBean.login}"/>
+                        </f:facet>
+                    </p:card>
+                </div>
+                <div class="p-col">
+                    <div class="box"></div>
+                </div>
             </div>
-            <div class="p-col">
-                <p:card style="width: auto">
-                    <f:facet name="title">
-                        Login
-                    </f:facet>
-                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-                    <div class="card">
-                        <table>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="#{msgs.label_username}"/>
-                                </td>
-                                <td>
-                                    <p:inputText value="username"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="#{msgs.label_password}"/>
-                                </td>
-                                <td>
-                                    <p:inputText value="password"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p:outputLabel value="#{msgs.label_email}"/>
-                                </td>
-                                <td>
-                                    <p:inputText type="email" value="email"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <p:commandButton value="#{msgs.save_user_button}"/>
-                    </div>
-                    <f:facet name="footer">
-                        <p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}"
-                                         action="#{userBean.login}"/>
-                    </f:facet>
-                </p:card>
-            </div>
-            <div class="p-col">
-                <div class="box"></div>
-            </div>
-        </div>
-    </h:form>
-</h:body>
+        </h:form>
+    </h:body>
+</f:view>
 </html>
