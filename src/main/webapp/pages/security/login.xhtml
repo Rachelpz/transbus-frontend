@@ -1,56 +1,66 @@
 <html lang="#{languageBean.localeCode}"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <f:view locale="#{languageBean.locale}">
-	<h:head>
-		<title>#{msgs.title_login}</title>
-		<h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
-	</h:head>
+    <h:head>
+        <title>#{msgs.title_login}</title>
+        <h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
 
-	<h:body>
-		<h:form prependId="false">
-			<p:growl for="securityMessages"  globalOnly="true" showDetail="true" showSummary="false" />
-			<p:spacer height="50"></p:spacer>
-			<div class="p-grid p-ai-center vertical-container">
-				<div class="p-col">
+    </h:head>
 
-				</div>
-				<div class="p-col">
-					<p:card style="width: auto">
-						<f:facet name="title">
-							#{msgs.title_login}
-						</f:facet>
-						<h:outputLabel value="user: pweb y pass: pweb"></h:outputLabel>
-						<p:panelGrid columns="1" layout="grid">
-							<h:panelGroup>
-								<p:outputLabel for="@next" value="#{msgs.label_username}"/>
-								<p:inputText value="#{userBean.username}" style="width:100%" required="true" id="username"/>
-								<p:message for="@previous"  />
-							</h:panelGroup>
+    <h:body>
+        <h:form prependId="false">
+            <p:growl for="securityMessages" globalOnly="true" showDetail="true" showSummary="false"/>
+            <p:spacer height="50"></p:spacer>
+            <div class="p-grid p-ai-center vertical-container">
+                <div class="p-col">
 
-							<h:panelGroup>
-								<p:outputLabel for="@next" value="#{msgs.label_password}" escape="false"/>
-								<p:password style="width:100%" value="#{userBean.password}" required="true" requiredMessage="Valor requerido" id="password"/>
-								<p:message for="@previous"  />
-							</h:panelGroup>
-						</p:panelGrid>
+                </div>
+                <div class="p-col">
+                    <p:card style="width: auto">
+                        <div align="center">
+                            <p:graphicImage name="Recurso 1.svg" library="images" alt="Image"
+                                           style="width: 150px; height:80px " styleClass="mb-3"/>
+                            <div style="font-size: xx-large"
+                                 class="text-900 text-3xl font-medium mb-3">#{msgs.title_login}</div>
+                            <span style="font-size: small"
+                                  class="text-600 font-medium line-height-3">#{msgs.title_quest}</span>
+                            <h:link style="color: #2196F3;text-decoration:none"
+                                    outcome="/pages/security/users/register.xhtml">
+                                #{msgs.link_signUp}
+                            </h:link></div>
+                        <br></br>
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:panelGroup>
+                                <p:outputLabel for="@next" value="#{msgs.label_username}"/>
+                                <p:inputText value="#{userBean.username}" style="width:100%" required="true"
+                                             id="username"/>
+                                <p:message for="@previous"/>
+                            </h:panelGroup>
 
-						<f:facet name="footer">
-							<p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}" action="#{userBean.login}"/>
-						</f:facet>
-					</p:card>
-				</div>
-				<div class="p-col">
-					<div class="box"></div>
-				</div>
-			</div>
-			<div align="center"><h:link tyle="color: #FF0000"  outcome="/pages/security/users/register.xhtml">
-				#{msgs.link_signUp}
-			</h:link></div>
-		</h:form>
-	</h:body>
+                            <h:panelGroup>
+                                <p:outputLabel for="@next" value="#{msgs.label_password}" escape="false"/>
+                                <p:password style="width:100%" value="#{userBean.password}" required="true"
+                                            requiredMessage="Valor requerido" id="password"/>
+                                <p:message for="@previous"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+
+                        <f:facet name="footer">
+                            <p:commandButton style="width: 100%" ajax="false" icon="pi pi-sign-in"
+                                             value="#{msgs.btn_login}" action="#{userBean.login}"/>
+                        </f:facet>
+                    </p:card>
+                </div>
+                <div class="p-col">
+                    <div class="box"></div>
+                </div>
+            </div>
+
+        </h:form>
+    </h:body>
 </f:view>
 </html>
