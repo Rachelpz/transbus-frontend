@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.dto.RoleDto;
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
 import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
@@ -23,6 +24,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component //Le indica a spring es un componete registrado
@@ -35,6 +37,7 @@ public class UserBean {
 
 	private String username;
 	private String password;
+	private String email;
 
 	@Autowired
 	private AuthService authService;
@@ -45,6 +48,7 @@ public class UserBean {
 	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -56,6 +60,13 @@ public class UserBean {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String registerNewUser() {
+		List<RoleDto> roles = new ArrayList<>();
+		roles.add(new RoleDto(2L, "", ""));
+		userService.createUser(new UserDto(null, username, "Example Name", password, email, "00000000000", roles));
+		return login();
 	}
 
 	public void editLoggedUser() {
@@ -143,5 +154,13 @@ public class UserBean {
 
 	public void setLogged_user_values(UserDto logged_user_values) {
 		this.logged_user_values = logged_user_values;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

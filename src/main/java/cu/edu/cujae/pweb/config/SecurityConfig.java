@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // todas las solicitudes deben estar autenticadas excepto las que se definan en este code
-        http.authorizeRequests().antMatchers("/javax.faces.resource/**", "/resources/**", "/pages/security/login.jsf", "/pages/errors/**")
+        http.authorizeRequests().antMatchers("/javax.faces.resource/**", "/resources/**", "/pages/security/login.jsf", "/pages/errors/**", "/pages/security/users/register.jsf")
         .permitAll()
         .antMatchers("/pages/security/**").hasAnyAuthority("admin")
         .anyRequest().authenticated();

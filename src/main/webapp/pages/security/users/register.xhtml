@@ -10,65 +10,53 @@
 <f:view locale="#{languageBean.locale}">
     <h:head>
         <title>#{msgs.title_authentication}</title>
-        <h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
+        <h:outputStylesheet name="primeflex.min.css" library="css"/>
     </h:head>
-
-    <h:body>
-        <h:form>
-            <p:spacer height="50"></p:spacer>
-            <div class="p-grid p-ai-center vertical-container">
-                <div class="p-col">
-
-                </div>
-                <div class="p-col">
-                    <p:card style="width: auto">
-                        <f:facet name="title">
-                            #{msgs.title_login}
-                        </f:facet>
-                        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
-                        <div class="card">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p:outputLabel value="#{msgs.label_username}"/>
-                                    </td>
-                                    <td>
-                                        <p:inputText value="#{msgs.label_username}"
-                                                     style="position:relative;left: 10%;"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p:outputLabel value="#{msgs.label_password}"/>
-                                    </td>
-                                    <td>
-                                        <p:inputText value="#{msgs.label_password}"
-                                                     style="position:relative;left: 10%;"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p:outputLabel value="#{msgs.header_email}"/>
-                                    </td>
-                                    <td>
-                                        <p:inputText type="email" value="#{msgs.header_email}"
-                                                     style="position:relative;left: 10%;"/>
-                                    </td>
-                                </tr>
-                            </table>
-                            <p:commandButton value="#{msgs.btn_save}"/>
+    <h:form>
+        <p:outputPanel id="manage-user-content" class="ui-fluid">
+            <p:outputPanel>
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.header_user}"/>
+                            <p:inputText id="username" required="true"
+                                         value="#{userBean.username}"/>
+                            <p:message for="@previous"/>
                         </div>
-                        <f:facet name="footer">
-                            <p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}"
-                                             action="#{userBean.login}"/>
-                        </f:facet>
-                    </p:card>
-                </div>
-                <div class="p-col">
-                    <div class="box"></div>
-                </div>
-            </div>
-        </h:form>
-    </h:body>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.header_email}"/>
+                            <p:inputText id="email" required="true"
+                                         value="#{userBean.email}"
+                                         validatorMessage="Email mal formado">
+                                <f:validateRegex
+                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                            </p:inputText>
+                            <p:message for="@previous"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next"
+                                           value="#{msgs.label_password}"/>
+                            <p:password id="password1" required="true"
+                                        value="#{userBean.password}"
+                                        match="password2">
+                            </p:password>
+                            <p:message for="@previous"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next"
+                                           value="#{msgs.label_repeat}"/>
+                            <p:password id="password2"
+                                        required="true"
+                                        value="#{userBean.password}">
+                            </p:password>
+                            <p:message for="@previous"/>
+                        </div>
+                        <p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}"
+                                         action="#{userBean.registerNewUser}"/>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+    </h:form>
 </f:view>
 </html>
