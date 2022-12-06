@@ -23,7 +23,7 @@ public class ManageDriverBean {
     private DriverDto selectedDriver;
     private List<DriverDto> drivers;
 
-    private Integer sizeDrivers=0;
+    private Integer sizeDrivers = 0;
 
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -56,7 +56,7 @@ public class ManageDriverBean {
         }
 
         this.drivers = driverService.getDrivers();
-        this.sizeDrivers=drivers.size();
+        this.sizeDrivers = drivers.size();
         PrimeFaces.current().executeScript("PF('manageDriverDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-drivers");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }

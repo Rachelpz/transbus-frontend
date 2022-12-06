@@ -23,7 +23,7 @@ public class ManageContractBean {
     private ContractDto selectedContract;
     private List<ContractDto> contracts;
 
-    private Integer sizeContracts=0;
+    private Integer sizeContracts = 0;
 
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -56,7 +56,7 @@ public class ManageContractBean {
         }
 
         this.contracts = contractService.getContracts();
-        this.sizeContracts=contracts.size();
+        this.sizeContracts = contracts.size();
         PrimeFaces.current().executeScript("PF('manageContractDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-contracts");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
     }

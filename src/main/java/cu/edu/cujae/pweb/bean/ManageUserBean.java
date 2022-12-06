@@ -29,7 +29,7 @@ public class ManageUserBean {
 
     private List<RoleDto> roles;
 
-    private Integer sizeUsers=0;
+    private Integer sizeUsers = 0;
 
     @Autowired
     private UserService userService;
@@ -75,7 +75,7 @@ public class ManageUserBean {
 
         //load datatable again with new values
         this.users = userService.getUsers();
-        this.sizeUsers=users.size();
+        this.sizeUsers = users.size();
 //
 //        for (UserDto user : users)
 //            System.out.println("\nUser ID: " + user.getId() + " Username: " + user.getUsername() + " Roles: " + user.getRoles().size());

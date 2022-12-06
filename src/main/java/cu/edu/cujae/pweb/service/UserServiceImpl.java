@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public Integer getUsersSize() {
 
         List<UserDto> users = new ArrayList<UserDto>();
-        Integer size=0;
+        Integer size = 0;
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        return size=users.size();
+        return size = users.size();
 
     }
 

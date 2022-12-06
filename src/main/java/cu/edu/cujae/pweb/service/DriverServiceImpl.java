@@ -42,7 +42,7 @@ public class DriverServiceImpl implements DriverService {
     public Integer getDriversSize() {
 
         List<DriverDto> drivers = new ArrayList<DriverDto>();
-        Integer size=0;
+        Integer size = 0;
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
@@ -52,7 +52,7 @@ public class DriverServiceImpl implements DriverService {
             e.printStackTrace();
         }
 
-        return size=drivers.size();
+        return size = drivers.size();
 
     }
 

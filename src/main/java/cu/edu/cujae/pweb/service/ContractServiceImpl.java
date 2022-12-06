@@ -42,7 +42,7 @@ public class ContractServiceImpl implements ContractService {
     public Integer getContractsSize() {
 
         List<ContractDto> contracts = new ArrayList<ContractDto>();
-        Integer size=0;
+        Integer size = 0;
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ContractDto> apiRestMapper = new ApiRestMapper<>();
@@ -52,7 +52,7 @@ public class ContractServiceImpl implements ContractService {
             e.printStackTrace();
         }
 
-        return size=contracts.size();
+        return size = contracts.size();
 
     }
 
