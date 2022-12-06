@@ -39,6 +39,24 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public Integer getDriversSize() {
+
+        List<DriverDto> drivers = new ArrayList<DriverDto>();
+        Integer size=0;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/drivers/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            drivers = apiRestMapper.mapList(response, DriverDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return size=drivers.size();
+
+    }
+
+    @Override
     public DriverDto getDriverById(Integer driverId) {
         DriverDto district = null;
 

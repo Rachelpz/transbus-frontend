@@ -10,4 +10,5 @@ public interface ContractService {
     void createContract(ContractDto contract);
     void updateContract(ContractDto contract);
     void deleteContract(Integer id);
+    Integer getContractsSize();
 }

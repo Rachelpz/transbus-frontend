@@ -40,6 +40,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer getUsersSize() {
+
+        List<UserDto> users = new ArrayList<UserDto>();
+        Integer size=0;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/users/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            users = apiRestMapper.mapList(response, UserDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return size=users.size();
+
+    }
+
+    @Override
     public UserDto getUserById(String userId) {
         UserDto user = null;
 
