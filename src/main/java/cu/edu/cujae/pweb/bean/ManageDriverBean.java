@@ -63,13 +63,21 @@ public class ManageDriverBean {
 
     public void deleteDriver() {
         try {
-            this.driverService.deleteDriver(this.selectedDriver.getDriver_id());
-            this.selectedDriver = null;
+            boolean canDelete=true;
+            canDelete=this.driverService.deleteDriver(this.selectedDriver.getDriver_id());
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }
+            else
+            {
+                this.selectedDriver = null;
 
-            this.drivers = driverService.getDrivers();
+                this.drivers = driverService.getDrivers();
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_driver_removed");
-            PrimeFaces.current().ajax().update("form:dt-drivers"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_driver_removed");
+                PrimeFaces.current().ajax().update("form:dt-drivers"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            }
+
 
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");

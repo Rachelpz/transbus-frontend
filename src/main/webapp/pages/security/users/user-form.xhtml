@@ -21,7 +21,9 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_user}"/>
                                 <p:inputText id="username" required="true"
-                                             value="#{manageUserBean.selectedUser.username}"/>
+                                             value="#{manageUserBean.selectedUser.username}">
+                                <f:validateRegex pattern="^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$" />
+                                 </p:inputText>
                                 <p:message for="@previous"></p:message>
                             </div>
                             <div class="p-field">
@@ -30,6 +32,7 @@
                                              value="#{manageUserBean.selectedUser.identification}"
                                              maxlength="11">
                                     <p:keyFilter mask="num"/>
+                                    <f:validateLength minimum="11"/>
                                 </p:inputText>
                                 <p:message for="@previous"></p:message>
                             </div>

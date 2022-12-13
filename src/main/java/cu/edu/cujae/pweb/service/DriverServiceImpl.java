@@ -6,6 +6,7 @@ import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -14,7 +15,6 @@ import org.springframework.web.util.UriTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -87,10 +87,18 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public void deleteDriver(Integer driverId) {
+    public boolean deleteDriver(Integer driverId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/drivers/{driverId}");
         String uri = template.expand(driverId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
     }
 }
