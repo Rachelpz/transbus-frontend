@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.DistrictDto;
+import cu.edu.cujae.pweb.dto.DriverDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
@@ -53,6 +54,42 @@ public class DistrictServiceImpl implements DistrictService {
             // TODO: handle exception
         }
         return district;
+    }
+
+    @Override
+    public List<DriverDto> getDriversByIdDistrict(Integer districtId) {
+        DistrictDto district = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<DistrictDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/districts/{districtId}");
+            String uri = template.expand(districtId).toString();
+            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            district = apiRestMapper.mapOne(response, DistrictDto.class);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        List<DriverDto> brands = new ArrayList<DriverDto>();
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/drivers/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            brands = apiRestMapper.mapList(response, DriverDto.class);
+            for (DriverDto driver:brands
+                 ) {if (!driver.getDistrict().equals(district)){
+                     brands.remove(driver);
+            }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return brands;
     }
 
     @Override

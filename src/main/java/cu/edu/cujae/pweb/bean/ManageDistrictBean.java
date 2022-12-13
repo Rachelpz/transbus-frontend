@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 
 import cu.edu.cujae.pweb.dto.DistrictDto;
+import cu.edu.cujae.pweb.dto.DriverDto;
 import cu.edu.cujae.pweb.service.DistrictService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -22,6 +23,17 @@ public class ManageDistrictBean {
     private DistrictDto districtDto;
     private DistrictDto selectedDistrict;
     private List<DistrictDto> districts;
+
+    public List<DriverDto> getDriversById(Integer districtId) {
+        this.driversById = districtService.getDriversByIdDistrict(districtId);
+        return this.driversById;
+    }
+
+    public void setDriversById(List<DriverDto> driversById) {
+        this.driversById = driversById;
+    }
+
+    private List<DriverDto> driversById;
 
     @Autowired
     private DistrictService districtService;
