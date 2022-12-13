@@ -16,7 +16,7 @@
                     <p:toolbar>
                         <p:toolbarGroup>
                             <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDistrictBean.districts}" label="Seleccione"
+                                             value="#{manageDistrictBean.selectedDistrict}" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250" valueChangeListener="#{manageDistrictBean.selectedDistrict}">
@@ -25,7 +25,8 @@
                                 <!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
                                 <!--                                <f:selectItem id="distrito_2" itemLabel="Distrito 2" itemValue="Distrito 2"/>-->
                                 <!--                                <f:selectItem id="distrito_3" itemLabel="Distrito 3" itemValue="Distrito 3"/>-->
-                                <p:ajax update="dt-drivers"  listener="#{manageDistrictBean.selectedDistrict}" />
+                                <p:ajax render="form:dt-drivers" process="@this"/>
+
                             </p:selectOneMenu>
                         </p:toolbarGroup>
                         <p:toolbarGroup align="right">
@@ -33,7 +34,7 @@
                                  del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
                             <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
                                              styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-brands" fileName="brands"/>
+                                <p:dataExporter type="pdf" target="dt-drivers" fileName="Drivers for Districts"/>
                             </p:commandButton>
                         </p:toolbarGroup>
                     </p:toolbar>

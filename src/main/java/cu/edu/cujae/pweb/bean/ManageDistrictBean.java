@@ -95,6 +95,7 @@ public class ManageDistrictBean {
         this.selectedDistrict = selectedDistrict;
     }
 
+
     public List<DistrictDto> getDistricts() {
         this.districts = districtService.getDistricts();
         return this.districts;
