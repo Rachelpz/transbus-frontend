@@ -85,7 +85,7 @@
 
             <f:facet name="footer">
                 <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
-                                 actionListener="#{manageUserBean.saveUser}"
+                                 actionListener="#{manageUserBean.saveUser}" ajax="true"
                                  update="manage-user-content" process="manage-user-content @this"/>
                 <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
                                  onclick="PF('manageUserDialog').hide()" class="ui-button-secondary"/>

@@ -23,7 +23,7 @@ public class CarouselView implements Serializable {
     @Inject
     private DriverServiceImpl service;
 
-    @PostConstruct
+
     public void init() {
         drivers = service.getDrivers();
 //        responsiveOptions = new ArrayList<>();

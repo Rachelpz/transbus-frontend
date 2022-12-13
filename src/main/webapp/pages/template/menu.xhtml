@@ -26,11 +26,14 @@
 
             <div class="menu-category">#{msgs.menuCategory_menu}</div>
 
+
             <div class="menu-items">
+                <sec:authorize access="hasAnyAuthority('admin','worker')">
                 <p:outputPanel>
                     <a tabindex="0" class="submenu-link" >
                         #{msgs.menuItem_data}
                     </a>
+
                     <div class="submenu">
                         <ul>
                             <li><h:link outcome="/pages/crud/brand/list_brand.xhtml" value="#{msgs.submenu_brands}"/></li>
@@ -44,7 +47,9 @@
                             <li><h:link outcome="/pages/crud/contract/list_contract.xhtml" value="#{msgs.submenu_contracts}"/></li>
                         </ul>
                     </div>
+
                 </p:outputPanel>
+                </sec:authorize>
                 <p:outputPanel>
                     <a tabindex="0" class="submenu-link">
                         #{msgs.menuItem_reports}
@@ -60,9 +65,12 @@
                         </ul>
                     </div>
                 </p:outputPanel>
+
+                <sec:authorize access="hasAnyAuthority('admin')">
                 <div class="menu-items">
                     <h:link outcome="/pages/security/users/user-list.xhtml" value="#{msgs.menuItem_users}"/>
                 </div>
+                </sec:authorize>
 
             </div>
             <div class="menu-category">#{msgs.menuCategory_helpEtPlugins}</div>
