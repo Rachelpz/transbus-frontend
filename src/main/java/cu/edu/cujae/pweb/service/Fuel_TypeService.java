@@ -9,5 +9,5 @@ public interface Fuel_TypeService {
     FuelDto getFuelById(Integer FuelId);
     void createFuel(FuelDto fuel);
     void updateFuel(FuelDto fuel);
-    void deleteFuel(Integer id);
+    boolean deleteFuel(Integer id);
 }

@@ -63,14 +63,22 @@ public class ManageFuel_TypeBean {
     //Permite eliminar una marca
     public void deleteFuel() {
         try {
-            fuelService.deleteFuel(this.selectedFuel.getFuel_id());
-            this.selectedFuel = null;
+            boolean canDelete=true;
+            canDelete=fuelService.deleteFuel(this.selectedFuel.getFuel_id());
 
-            fuels=fuelService.getFuels();
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }else{
+                this.selectedFuel = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_fuel_removed");
-            PrimeFaces.current().ajax().update("form:dt-fuels");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-        } catch (Exception e) {
+                fuels=fuelService.getFuels();
+
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_fuel_removed");
+                PrimeFaces.current().ajax().update("form:dt-fuels");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
+            }
+
+          } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
 

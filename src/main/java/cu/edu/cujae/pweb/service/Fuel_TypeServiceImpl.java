@@ -66,10 +66,17 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
     }
 
     @Override
-    public void deleteFuel(Integer fuelId) {
+    public boolean deleteFuel(Integer fuelId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/fuels/{fuelId}");
         String uri = template.expand(fuelId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
     }
 }
