@@ -60,15 +60,23 @@ public class ManageGroupBean {
 
     public void deleteGroup() {
         try {
+            boolean canDelete=true;
+            canDelete=
             this.groupService.deleteGroup(this.selectedGroup.getGroup_id());
-            this.selectedGroup = null;
 
-            this.groups = groupService.getGroups();
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }else {
+                this.selectedGroup = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_removed");
-            PrimeFaces.current().ajax().update("form:dt-groups");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+                this.groups = groupService.getGroups();
 
-        } catch (Exception e) {
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_group_removed");
+                PrimeFaces.current().ajax().update("form:dt-groups");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
+
+            }
+     } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
 

@@ -9,5 +9,5 @@ public interface GroupService {
     GroupDto getGroupById(Integer GroupId);
     void createGroup(GroupDto group);
     void updateGroup(GroupDto group);
-    void deleteGroup(Integer id);
+    boolean deleteGroup(Integer id);
 }

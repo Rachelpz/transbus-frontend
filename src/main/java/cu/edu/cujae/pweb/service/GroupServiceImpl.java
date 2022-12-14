@@ -14,7 +14,6 @@ import org.springframework.web.util.UriTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -69,10 +68,18 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void deleteGroup(Integer groupId) {
+    public boolean deleteGroup(Integer groupId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/groups/{groupId}");
         String uri = template.expand(groupId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
     }
 }
