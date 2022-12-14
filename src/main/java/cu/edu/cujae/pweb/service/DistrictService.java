@@ -10,6 +10,6 @@ public interface DistrictService {
     DistrictDto getDistrictById(Integer districtId);
     void createDistrict(DistrictDto district);
     void updateDistrict(DistrictDto district);
-    void deleteDistrict(Integer id);
+    boolean deleteDistrict(Integer id);
     List<DriverDto> getDriversByIdDistrict(Integer districtId);
 }

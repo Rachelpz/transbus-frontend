@@ -14,7 +14,6 @@ import org.springframework.web.util.UriTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DistrictServiceImpl implements DistrictService {
@@ -90,10 +89,18 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public void deleteDistrict(Integer districtId) {
+    public boolean deleteDistrict(Integer districtId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/districts/{districtId}");
         String uri = template.expand(districtId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
+
     }
 }

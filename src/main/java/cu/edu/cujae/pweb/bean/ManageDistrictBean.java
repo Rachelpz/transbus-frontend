@@ -56,14 +56,22 @@ public class ManageDistrictBean {
 
     public void deleteDistrict() {
         try {
-            this.districtService.deleteDistrict(this.selectedDistrict.getDistrict_id());
-            this.selectedDistrict = null;
+            boolean canDelete=true;
+            canDelete=this.districtService.deleteDistrict(this.selectedDistrict.getDistrict_id());
 
-            this.districts = districtService.getDistricts();
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }else {
+                this.selectedDistrict = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_district_removed");
-            PrimeFaces.current().ajax().update("form:dt-districts");
-        } catch (Exception e) {
+                this.districts = districtService.getDistricts();
+
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_district_removed");
+                PrimeFaces.current().ajax().update("form:dt-districts");
+
+            }
+
+      } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
     }
