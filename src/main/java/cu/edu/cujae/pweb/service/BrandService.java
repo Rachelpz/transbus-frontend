@@ -9,6 +9,6 @@ public interface BrandService {
     BrandDto getBrandById(Integer BrandId);
     void createBrand(BrandDto brand);
     void updateBrand(BrandDto brand);
-    void deleteBrand(Integer id);
+    boolean deleteBrand(Integer id);
     Integer getBrandsSize();
 }

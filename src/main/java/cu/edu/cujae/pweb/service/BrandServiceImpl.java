@@ -87,11 +87,19 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void deleteBrand(Integer brandId) {
+    public boolean deleteBrand(Integer brandId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/brands/{brandId}");
         String uri = template.expand(brandId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
     }
 
 

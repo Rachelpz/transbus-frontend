@@ -70,15 +70,22 @@ public class ManageBrandBean {
     //Permite eliminar una marca
     public void deleteBrand() {
         try {
-            this.brandService.deleteBrand(this.selectedBrand.getBrand_id());
-            this.selectedBrand = null;
+            boolean canDelete=true;
+            canDelete=this.brandService.deleteBrand(this.selectedBrand.getBrand_id());
+            if(canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }else
+            {
+                this.selectedBrand = null;
 
-            //load datatable again with new values
-            this.brands = brandService.getBrands();
+                //load datatable again with new values
+                this.brands = brandService.getBrands();
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_removed");
-            PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-        } catch (Exception e) {
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_brand_removed");
+                PrimeFaces.current().ajax().update("form:dt-brands");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
+            }
+            } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
 
