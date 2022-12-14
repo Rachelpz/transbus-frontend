@@ -9,5 +9,5 @@ public interface ServiceService {
     ServiceDto getServiceById(Integer serviceId);
     void createService(ServiceDto service);
     void updateService(ServiceDto service);
-    void deleteService(Integer id);
+    boolean deleteService(Integer id);
 }

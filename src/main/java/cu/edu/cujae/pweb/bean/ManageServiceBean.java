@@ -60,15 +60,23 @@ public class ManageServiceBean {
 
     public void deleteService() {
         try {
+            boolean canDelete=true;
+            canDelete=
             this.serviceService.deleteService(this.selectedService.getService_id());
-            this.selectedService = null;
 
-            this.services = serviceService.getServices();
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }
+            else {
+                this.selectedService = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_service_removed");
-            PrimeFaces.current().ajax().update("form:dt-services"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+                this.services = serviceService.getServices();
 
-        } catch (Exception e) {
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_service_removed");
+                PrimeFaces.current().ajax().update("form:dt-services"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            }
+
+            } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
 

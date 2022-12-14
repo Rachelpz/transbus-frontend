@@ -14,7 +14,6 @@ import org.springframework.web.util.UriTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ServiceServiceImpl implements ServiceService{
@@ -69,10 +68,18 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
-    public void deleteService(Integer serviceId) {
+    public boolean deleteService(Integer serviceId) {
+        boolean status=true;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/services/{serviceId}");
         String uri = template.expand(serviceId).toString();
-        restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+        if(restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getStatusCode().isError()){
+            return status=false;
+        }
+        else{
+            restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            return status ;
+        }
+
     }
 }
