@@ -9,12 +9,10 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 @ManagedBean
@@ -23,17 +21,8 @@ public class ManageDistrictBean {
     private DistrictDto districtDto;
     private DistrictDto selectedDistrict;
     private List<DistrictDto> districts;
-
-    public List<DriverDto> getDriversById(Integer districtId) {
-        this.driversById = districtService.getDriversByIdDistrict(districtId);
-        return this.driversById;
-    }
-
-    public void setDriversById(List<DriverDto> driversById) {
-        this.driversById = driversById;
-    }
-
     private List<DriverDto> driversById;
+    private Integer districtId;
 
     @Autowired
     private DistrictService districtService;
@@ -111,5 +100,22 @@ public class ManageDistrictBean {
 
     public void setDistrictService(DistrictService districtService) {
         this.districtService = districtService;
+    }
+
+    public List<DriverDto> getDriversById(Integer districtId) {
+        this.driversById = districtService.getDriversByIdDistrict(districtId);
+        return this.driversById;
+    }
+
+    public void setDriversById(List<DriverDto> driversById) {
+        this.driversById = driversById;
+    }
+
+    public Integer getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(Integer driverId) {
+        this.districtId = driverId;
     }
 }

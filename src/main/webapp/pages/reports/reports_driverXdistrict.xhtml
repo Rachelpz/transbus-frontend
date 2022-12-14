@@ -16,10 +16,11 @@
                     <p:toolbar>
                         <p:toolbarGroup>
                             <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDistrictBean.selectedDistrict}" label="Seleccione"
+                                             value="#{manageDistrictBean.districtId}"
+                                             onchange="submit()" immediate = "true" label="Seleccione"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250" valueChangeListener="#{manageDistrictBean.selectedDistrict}">
+                                             scrollHeight="250">
                                 <f:selectItems value="#{manageDistrictBean.districts}" var="district"
                                                itemLabel="#{district.district_name}" itemValue="#{district.district_id}" />
                                 <!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
@@ -50,7 +51,7 @@
                           con mayor detalle ver el showcase.
                      -->
                     <p:dataTable id="dt-drivers" widgetVar="dtDrivers" var="driver"
-                                 value="#{manageDistrictBean.getDriversById(manageDistrictBean.selectedDistrict.district_id)}" reflow="true" paginator="true"
+                                 value="#{manageDistrictBean.getDriversById(manageDistrictBean.districtId)}" reflow="true" paginator="true"
                                  rows="10" paginatorPosition="bottom">
                         <f:facet name="header">
                             <div class="products-table-header">

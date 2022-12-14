@@ -25,17 +25,16 @@ public class DistrictServiceImpl implements DistrictService {
     @Override
     public List<DistrictDto> getDistricts() {
 
-        List<DistrictDto> brands = new ArrayList<DistrictDto>();
+        List<DistrictDto> districts = new ArrayList<DistrictDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<DistrictDto> apiRestMapper = new ApiRestMapper<>();
             String response = (String) restService.GET("/api/v1/districts/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            brands = apiRestMapper.mapList(response, DistrictDto.class);
+            districts = apiRestMapper.mapList(response, DistrictDto.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return brands;
+        return districts;
     }
 
     @Override
@@ -58,38 +57,25 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public List<DriverDto> getDriversByIdDistrict(Integer districtId) {
-        DistrictDto district = null;
+        List<DriverDto> allDrivers = new ArrayList<DriverDto>();
+        List<DriverDto> drivers = new ArrayList<DriverDto>();
 
-        try {
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<DistrictDto> apiRestMapper = new ApiRestMapper<>();
-
-            UriTemplate template = new UriTemplate("/api/v1/districts/{districtId}");
-            String uri = template.expand(districtId).toString();
-            String response = (String) restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            district = apiRestMapper.mapOne(response, DistrictDto.class);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
-        List<DriverDto> brands = new ArrayList<DriverDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<DriverDto> apiRestMapper = new ApiRestMapper<>();
             String response = (String) restService.GET("/api/v1/drivers/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            brands = apiRestMapper.mapList(response, DriverDto.class);
-            for (DriverDto driver:brands
-                 ) {if (!driver.getDistrict().equals(district)){
-                     brands.remove(driver);
-            }
-
-            }
+            allDrivers = apiRestMapper.mapList(response, DriverDto.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        for (DriverDto allDriver : allDrivers) {
+            if (allDriver.getDistrict().getDistrict_id().equals(districtId)) {
+                drivers.add(allDriver);
+            }
+        }
 
-        return brands;
+        return drivers;
     }
 
     @Override
