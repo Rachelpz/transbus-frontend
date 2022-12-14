@@ -9,5 +9,5 @@ public interface RequestService {
     RequestDto getRequestById(Integer requestId);
     void createRequest(RequestDto request);
     void updateRequest(RequestDto request);
-    void deleteRequest(Integer id);
+    boolean deleteRequest(Integer id);
 }

@@ -60,14 +60,21 @@ public class ManageRequestBean {
 
     public void deleteRequest() {
         try {
+            boolean canDelete=true;
+            canDelete=
             this.requestService.deleteRequest(this.selectedRequest.getRequest_id());
-            this.selectedRequest = null;
 
-            this.requests = requestService.getRequests();
+            if (canDelete==false){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
+            }
+            else {
+                this.selectedRequest = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_request_removed");
-            PrimeFaces.current().ajax().update("form:dt-requests"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+                this.requests = requestService.getRequests();
 
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_request_removed");
+                PrimeFaces.current().ajax().update("form:dt-requests"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            }
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }
