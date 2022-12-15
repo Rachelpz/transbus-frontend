@@ -168,7 +168,15 @@ public class ChartJsView implements Serializable {
         title.setDisplay(true);
         title.setText("Cantidad de asientos por marca");
         options.setTitle(title);
-
+        Legend legend = new Legend();
+        legend.setDisplay(false);
+        legend.setPosition("top");
+        LegendLabel legendLabels = new LegendLabel();
+//        legendLabels.setFontStyle("italic");
+//        legendLabels.setFontColor("#2980B9");
+//        legendLabels.setFontSize(24);
+        legend.setLabels(legendLabels);
+        options.setLegend(legend);
         lineModel.setOptions(options);
         lineModel.setData(data);
 
@@ -257,7 +265,7 @@ public class ChartJsView implements Serializable {
         options.setTitle(title);
 
         Legend legend = new Legend();
-        legend.setDisplay(true);
+        legend.setDisplay(false);
         legend.setPosition("top");
         LegendLabel legendLabels = new LegendLabel();
 //        legendLabels.setFontStyle("italic");
