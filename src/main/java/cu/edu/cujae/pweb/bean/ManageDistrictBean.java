@@ -22,7 +22,7 @@ public class ManageDistrictBean {
     private DistrictDto selectedDistrict;
     private List<DistrictDto> districts;
     private List<DriverDto> driversById;
-    private Integer districtId;
+    private String districtName;
 
     @Autowired
     private DistrictService districtService;
@@ -110,8 +110,8 @@ public class ManageDistrictBean {
         this.districtService = districtService;
     }
 
-    public List<DriverDto> getDriversById(Integer districtId) {
-        this.driversById = districtService.getDriversByIdDistrict(districtId);
+    public List<DriverDto> getDriversById(String districtName) {
+        this.driversById = districtService.getDriversByIdDistrict(districtName);
         return this.driversById;
     }
 
@@ -119,11 +119,11 @@ public class ManageDistrictBean {
         this.driversById = driversById;
     }
 
-    public Integer getDistrictId() {
-        return districtId;
+    public String getDistrictName() {
+        return districtName;
     }
 
-    public void setDistrictId(Integer driverId) {
-        this.districtId = driverId;
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
     }
 }

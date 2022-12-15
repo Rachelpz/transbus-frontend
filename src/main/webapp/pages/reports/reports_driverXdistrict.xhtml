@@ -16,18 +16,15 @@
                     <p:toolbar>
                         <p:toolbarGroup>
                             <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDistrictBean.districtId}"
-                                             onchange="submit()" immediate = "true" label="Seleccione"
+                                             value="#{manageDistrictBean.districtName}"
+                                             onchange="submit()"
+                                             placeholder="#{msgs.label_select}" editable="true"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
                                 <f:selectItems value="#{manageDistrictBean.districts}" var="district"
-                                               itemLabel="#{district.district_name}" itemValue="#{district.district_id}" />
-                                <!--                                <f:selectItem id="distrito_1" itemLabel="Distrito 1" itemValue="Distrito 1"/>-->
-                                <!--                                <f:selectItem id="distrito_2" itemLabel="Distrito 2" itemValue="Distrito 2"/>-->
-                                <!--                                <f:selectItem id="distrito_3" itemLabel="Distrito 3" itemValue="Distrito 3"/>-->
+                                               itemLabel="#{district.district_name.trim()}" itemValue="#{district.district_name.trim()}" />
                                 <p:ajax render="form:dt-drivers" process="@this"/>
-
                             </p:selectOneMenu>
                         </p:toolbarGroup>
                         <p:toolbarGroup align="right">
@@ -51,7 +48,7 @@
                           con mayor detalle ver el showcase.
                      -->
                     <p:dataTable id="dt-drivers" widgetVar="dtDrivers" var="driver"
-                                 value="#{manageDistrictBean.getDriversById(manageDistrictBean.districtId)}" reflow="true" paginator="true"
+                                 value="#{manageDistrictBean.getDriversById(manageDistrictBean.districtName)}" reflow="true" paginator="true"
                                  rows="10" paginatorPosition="bottom">
                         <f:facet name="header">
                             <div class="products-table-header">

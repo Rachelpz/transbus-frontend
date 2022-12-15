@@ -55,7 +55,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public List<DriverDto> getDriversByIdDistrict(Integer districtId) {
+    public List<DriverDto> getDriversByIdDistrict(String districtName) {
         List<DriverDto> allDrivers = new ArrayList<DriverDto>();
         List<DriverDto> drivers = new ArrayList<DriverDto>();
 
@@ -69,7 +69,7 @@ public class DistrictServiceImpl implements DistrictService {
         }
 
         for (DriverDto allDriver : allDrivers) {
-            if (allDriver.getDistrict().getDistrict_id().equals(districtId)) {
+            if (allDriver.getDistrict().getDistrict_name().trim().equals(districtName)) {
                 drivers.add(allDriver);
             }
         }
