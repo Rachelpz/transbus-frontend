@@ -151,11 +151,11 @@ public class ChartJsView implements Serializable {
 
         for (int i = 0; i < brands.size(); i++) {
             values.add(brands.get(i).getSeats_numb());
-            labels.add(brands.get(i).getBrand_name());
+            labels.add(brands.get(i).getBrand_name().trim());
         }
 
         dataSet.setData(values);
-        dataSet.setFill(false);
+        dataSet.setFill(true);
         dataSet.setLabel("Número de asientos");
         dataSet.setBorderColor("rgb(75, 192, 192)");
 //        dataSet.setTension(0.1);
@@ -168,7 +168,15 @@ public class ChartJsView implements Serializable {
         title.setDisplay(true);
         title.setText("Cantidad de asientos por marca");
         options.setTitle(title);
-
+        Legend legend = new Legend();
+        legend.setDisplay(false);
+        legend.setPosition("top");
+        LegendLabel legendLabels = new LegendLabel();
+//        legendLabels.setFontStyle("italic");
+//        legendLabels.setFontColor("#2980B9");
+//        legendLabels.setFontSize(24);
+        legend.setLabels(legendLabels);
+        options.setLegend(legend);
         lineModel.setOptions(options);
         lineModel.setData(data);
 
@@ -185,40 +193,56 @@ public class ChartJsView implements Serializable {
         ChartData data = new ChartData();
 
         BarChartDataSet barDataSet = new BarChartDataSet();
-        barDataSet.setLabel("Número de asientos");
+        barDataSet.setLabel("Número de pasajeros");
 
         List<Number> values = new ArrayList<>();
         List<String> labels = new ArrayList<>();
 
-        this.brands = brandService.getBrands();
+        this.groups = groupService.getGroups();
 
-        for (int i = 0; i < brands.size(); i++) {
-            values.add(brands.get(i).getSeats_numb());
-            labels.add(brands.get(i).getBrand_name());
+        for (int i = 0; i < groups.size(); i++) {
+            values.add(groups.get(i).getPaxamount());
+            labels.add(groups.get(i).getGroup_name().trim());
         }
 
         barDataSet.setData(values);
         data.setLabels(labels);
         barModel.setData(data);
 
-        List<String> bgColor = new ArrayList<>();
-        bgColor.add("rgba(255, 99, 132, 0.2)");
-        bgColor.add("rgba(255, 159, 64, 0.2)");
-        bgColor.add("rgba(255, 205, 86, 0.2)");
-        bgColor.add("rgba(75, 192, 192, 0.2)");
-        bgColor.add("rgba(54, 162, 235, 0.2)");
-        bgColor.add("rgba(153, 102, 255, 0.2)");
-        bgColor.add("rgba(201, 203, 207, 0.2)");
-        barDataSet.setBackgroundColor(bgColor);
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(255, 99, 132, 0.2)");
+        bgColors.add("rgb(54, 162, 235, 0.2)");
+        bgColors.add("rgb(255, 205, 86, 0.2)");
+        bgColors.add("rgba(75, 192, 192, 0.2)");
+        bgColors.add("rgba(54, 162, 235, 0.2)");
+        bgColors.add("rgba(153, 102, 255, 0.2)");
+        bgColors.add("rgba(201, 203, 207, 0.2)");
+        bgColors.add("rgba(153, 99, 192, 0.2)");
+        bgColors.add("rgba(255, 162, 86, 0.2)");
+        bgColors.add("rgba(54, 205, 192, 0.2)");
+        bgColors.add("rgba(75, 162, 235, 0.2)");
+        bgColors.add("rgba(270, 163, 237, 0.2)");
+        bgColors.add("rgba(155, 203, 107, 0.2)");
+        bgColors.add("rgba(241, 133, 207, 0.2)");
+        bgColors.add("rgba(201, 103, 107, 0.2)");
+        barDataSet.setBackgroundColor(bgColors);
 
         List<String> borderColor = new ArrayList<>();
         borderColor.add("rgb(255, 99, 132)");
-        borderColor.add("rgb(255, 159, 64)");
-        borderColor.add("rgb(255, 205, 86)");
-        borderColor.add("rgb(75, 192, 192)");
         borderColor.add("rgb(54, 162, 235)");
-        borderColor.add("rgb(153, 102, 255)");
-        borderColor.add("rgb(201, 203, 207)");
+        borderColor.add("rgb(255, 205, 86)");
+        borderColor.add("rgba(75, 192, 192)");
+        borderColor.add("rgba(54, 162, 235)");
+        borderColor.add("rgba(153, 102, 255)");
+        borderColor.add("rgba(201, 203, 207)");
+        borderColor.add("rgba(153, 99, 192)");
+        borderColor.add("rgba(255, 162, 86)");
+        borderColor.add("rgba(54, 205, 192)");
+        borderColor.add("rgba(75, 162, 235)");
+        borderColor.add("rgba(270, 163, 237)");
+        borderColor.add("rgba(155, 203, 107)");
+        borderColor.add("rgba(241, 133, 207)");
+        borderColor.add("rgba(201, 103, 107)");
         barDataSet.setBorderColor(borderColor);
         barDataSet.setBorderWidth(1);
 
@@ -237,15 +261,15 @@ public class ChartJsView implements Serializable {
 
         Title title = new Title();
         title.setDisplay(true);
-        title.setText("Cantidad de asientos por marca");
+        title.setText("Cantidad de pasajeros por grupo");
         options.setTitle(title);
 
         Legend legend = new Legend();
-        legend.setDisplay(true);
+        legend.setDisplay(false);
         legend.setPosition("top");
         LegendLabel legendLabels = new LegendLabel();
-        legendLabels.setFontStyle("italic");
-        legendLabels.setFontColor("#2980B9");
+//        legendLabels.setFontStyle("italic");
+//        legendLabels.setFontColor("#2980B9");
 //        legendLabels.setFontSize(24);
         legend.setLabels(legendLabels);
         options.setLegend(legend);
