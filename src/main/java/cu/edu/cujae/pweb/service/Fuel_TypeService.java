@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
+import cu.edu.cujae.pweb.dto.BrandDto;
 import cu.edu.cujae.pweb.dto.FuelDto;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface Fuel_TypeService {
     void createFuel(FuelDto fuel);
     void updateFuel(FuelDto fuel);
     boolean deleteFuel(Integer id);
+    List<BrandDto> getBrandsByIdFuel(String fuelName);
 }

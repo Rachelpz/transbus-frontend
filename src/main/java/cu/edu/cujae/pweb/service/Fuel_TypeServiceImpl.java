@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
+import cu.edu.cujae.pweb.dto.BrandDto;
 import cu.edu.cujae.pweb.dto.FuelDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -78,5 +79,28 @@ public class Fuel_TypeServiceImpl implements Fuel_TypeService {
             restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             return status ;
         }
+    }
+
+    @Override
+    public List<BrandDto> getBrandsByIdFuel(String fuelName) {
+        List<BrandDto> allBrands = new ArrayList<BrandDto>();
+        List<BrandDto> brands = new ArrayList<BrandDto>();
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<BrandDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/brands/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            allBrands = apiRestMapper.mapList(response, BrandDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (BrandDto allBrand : allBrands) {
+            if (allBrand.getFuel_type().getFuel_name().trim().equals(fuelName)) {
+                brands.add(allBrand);
+            }
+        }
+
+        return brands;
     }
 }
