@@ -8,23 +8,23 @@
 <f:view locale="#{languageBean.locale}">
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-            #{msgs.title_listDrivers}
+            #{msgs.title_listVehicles}
         </ui:define>
         <ui:define name="layout">
             <h:form id="form">
                 <div class="card crud-demo">
                     <p:toolbar>
                         <p:toolbarGroup>
-                            <p:selectOneMenu id="district_select" required="true"
-                                             value="#{manageDistrictBean.districtName}"
+                            <p:selectOneMenu id="vehicle_select" required="true"
+                                             value="#{manageBrandBean.brandName}"
                                              onchange="submit()"
                                              placeholder="#{msgs.label_select}" editable="true"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
-                                <f:selectItems value="#{manageDistrictBean.districts}" var="district"
-                                               itemLabel="#{district.district_name.trim()}" itemValue="#{district.district_name.trim()}" />
-                                <p:ajax render="form:dt-drivers" process="@this"/>
+                                <f:selectItems value="#{manageBrandBean.brands}" var="brand"
+                                               itemLabel="#{brand.brand_name.trim()}" itemValue="#{brand.brand_name.trim()}" />
+                                <p:ajax render="form:dt-vehicles" process="@this"/>
                             </p:selectOneMenu>
                         </p:toolbarGroup>
                         <p:toolbarGroup align="right">
@@ -32,7 +32,7 @@
                                  del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
                             <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
                                              styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-drivers" fileName="Drivers for Districts"/>
+                                <p:dataExporter type="pdf" target="dt-vehicles" fileName="Vehicles for Brands"/>
                             </p:commandButton>
                         </p:toolbarGroup>
                     </p:toolbar>
@@ -47,37 +47,36 @@
                         * El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                           con mayor detalle ver el showcase.
                      -->
-                    <p:dataTable id="dt-drivers" widgetVar="dtDrivers" var="driver"
-                                 value="#{manageDistrictBean.getDriversById(manageDistrictBean.districtName)}" reflow="true" paginator="true"
+
+
+
+                    <p:dataTable id="dt-vehicles" widgetVar="dtVehicles" var="vehicle"
+                                 value="#{manageBrandBean.getVehiclesById(manageBrandBean.brandName)}" reflow="true" paginator="true"
                                  rows="10" paginatorPosition="bottom">
                         <f:facet name="header">
                             <div class="products-table-header">
-                                <span style="font-weight: bold">#{msgs.label_drivers}</span> <span
+                                <span style="font-weight: bold">#{msgs.label_vehicles}</span> <span
                                     class="filter-container ui-input-icon-left"> <i
                                     class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                           onkeyup="PF('dtDrivers').filter()" placeholder="#{msgs.input_searh}" />
+                                                                           onkeyup="PF('dtVehicles').filter()" placeholder="#{msgs.input_searh}" />
 							</span>
                             </div>
                         </f:facet>
 
-
-                        <p:column headerText="#{msgs.header_driver}" sortBy="#{driver.driver_name}" filterBy="#{driver.driver_name}">
-                            <h:outputText value="#{driver.driver_name}" />
+                        <p:column headerText="#{msgs.header_plate}" sortBy="#{vehicle.plate_numb}" filterBy="#{vehicle.plate_numb}">
+                            <h:outputText value="#{vehicle.plate_numb}" />
                         </p:column>
-                        <p:column headerText="#{msgs.header_ci}" sortBy="#{driver.dni}" filterBy="#{driver.dni}">
-                            <h:outputText value="#{driver.dni}" />
+                        <p:column headerText="#{msgs.header_plannedFuel}" sortBy="#{vehicle.planned_fuel}">
+                            <h:outputText value="#{vehicle.planned_fuel}" />
                         </p:column>
-                        <p:column headerText="#{msgs.header_address}" sortBy="#{driver.address}" filterBy="#{driver.address}">
-                            <h:outputText value="#{driver.address}" />
+                        <p:column headerText="#{msgs.header_firstDriver}" sortBy="#{vehicle.first_driver.driver_name}" filterBy="#{vehicle.first_driver.driver_name}">
+                            <h:outputText value="#{vehicle.first_driver.driver_name}" />
                         </p:column>
-                        <p:column headerText="#{msgs.header_phone}" sortBy="#{driver.phone_number}" filterBy="#{driver.phone_number}">
-                            <h:outputText value="#{driver.phone_number}" />
+                        <p:column headerText="#{msgs.header_secondDriver}" sortBy="#{vehicle.second_driver.driver_name}" filterBy="#{vehicle.second_driver.driver_name}">
+                            <h:outputText value="#{vehicle.second_driver.driver_name}" />
                         </p:column>
-                        <p:column headerText="#{msgs.header_district}" sortBy="#{driver.district.district_name}" filterBy="#{driver.district.district_name}">
-                            <h:outputText value="#{driver.district.district_name}" />
-                        </p:column>
-                        <p:column headerText="#{msgs.header_brand}" sortBy="#{driver.brand.brand_name}" filterBy="#{driver.brand.brand_name}">
-                            <h:outputText value="#{driver.brand.brand_name}" />
+                        <p:column headerText="#{msgs.header_brand}" sortBy="#{vehicle.brand.brand_name}" filterBy="#{vehicle.brand.brand_name}">
+                            <h:outputText value="#{vehicle.brand.brand_name}" />
                         </p:column>
 
                     </p:dataTable>

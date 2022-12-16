@@ -1,7 +1,9 @@
 package cu.edu.cujae.pweb.bean;
 
 import cu.edu.cujae.pweb.dto.BrandDto;
+import cu.edu.cujae.pweb.dto.DriverDto;
 import cu.edu.cujae.pweb.dto.FuelDto;
+import cu.edu.cujae.pweb.dto.VehicleDto;
 import cu.edu.cujae.pweb.service.BrandService;
 import cu.edu.cujae.pweb.service.Fuel_TypeService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
@@ -23,7 +25,17 @@ public class ManageBrandBean {
     private BrandDto brandDto;
     private BrandDto selectedBrand;
     private List<BrandDto> brands;
+    private List<VehicleDto> vehiclesById;
 
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    private String brandName;
 
 
     private Integer sizeBrands=0;
@@ -124,7 +136,10 @@ public class ManageBrandBean {
     public void setSizeBrands(Integer sizeBrands) {
         this.sizeBrands = sizeBrands;
     }
-
+    public List<VehicleDto> getVehiclesById(String brandName) {
+        this.vehiclesById = brandService.getVehiclesByIdBrand(brandName);
+        return this.vehiclesById;
+    }
 
 
 }

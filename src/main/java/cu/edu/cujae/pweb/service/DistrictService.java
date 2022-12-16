@@ -11,5 +11,5 @@ public interface DistrictService {
     void createDistrict(DistrictDto district);
     void updateDistrict(DistrictDto district);
     boolean deleteDistrict(Integer id);
-    List<DriverDto> getDriversByIdDistrict(Integer districtId);
+    List<DriverDto> getDriversByIdDistrict(String districtName);
 }
