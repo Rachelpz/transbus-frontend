@@ -15,7 +15,9 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.label_fuelName}"/>
                                 <p:inputText id="name" required="true"
-                                             value="#{manageFuel_TypeBean.selectedFuel.fuel_name}" />
+                                             value="#{manageFuel_TypeBean.selectedFuel.fuel_name}" validatorMessage="Solo debe contener letras">
+                                    <f:validateRegex pattern="^([a-zA-Z]+[\s]*)$"/>
+                                </p:inputText>
                                 <p:message for="@previous" ></p:message>
                             </div>
                         </h:panelGroup>
