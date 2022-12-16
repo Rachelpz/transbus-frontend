@@ -400,7 +400,7 @@ input[type="number"] {
 
 .layout-content {
   margin-left: 250px;
-  padding-top: auto; }
+  padding-top: 60px; }
   .layout-content .content-section {
     padding: 2rem; }
     .layout-content .content-section.introduction {

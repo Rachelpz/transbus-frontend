@@ -40,20 +40,18 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Integer getContractsSize() {
+        return getContracts().size();
+    }
 
-        List<ContractDto> contracts = new ArrayList<ContractDto>();
-        Integer size = 0;
-        try {
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<ContractDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/api/v1/contracts/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            contracts = apiRestMapper.mapList(response, ContractDto.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public List<ContractDto> getContractByRequest(Integer requestId) {
+        List<ContractDto> contracts = new ArrayList<>();
 
-        return size = contracts.size();
+        for (ContractDto contract : getContracts())
+            if (contract.getRequest().getRequest_id() == requestId)
+                contracts.add(contract);
 
+        return contracts;
     }
 
     @Override

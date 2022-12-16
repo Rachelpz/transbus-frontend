@@ -1,0 +1,71 @@
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.title_listContracts}
+        </ui:define>
+        <ui:define name="layout">
+            <h:form id="form">
+                <div class="card crud-demo">
+                    <p:toolbar>
+                        <p:toolbarGroup>
+                            <p:selectOneMenu id="request_select" required="true"
+                                             value="#{manageRequestBean.report_requestId}"
+                                             onchange="submit()"
+                                             placeholder="#{msgs.label_select}" editable="true"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageRequestBean.requests}" var="rq"
+                                               itemLabel="#{rq.request_name.trim()}" itemValue="#{rq.request_id}" />
+                                <p:ajax render="form:dt-requests" process="@this"/>
+                            </p:selectOneMenu>
+                        </p:toolbarGroup>
+                        <p:toolbarGroup align="right">
+                            <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
+                                             styleClass="ui-button-help" ajax="false">
+                                <p:dataExporter type="pdf" target="dt-requests" fileName="Rental Contracts for Requests"/>
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+
+                    <p:dataTable id="dt-contracts" widgetVar="dtContracts" var="contract"
+                                 value="#{manageContractBean.getContractsByRequest(manageRequestBean.report_requestId)}" reflow="true" paginator="true"
+                                 rows="10" paginatorPosition="bottom">
+                        <f:facet name="header">
+                            <div class="products-table-header">
+                                <span style="font-weight: bold">#{msgs.label_contract}</span> <span
+                                    class="filter-container ui-input-icon-left"> <i
+                                    class="pi pi-search"/> <p:inputText id="globalFilter"
+                                                                           onkeyup="PF('dtContracts').filter()" placeholder="#{msgs.input_searh}" />
+							</span>
+                            </div>
+                        </f:facet>
+                        <p:column headerText="#{msgs.header_start}" sortBy="#{contract.start_date.toInstant().toString().substring(0,10)}" filterBy="#{contract.start_date.toInstant().toString().substring(0,10)}">
+                            <h:outputText value="#{contract.start_date.toInstant().toString().substring(0,10)}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_end}" sortBy="#{contract.end_date.toInstant().toString().substring(0,10)}" filterBy="#{contract.end_date.toInstant().toString().substring(0,10)}">
+                            <h:outputText value="#{contract.end_date.toInstant().toString().substring(0,10)}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_traveled}" sortBy="#{contract.km_traveled}" filterBy="#{contract.km_traveled}">
+                            <h:outputText value="#{contract.km_traveled}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.label_request}" sortBy="#{contract.request.request_name}" filterBy="#{contract.request.request_name}">
+                            <h:outputText value="#{contract.request.request_name}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_amountCharged}" sortBy="#{contract.amount_charged}" filterBy="#{contract.amount_charged}">
+                            <h:outputText value="#{contract.amount_charged}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
+</html>

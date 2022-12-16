@@ -118,4 +118,8 @@ public class ManageContractBean {
     public void setSizeContracts(Integer sizeContracts) {
         this.sizeContracts = sizeContracts;
     }
+
+    public List<ContractDto> getContractsByRequest(Integer requestId) {
+        return contractService.getContractByRequest(requestId);
+    }
 }

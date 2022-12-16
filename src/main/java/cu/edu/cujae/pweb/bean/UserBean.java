@@ -93,6 +93,7 @@ public class UserBean {
             for (UserDto user : users) {
                 if (user.getUsername().equals(this.username)) {
                     logged_user = user;
+                    System.out.println("\n\n" + logged_user.getUsername());
                     break;
                 }
             }

@@ -23,6 +23,8 @@ public class ManageRequestBean {
     private RequestDto selectedRequest;
     private List<RequestDto> requests;
 
+    private Integer report_requestId;
+
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
      */
@@ -112,5 +114,13 @@ public class ManageRequestBean {
 
     public void setRequestService(RequestService requestService) {
         this.requestService = requestService;
+    }
+
+    public Integer getReport_requestId() {
+        return report_requestId;
+    }
+
+    public void setReport_requestId(Integer report_requestId) {
+        this.report_requestId = report_requestId;
     }
 }

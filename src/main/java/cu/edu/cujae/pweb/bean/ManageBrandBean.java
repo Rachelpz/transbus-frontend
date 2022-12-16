@@ -136,6 +136,7 @@ public class ManageBrandBean {
     public void setSizeBrands(Integer sizeBrands) {
         this.sizeBrands = sizeBrands;
     }
+
     public List<VehicleDto> getVehiclesById(String brandName) {
         this.vehiclesById = brandService.getVehiclesByIdBrand(brandName);
         return this.vehiclesById;
