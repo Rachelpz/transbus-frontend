@@ -1,6 +1,8 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.BrandDto;
+import cu.edu.cujae.pweb.dto.DriverDto;
+import cu.edu.cujae.pweb.dto.VehicleDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
@@ -100,6 +102,28 @@ public class BrandServiceImpl implements BrandService {
             restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             return status ;
         }
+    }
+    @Override
+    public List<VehicleDto> getVehiclesByIdBrand(String districtName) {
+        List<VehicleDto> allDrivers = new ArrayList<VehicleDto>();
+        List<VehicleDto> drivers = new ArrayList<VehicleDto>();
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<VehicleDto> apiRestMapper = new ApiRestMapper<>();
+            String response = (String) restService.GET("/api/v1/vehicles/", params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            allDrivers = apiRestMapper.mapList(response, VehicleDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (VehicleDto allDriver : allDrivers) {
+            if (allDriver.getBrand().getBrand_name().trim().equals(districtName)) {
+                drivers.add(allDriver);
+            }
+        }
+
+        return drivers;
     }
 
 
