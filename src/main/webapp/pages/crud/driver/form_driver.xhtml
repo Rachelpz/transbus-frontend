@@ -24,7 +24,7 @@
                                 <p:outputLabel for="@next" value="#{msgs.header_ci}"/>
                                 <p:inputText id="dni" required="true"
                                              value="#{manageDriverBean.selectedDriver.dni}" validatorMessage="El DNI tiene que tener 11 dígitos">
-                                    <f:validateLength minimum="11"/>
+                                    <f:validateLength minimum="11" maximum="11"/>
                                     <f:validateRegex pattern="^([0-9]+[\s]*)$"/>
                                 </p:inputText>
                                 <p:message for="@previous" ></p:message>
