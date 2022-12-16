@@ -35,11 +35,11 @@ public class UserBean {
     private UserDto logged_user;
     private UserDto logged_user_values;
 
-    private String username;
-    private String fullname;
-    private String password;
-    private String email;
-    private String identification;
+    private String username = "";
+    private String fullname = "";
+    private String password = "";
+    private String email = "";
+    private String identification = "";
 
     @Autowired
     private AuthService authService;
@@ -52,10 +52,10 @@ public class UserBean {
     }
 
     public String registerNewUser() {
-        List<RoleDto> roles = new ArrayList<>();
-        roles.add(new RoleDto(2L, "", ""));
+//        List<RoleDto> roles = new ArrayList<>();
+//        roles.add(new RoleDto(2L, "", ""));
 //		userService.createUser(new UserDto(null, username, "Example Name", password, email, "00000000000", roles));
-        userService.createUser(new UserDto(null, username, fullname, password, email, identification, roles));
+        userService.registerUser(new UserDto(null, username, fullname, password, email, identification, null));
         return login();
     }
 
@@ -77,7 +77,7 @@ public class UserBean {
         PrimeFaces.current().executeScript("PF('manageUserProfileDialog').hide()");
         PrimeFaces.current().ajax().update(":user_profile_form");
         PrimeFaces.current().ajax().update(":form_user_topbar:user_name_label");
-        System.out.println("\n\nName: " + logged_user.getFullName());
+//        System.out.println("\n\nName: " + logged_user.getFullName());
     }
 
     public String login() {

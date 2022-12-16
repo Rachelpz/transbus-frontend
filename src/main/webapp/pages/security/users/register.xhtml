@@ -53,7 +53,10 @@
                             <h:panelGroup>
                                 <p:outputLabel for="@next" value="#{msgs.header_ci}"/>
                                 <p:inputText id="identification" required="true" style="width:100%"
-                                             value="#{userBean.identification}" maxlength="11"/>
+                                             value="#{userBean.identification}" maxlength="11">
+                                    <p:keyFilter mask="num"/>
+                                    <f:validateLength minimum="11"/>
+                                </p:inputText>
                                 <p:message for="@previous"/>
                             </h:panelGroup>
                             <h:panelGroup>
