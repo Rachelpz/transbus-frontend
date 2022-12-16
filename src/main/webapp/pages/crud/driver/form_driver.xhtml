@@ -15,13 +15,18 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_driver}"/>
                                 <p:inputText id="driver_name" required="true"
-                                             value="#{manageDriverBean.selectedDriver.driver_name}" />
+                                             value="#{manageDriverBean.selectedDriver.driver_name}" validatorMessage="El nombre solo debe contener letras">
+                                    <f:validateRegex pattern="^([a-zA-Z]+[\s]*)$"/>
+                                </p:inputText>
                                 <p:message for="@previous" ></p:message>
                             </div>
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_ci}"/>
                                 <p:inputText id="dni" required="true"
-                                             value="#{manageDriverBean.selectedDriver.dni}" />
+                                             value="#{manageDriverBean.selectedDriver.dni}" validatorMessage="El DNI tiene que tener 11 dígitos">
+                                    <f:validateLength minimum="11"/>
+                                    <f:validateRegex pattern="^([0-9]+[\s]*)$"/>
+                                </p:inputText>
                                 <p:message for="@previous" ></p:message>
                             </div>
                             <div class="p-field">
@@ -33,7 +38,9 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_phone}"/>
                                 <p:inputText id="phone_number" required="true"
-                                             value="#{manageDriverBean.selectedDriver.phone_number}" />
+                                             value="#{manageDriverBean.selectedDriver.phone_number}" validatorMessage="Solo puede contener números">
+                                    <f:validateRegex pattern="^([0-9]+[\s]*)$"/>
+                                </p:inputText>
                                 <p:message for="@previous" ></p:message>
                             </div>
                             <div class="p-field">
