@@ -400,7 +400,7 @@ input[type="number"] {
 
 .layout-content {
   margin-left: 250px;
-  padding-top: 70px; }
+  padding-top: auto; }
   .layout-content .content-section {
     padding: 2rem; }
     .layout-content .content-section.introduction {
@@ -1459,6 +1459,7 @@ pre[class*="language-"].line-numbers > code {
 
 .layout-topbar .user_pfp {
   position: relative;
+  background-color: transparent;
 }
 
 .layout-topbar .user_pfp {
@@ -1524,7 +1525,7 @@ pre[class*="language-"].line-numbers > code {
 
 .layout-topbar .topbar-form {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: row;
   align-self: center;
@@ -1534,6 +1535,7 @@ pre[class*="language-"].line-numbers > code {
 .layout-topbar {
   align-items: center;
   justify-content: space-between;
+  height: auto;
 }
 
 .user_profile_table{
