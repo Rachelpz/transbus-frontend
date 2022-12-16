@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.dto.BrandDto;
 import cu.edu.cujae.pweb.dto.FuelDto;
 import cu.edu.cujae.pweb.service.Fuel_TypeService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
@@ -21,6 +22,17 @@ public class ManageFuel_TypeBean {
     private FuelDto fuelDto;
     private FuelDto selectedFuel;
     private List<FuelDto> fuels;
+    private List<BrandDto> brandsById;
+
+    public String getFuelName() {
+        return fuelName;
+    }
+
+    public void setFuelName(String fuelName) {
+        this.fuelName = fuelName;
+    }
+
+    private String fuelName;
 
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -110,7 +122,10 @@ public class ManageFuel_TypeBean {
         this.fuels = fuels;
     }
 
-
+    public List<BrandDto> getBrandsById(String fuelName) {
+        this.brandsById = fuelService.getBrandsByIdFuel(fuelName);
+        return this.brandsById;
+    }
 
 
 }

@@ -1,0 +1,87 @@
+<html lang="#{languageBean.localeCode}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="#{languageBean.locale}">
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.title_listBrands}
+        </ui:define>
+        <ui:define name="layout">
+            <h:form id="form">
+                <div class="card crud-demo">
+                    <p:toolbar>
+                        <p:toolbarGroup>
+                            <p:selectOneMenu id="fuel_type_select" required="true"
+                                             value="#{manageFuel_TypeBean.fuelName}"
+                                             onchange="submit()"
+                                             placeholder="#{msgs.label_select}" editable="true"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageFuel_TypeBean.fuels}" var="fuel"
+                                               itemLabel="#{fuel.fuel_name.trim()}" itemValue="#{fuel.fuel_name.trim()}" />
+                                <p:ajax render="form:dt-brands" process="@this"/>
+                            </p:selectOneMenu>
+                        </p:toolbarGroup>
+                        <p:toolbarGroup align="right">
+                            <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
+                                 del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
+                            <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
+                                             styleClass="ui-button-help" ajax="false">
+                                <p:dataExporter type="pdf" target="dt-brands" fileName="Brands for Fuel Type"/>
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+
+                    <!-- Componente usado para mostrar tablas con datos y ejecutar operaciones
+                        * La propiedad value: apunta a una lista de objetos de tipo UserDto que está en el bean de jsf
+                        * La propiedad var: es una instancia de esta lista para poder extaer los objetos, es como iterador
+                          que luego permite poder decir user.<propiedad del objeto>.
+                        * La propiedad paginator: define si se quiere paginar o no y es posible definir la position del mismo usando
+                          la propiedad pagePosition.
+                        * La propiedad rows: define la cantidad de filas
+                        * El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
+                          con mayor detalle ver el showcase.
+                     -->
+
+
+
+                    <p:dataTable id="dt-brands" widgetVar="dtBrands" var="brand"
+                                 value="#{manageFuel_TypeBean.getBrandsById(manageFuel_TypeBean.fuelName)}" reflow="true" paginator="true"
+                                 rows="10" paginatorPosition="bottom">
+                        <f:facet name="header">
+                            <div class="products-table-header">
+                                <span style="font-weight: bold">#{msgs.label_brands}</span> <span
+                                    class="filter-container ui-input-icon-left"> <i
+                                    class="pi pi-search"></i> <p:inputText id="globalFilter"
+                                                                           onkeyup="PF('dtBrands').filter()" placeholder="#{msgs.input_searh}" />
+							</span>
+                            </div>
+                        </f:facet>
+
+                        <p:column headerText="#{msgs.header_brand}" sortBy="#{brand.brand_name}" filterBy="#{brand.brand_name}">
+                            <h:outputText value="#{brand.brand_name}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_seatsNumb}" sortBy="#{brand.seats_numb}" filterBy="#{brand.seats_numb}">
+                            <h:outputText value="#{brand.seats_numb}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_fuelConsumption}" sortBy="#{brand.fuel_consumption}" filterBy="#{brand.fuel_consumption}">
+                            <h:outputText value="#{brand.fuel_consumption}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.header_fuelType}" sortBy="#{brand.fuel_type.fuel_name}" filterBy="#{brand.fuel_type.fuel_name}">
+                            <h:outputText value="#{brand.fuel_type.fuel_name}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>
+</html>
