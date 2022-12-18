@@ -15,7 +15,9 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_petitioner}"/>
                                 <p:inputText id="petitioner_name" required="true"
-                                             value="#{manageRequestBean.selectedRequest.petitioner_name}" />
+                                             value="#{manageRequestBean.selectedRequest.petitioner_name}" validatorMessage="El nombre del solicitante solo debe contener letras">
+                                    <f:validateRegex pattern="^([a-zA-Z]+[\s]*)$"/>
+                                </p:inputText>
                                 <p:message for="@previous" ></p:message>
                             </div>
                             <div class="p-field">
