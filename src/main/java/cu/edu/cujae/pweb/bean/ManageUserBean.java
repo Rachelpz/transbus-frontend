@@ -64,13 +64,21 @@ public class ManageUserBean {
 
         if (this.selectedUser.getId() == null) {
             //register user
-            this.userService.createUser(this.selectedUser);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+            String message = this.userService.createUser(this.selectedUser);
+
+            if (!message.isEmpty())
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "user_exists");
+            else
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+
         } else {
             this.selectedUser.setPassword("");
             //update user
-            this.userService.updateUser(this.selectedUser);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
+            String message = this.userService.updateUser(this.selectedUser);
+            if (!message.isEmpty())
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "user_exists");
+            else
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
         }
 
         //load datatable again with new values
@@ -85,17 +93,25 @@ public class ManageUserBean {
     }
 
     //Permite eliminar un usuario
-    public void deleteUser() {
+    public void deleteUser(String logged_user_id) {
         try {
             //delete user
-            this.userService.deleteUser(this.selectedUser.getId());
-            this.selectedUser = null;
+            System.out.println("logged user id: " + logged_user_id);
+            System.out.println("selected user id: " + this.selectedUser.getId());
 
-            //load datatable again with new values
-            this.users = userService.getUsers();
+            if (!logged_user_id.equals(this.selectedUser.getId())) {
+                this.userService.deleteUser(this.selectedUser.getId());
+                this.selectedUser = null;
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_deleted");
-            PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+                //load datatable again with new values
+                this.users = userService.getUsers();
+
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_deleted");
+                PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            } else {
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "delete_logged_user");
+            }
+
         } catch (Exception e) {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
         }

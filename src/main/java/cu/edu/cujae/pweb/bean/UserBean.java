@@ -9,6 +9,7 @@ import cu.edu.cujae.pweb.service.AuthService;
 import cu.edu.cujae.pweb.service.UserService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +41,7 @@ public class UserBean {
     private String password = "";
     private String email = "";
     private String identification = "";
+    private String pfp_location = "";
 
     @Autowired
     private AuthService authService;
@@ -52,32 +54,33 @@ public class UserBean {
     }
 
     public String registerNewUser() {
-//        List<RoleDto> roles = new ArrayList<>();
-//        roles.add(new RoleDto(2L, "", ""));
-//		userService.createUser(new UserDto(null, username, "Example Name", password, email, "00000000000", roles));
-        userService.registerUser(new UserDto(null, username, fullname, password, email, identification, null));
+
+        String message = userService.registerUser(new UserDto(null, username, fullname, password, email, identification, null));
+
+        if (!message.isEmpty()) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "user_exists");
+            return "failure";
+        }
+
         return login();
     }
 
     public void editLoggedUser() {
         logged_user_values = userService.getUserById(logged_user.getId());
         logged_user_values.setPassword("");
-//		logged_user_values = new UserDto();
-//		logged_user_values.setId(logged_user.getId());
-//		logged_user_values.setUsername(logged_user.getUsername());
-//		logged_user_values.setFullName(logged_user.getFullName());
-//		logged_user_values.setIdentification(logged_user.getIdentification());
-//		logged_user_values.setEmail(logged_user.getEmail());
         PrimeFaces.current().ajax().update(":user_profile_form:user_profile_form_edit");
     }
 
     public void saveUserProfile() {
-        this.userService.updateUser(logged_user_values);
-        logged_user = userService.getUserById(logged_user_values.getId());
-        PrimeFaces.current().executeScript("PF('manageUserProfileDialog').hide()");
-        PrimeFaces.current().ajax().update(":user_profile_form");
-        PrimeFaces.current().ajax().update(":form_user_topbar:user_name_label");
-//        System.out.println("\n\nName: " + logged_user.getFullName());
+        String message = this.userService.updateUser(logged_user_values);
+        if (!message.isEmpty()) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "user_exists");
+        } else {
+            logged_user = userService.getUserById(logged_user_values.getId());
+            PrimeFaces.current().executeScript("PF('manageUserProfileDialog').hide()");
+            PrimeFaces.current().ajax().update(":user_profile_form");
+            PrimeFaces.current().ajax().update(":form_user_topbar:user_name_label");
+        }
     }
 
     public String login() {
@@ -185,5 +188,13 @@ public class UserBean {
 
     public void setIdentification(String identification) {
         this.identification = identification;
+    }
+
+    public String getPfp_location() {
+        return pfp_location;
+    }
+
+    public void setPfp_location(String pfp_location) {
+        this.pfp_location = pfp_location;
     }
 }

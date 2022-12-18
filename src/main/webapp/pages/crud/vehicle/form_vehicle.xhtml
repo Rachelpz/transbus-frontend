@@ -15,7 +15,8 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.header_plate}"/>
                                 <p:inputText id="plate" required="true"
-                                             value="#{manageVehicleBean.selectedVehicle.plate_numb}" />
+                                             value="#{manageVehicleBean.selectedVehicle.plate_numb}"
+                                             maxlength="7"/>
                                 <p:message for="@previous" ></p:message>
                             </div>
                             <div class="p-field">

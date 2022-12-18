@@ -100,7 +100,7 @@ public class BrandServiceImpl implements BrandService {
         }
         else{
             restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            return status ;
+            return status;
         }
     }
     @Override

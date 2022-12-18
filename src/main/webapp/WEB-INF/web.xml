@@ -66,4 +66,17 @@
         <param-value>/WEB-INF/taglib/springsecurity.taglib.xml</param-value>
     </context-param>
 
+    <!--File Upload-->
+<!--    <context-param>-->
+<!--        <param-name>primefaces.UPLOADER</param-name>-->
+<!--        <param-value>native</param-value>-->
+<!--    </context-param>-->
+<!--    <filter>-->
+<!--        <filter-name>PrimeFaces FileUpload Filter</filter-name>-->
+<!--        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>PrimeFaces FileUpload Filter</filter-name>-->
+<!--        <servlet-name>Faces Servlet</servlet-name>-->
+<!--    </filter-mapping>-->
 </web-app>

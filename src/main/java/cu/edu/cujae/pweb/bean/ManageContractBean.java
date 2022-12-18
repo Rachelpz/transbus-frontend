@@ -45,7 +45,23 @@ public class ManageContractBean {
 
     }
 
+    private boolean checkDates(ContractDto contract) {
+        boolean check = true;
+
+        if (contract.getStart_date().after(contract.getEnd_date()))
+            check = false;
+
+        System.out.println("\n\ncheck: " + check);
+
+        return check;
+    }
+
     public void saveContract() {
+        if (!checkDates(this.selectedContract)) {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "start_end_dates_error");
+            return;
+        }
+
         if (this.selectedContract.getContract_id() == null) {
             this.contractService.createContract(this.selectedContract);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_contract_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
