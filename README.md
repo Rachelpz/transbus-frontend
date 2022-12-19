@@ -1,5 +1,3 @@
-﻿# transbus_webapp
-
 ## Briefing
 
 The Service Control System called TransBus System is a web application made up of a front-end and a back-end. The front-end is developed from Java Server Faces (JSF) and Spring using Maven. The back - end with REST API is made in Spring framework (Spring MVC, Spring Boot, Spring Data JPA) with database (postgresql) and swagger, developed with the Maven compilation system. The project deals mainly with the administration of transport and services.
