@@ -19,7 +19,7 @@ The app is currently available in the following languages:
  
  ## Responsive design
  
- ### Desktop screenshot
+ ### Desktop screenshots
  
 ![](/src/main/webapp/resources/images/Screenshot%201.png)
 
