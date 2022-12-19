@@ -21,6 +21,6 @@ The app is currently available in the following languages:
  
  ### Desktop screenshot
  
- <p align="center">
-   <img src="src/main/webapp/resources/images/Screnshot 1.png" alt="Desktop web: full app" width=810 />
- </p>
+![](/src/main/webapp/resources/images/Screenshot%201.png)
+
+![](/src/main/webapp/resources/images/Screenshot%202.png)
