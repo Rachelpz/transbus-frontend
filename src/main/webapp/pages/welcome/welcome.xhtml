@@ -150,41 +150,41 @@
 <!--            </p:card>-->
 
             <!--        Carousel with info-->
-            <h:form id="form">
-                <div class="card">
-                    <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"
-                                numVisible="3" numScroll="1">
-                        <f:facet name="header">
-                            <h5>#{msgs.label_drivers}</h5>
-                        </f:facet>
+<!--            <h:form id="form">-->
+<!--                <div class="card">-->
+<!--                    <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"-->
+<!--                                numVisible="3" numScroll="1">-->
+<!--                        <f:facet name="header">-->
+<!--                            <h5>#{msgs.label_drivers}</h5>-->
+<!--                        </f:facet>-->
 
-                        <div class="driver-item">
-                            <div class="driver-item-content">
-                                <div class="mb-3">
-                                    <p:graphicImage name="driver.jpg" library="images" styleClass="driver-image"/>
-                                </div>
-                                <div>
-                                    <h4 class="mb-1">#{driver.driver_name}</h4>
-                                    <h6 class="mt-0 mb-3">
-                                        <h:outputText value="#{driver.brand}">
-                                            <f:convertNumber type="currency"/>
-                                        </h:outputText>
-                                    </h6>
-                                    <!--                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>-->
-                                    <div class="mt-5">
-                                        <p:commandButton type="button" icon="pi pi-search"
-                                                         styleClass="rounded-button mr-2"/>
-                                        <p:commandButton type="button" icon="pi pi-star"
-                                                         styleClass="ui-button-success rounded-button mr-2"/>
-                                        <p:commandButton type="button" icon="pi pi-cog"
-                                                         styleClass="ui-button-help rounded-button"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </p:carousel>
-                </div>
-            </h:form>
+<!--                        <div class="driver-item">-->
+<!--                            <div class="driver-item-content">-->
+<!--                                <div class="mb-3">-->
+<!--                                    <p:graphicImage name="driver.jpg" library="images" styleClass="driver-image"/>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <h4 class="mb-1">#{driver.driver_name}</h4>-->
+<!--                                    <h6 class="mt-0 mb-3">-->
+<!--                                        <h:outputText value="#{driver.brand}">-->
+<!--                                            <f:convertNumber type="currency"/>-->
+<!--                                        </h:outputText>-->
+<!--                                    </h6>-->
+<!--                                    &lt;!&ndash;                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>&ndash;&gt;-->
+<!--                                    <div class="mt-5">-->
+<!--                                        <p:commandButton type="button" icon="pi pi-search"-->
+<!--                                                         styleClass="rounded-button mr-2"/>-->
+<!--                                        <p:commandButton type="button" icon="pi pi-star"-->
+<!--                                                         styleClass="ui-button-success rounded-button mr-2"/>-->
+<!--                                        <p:commandButton type="button" icon="pi pi-cog"-->
+<!--                                                         styleClass="ui-button-help rounded-button"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </p:carousel>-->
+<!--                </div>-->
+<!--            </h:form>-->
         </ui:define>
     </ui:composition>
 </f:view>
