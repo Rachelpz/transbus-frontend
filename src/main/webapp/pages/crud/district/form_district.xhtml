@@ -15,7 +15,7 @@
                             <div class="p-field">
                                 <p:outputLabel for="@next" value="#{msgs.label_districtName}"/>
                                 <p:inputText id="name" required="true"
-                                             value="#{manageDistrictBean.selectedDistrict.district_name}" validatorMessage="El nombre solo debe contener letras">
+                                             value="#{manageDistrictBean.selectedDistrict.district_name}" validatorMessage="#{msgs.only_letters_district_name}">
                                     <f:validateRegex pattern="^([a-zA-Z]+[\s]*)$"/>
                                 </p:inputText>
                                 <p:message for="@previous" ></p:message>
